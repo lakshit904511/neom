@@ -45,7 +45,6 @@ export default function HomePageCard1({ list }) {
 
         <ul className="w-[290px] h-[76px] mt-[18px] flex flex-col gap-1.5">
           <li className="flex items-center gap-2">
-            {" "}
             <CiCalendar className=" w-[14px] h-[16px] text-[#FF385C]" />
             <span className=" w-[218px] text-left text-[11px] leading-[17px] tracking-[0.31px] text-[#222222] font-[brownlight]">
               Nov 10, 10:30 AM - Nov 29. 6:30 PM
