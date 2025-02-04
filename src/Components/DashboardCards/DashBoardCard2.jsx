@@ -1,5 +1,6 @@
+import { NavLink, Outlet } from "react-router-dom";
 
-export default function HomePageCard2({ card2,handleClickReview }) {
+export default function DashBoardCard2({ card2,handleClickReview }) {
 
   return (
     <>
@@ -15,26 +16,27 @@ export default function HomePageCard2({ card2,handleClickReview }) {
             alt="mountainImage"
           />
         </div>
-        <span className=" w-[350px] text-left text-[15px] font-semibold leading-[20px] tracking-[0.59px] text-[#222222] font-[IvyMode] ">
+        <span style={{fontFamily:"IvyMode, sans-serif"}} className=" w-[350px] text-left text-[15px] font-semibold leading-[20px] tracking-[0.59px] text-[#222222] ">
           {card2.title}
         </span>
-        <span className="mt-[4px] text-left text-[12px] font-normal text-[#222222] opacity-70 font-[Brown]">
+        <span style={{fontFamily:"BrownLight, sans-serif"}} className="mt-[4px] text-left text-[12px] font-normal text-[#222222] opacity-70 ">
           on Nov 17, 2022
         </span>
-        <p className="w-[490px] mt-[12px] text-[15px] font-normal leading-[21px] opacity-100 text-[#6f6f6f] font-[BrownLight] text-justify">
+        <p style={{fontFamily:"BrownLight, sans-serif"}} className="w-[490px] mt-[12px] text-[13px] font-normal leading-[20px] opacity-100 text-[#222222]">
           {card2.description}
         </p>
         <div className="mt-[22px] flex gap-[24px]">
-          <button
+          <NavLink to="modal"
             onClick={card2.textBtn === "Yes, I would Share"? handleClickReview:null}
-            className="bg-[#222222] cursor-pointer rounded-[6px] text-white px-9 py-2 text-[10px]"
+            className="bg-[#222222] cursor-pointer rounded-[6px] text-white px-9 py-2 text-[10px] font-[Poppins]"
           >
             {card2.textBtn}
-          </button>
+          </NavLink>
           <button className="text-center underline text-[12px] font-normal leading-[16px] tracking-[0px] text-[#5b5b5b] opacity-100 font-[Poppins]">
             {card2.textBtn2}
           </button>
         </div>
+      
       </div>
       
     </>

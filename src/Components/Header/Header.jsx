@@ -1,12 +1,18 @@
 import styles from "../Header/header.module.css";
-import logo from "../assets/img/logo2.png";
+import logo from '../../assets/img/logo2.png';
 import { RiGlobalLine } from "react-icons/ri";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { BsList } from "react-icons/bs";
 import { useEffect, useState } from "react";
-import ModalLanguage from "./ModalLanguage";
-import ModalProfile from "./ModalProfile";
+import ModalLanguage from "../Modals/ModalLanguage";
+import ModalProfile from "../Modals/ModalProfile";
+import { NavLink } from "react-router-dom";
 
+const navItems = [
+  { name: "Dashboard", path: "/dashboard" },
+  { name: "My Favourites", path: "/favourites" },
+  { name: "Upcoming events", path: "/events" },
+];
 export default function Header() {
   const [selected, setSelected] = useState(null);
   const [login, setLogin] = useState(false);
@@ -18,10 +24,16 @@ export default function Header() {
       if (!event.target.closest(".menu-list")) {
         setSelected(null);
       }
-      if (!event.target.closest(".language-dropdown") && !event.target.closest(".language-icon")) {
+      if (
+        !event.target.closest(".language-dropdown") &&
+        !event.target.closest(".language-icon")
+      ) {
         setShowLanguage(false);
       }
-      if (!event.target.closest(".profile-dropdown") && !event.target.closest(".profile-icon")) {
+      if (
+        !event.target.closest(".profile-dropdown") &&
+        !event.target.closest(".profile-icon")
+      ) {
         setShowProfile(false);
       }
     };
@@ -31,30 +43,36 @@ export default function Header() {
   }, []);
 
   return (
+ 
     <nav className={styles.main}>
+      <NavLink to="/">
       <img className={styles.neom_logo} src={logo} alt="Neom Logo" />
-
+      </NavLink>
       <ul className={`${styles.item} menu-list`}>
-        <div className={styles.item1}>
-          {["Dashboard", "My Favourites", "Upcoming events"].map(
-            (item, index) => (
-              <li key={index}>
-                <a
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelected(index);
-                  }}
-                  className={`text-sm block cursor-pointer pb-1 transition-all duration-300 border-b-2 ${
-                    selected === index
+        <div
+          style={{ fontFamily: "Brown, sans-serif" }}
+          className={styles.item1}
+        >
+          {navItems.map((item, index) => (
+            <li key={index}>
+              <NavLink
+                to={item.path}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelected(index);
+                }}
+                className={({ isActive }) =>
+                  `text-sm block cursor-pointer pb-1 transition-all duration-300 border-b-2 ${
+                    isActive || selected === index
                       ? "text-[#FF385C] border-[#FF385C] font-bold"
                       : "text-gray-600 border-transparent"
-                  }`}
-                >
-                  {item}
-                </a>
-              </li>
-            )
-          )}
+                  }`
+                }
+              >
+                {item.name}
+              </NavLink>
+            </li>
+          ))}
         </div>
         <div className={styles.item2}>
           <li>
@@ -95,5 +113,6 @@ export default function Header() {
         </div>
       </ul>
     </nav>
+  
   );
 }

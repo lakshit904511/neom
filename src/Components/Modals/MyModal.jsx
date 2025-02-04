@@ -1,15 +1,22 @@
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { FaRegStar } from "react-icons/fa";
-import { useState } from "react";
+import HomePage from "../../Pages/DashBoard";
+import { useNavigate } from "react-router-dom";
 
-export default function MyModal({ closeModal, handleViboMeter }) {
+export default function MyModal() {
+  const navigate=useNavigate();
+  function closeModal(){
+    navigate("/");
+  }
   return (
+    <>
+    <HomePage />
     <div
       onClick={closeModal}
       className="fixed inset-0 flex items-center justify-center bg-gradient-to-b from-black/50 to-black/20 "
     >
       <div className="w-[550px] h-[527px] bg-white p-[25px] rounded-lg shadow-lg relative">
-        <IoIosCloseCircleOutline className="absolute top-[10px] right-[10px]" />
+        <IoIosCloseCircleOutline onClick={closeModal} className="absolute top-[10px] right-[10px]" />
         <h2
           className=" text-left text-[20px] leading-[16px] tracking-[0.19px] font-[IvyMode] text-[#222222]
 "
@@ -101,12 +108,13 @@ export default function MyModal({ closeModal, handleViboMeter }) {
           />
         </div>
         <button
-          onClick={handleViboMeter}
+          // onClick={handleViboMeter}
           className="mt-4 text-[12px] px-8 py-2 bg-[#222222] text-white rounded-[6px]"
         >
           Submit
         </button>
       </div>
     </div>
+    </>
   );
 }
