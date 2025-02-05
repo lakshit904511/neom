@@ -43,7 +43,7 @@ export default function Header() {
   }, []);
 
   return (
- 
+   
     <nav className={styles.main}>
       <NavLink to="/">
       <img className={styles.neom_logo} src={logo} alt="Neom Logo" />
@@ -78,14 +78,14 @@ export default function Header() {
           <li>
             <IoIosNotificationsOutline className="w-[18px]" />
           </li>
-          {!login ? (
+          {/* {!login ? (
             <button
               onClick={() => setLogin(true)}
               className="flex w-[81px] flex-row items-center justify-evenly bg-white px-3 py-2 rounded-4xl border border-red-100"
             >
               Login
             </button>
-          ) : (
+          ) : ( */}
             <div className="relative">
               <div
                 onClick={(e) => {
@@ -99,7 +99,7 @@ export default function Header() {
               </div>
               {showProfile && <ModalProfile />}
             </div>
-          )}
+        
           <li className="relative">
             <RiGlobalLine
               className="w-[38px] object-contain cursor-pointer language-icon"
@@ -113,6 +113,6 @@ export default function Header() {
         </div>
       </ul>
     </nav>
-  
+    
   );
 }

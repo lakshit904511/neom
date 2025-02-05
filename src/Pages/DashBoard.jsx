@@ -26,27 +26,27 @@ export default function DashBoard({ handleClickReview }) {
     }
   };
 
+  const goToNextImage = () => {
+    if (currentIndex < dataDashBoardCard1.length - itemsPerView) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
   const goToPrevImageCard2 = () => {
     if (currentIndexCard2 > 0) {
       setCurrentIndexCard2(currentIndexCard2 - 1);
     }
   };
 
-  const goToNextImage = () => {
-    if (currentIndex < lists.length - itemsPerView) {
-      setCurrentIndex(currentIndex + 1);
-    }
-  };
 
   const goToNextImageCard2 = () => {
-    if (currentIndexCard2 < dataHomePageCard2.length - itemsPerViewCard2) {
+    if (currentIndexCard2 < dataDashBoardCard2.length - itemsPerViewCard2) {
       setCurrentIndexCard2(currentIndexCard2 + 1);
     }
   };
 
   return (
     <>
-      <Header />
+     
       <section className="mt-[29px] ">
         <h2
           style={{ fontFamily: "IvyMode, sans-serif" }}
@@ -60,7 +60,7 @@ export default function DashBoard({ handleClickReview }) {
           location. We wish you to enjoy the activities and the weather!
         </p>
 
-        <div className="relative overflow-hidden">
+        <div className="relative ">
           <div
             className="flex gap-[21px] transition-transform duration-300 ease-in-out"
             style={{
@@ -90,7 +90,7 @@ export default function DashBoard({ handleClickReview }) {
             Charlie, hope we understand you better
           </h2>
 
-          <div className="relative overflow-hidden ">
+          <div className="relative ">
             <div
               style={{
                 transform: `translateX(-${

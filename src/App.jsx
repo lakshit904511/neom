@@ -5,50 +5,54 @@ import MyModal from "./Components/Modals/MyModal";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MyFavrouites from "./Pages/MyFavrouites";
 import DashBoard from "./Pages/DashBoard";
+import Footer from "./Components/Footer/Footer";
+import ProfilePage from "./Pages/ProfilePage";
+import Header from "../src/Components/Header/Header";
+import UpComming from "./Pages/UpComming";
 
 export default function App() {
   const [modal, setModal] = useState(false);
-
 
   // function closeModalVibe() {
   //   setModal(!modal);
   //   setVibe(!vibe);
   // }
 
-
-
-
-
   function handleClickReview() {
     setModal(!modal);
   }
- 
+
   return (
-    <div className="app">
+    <div style={{ background: "#F9F7F2 0% 0% no-repeat padding-box" }} className="overflow-x-hidden">
       <BrowserRouter>
-        <Routes>
-          <Route
-            index
-            element={<DashBoard handleClickReview={handleClickReview} />}
-          />
-          <Route
-             path="dashboard"
-            element={<DashBoard handleClickReview={handleClickReview} />}
-          >
-            {/* <Route index element={<HomePage handleClickReview={handleClickReview}  />} /> */}
+        <Header />
+        <div className="app">
+          <Routes>
+            <Route
+              index
+              element={<DashBoard handleClickReview={handleClickReview} />}
+            />
+            <Route
+              path="dashboard"
+              element={<DashBoard handleClickReview={handleClickReview} />}
+            >
+              <Route path="modal" element={<MyModal />} />
+            </Route>
+            <Route path="favourites" element={<MyFavrouites />} />
             <Route path="modal" element={<MyModal />} />
-          </Route>
-          <Route path="favourites" element={<MyFavrouites />} />
-          <Route path="modal" element={<MyModal />} />
-          {/* <HomePage handleClickReview={handleClickReview} /> */}
-          {/* {modal && (
+            <Route path="edit-profile" element={<ProfilePage />} />
+            <Route path="events" element={<UpComming />} />
+            {/* <HomePage handleClickReview={handleClickReview} /> */}
+            {/* {modal && (
             <MyModal
               handleViboMeter={handleViboMeter}
               closeModal={closeModal}
             />
           )}
           {vibe && <VibeMeter closeModalVibe={closeModalVibe} />} */}
-        </Routes>
+          </Routes>
+        </div>
+        <Footer />
       </BrowserRouter>
     </div>
   );

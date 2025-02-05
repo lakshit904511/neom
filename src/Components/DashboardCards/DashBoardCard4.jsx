@@ -6,7 +6,7 @@ export default function DashBoardCard4({ card4 }) {
     <div className="w-[300px] h-[350px] flex flex-col items-start">
       <div className="flex items-center justify-center">
         <img
-          className="w-[200px] h-[280px] object-cover rounded-[8px]"
+          className="w-[230px] h-[280px] object-cover rounded-[8px]"
           src={card4.image}
         />
       </div>
