@@ -11,12 +11,103 @@ import socialize from "../img/cooking-dining.png";
 import cooking from "../img/exploring.png";
 import golfPng from "../img/golf.png";
 import music from "../img/music.png";
+import music1 from "../img/music.jpg";
+
 import play from "../img/plays.png";
 import room from "../img/rooms.png";
 
 import golfImage from "../img/golf.jpg";
 import surfingImage from "../img/surfing.jpg";
 import islandImage from "../img/island.jpg";
+
+
+const settingData=[
+  {
+    id:1,
+    text1:"Personal and Account Information",
+    check:null,
+    btn:null,
+    text2:"Would you like to share your personal information with us to know you better?",
+  },
+  {
+    id:2,
+    btn:null,
+    check:null,
+    text1:"Consent for sharing information with operators",
+    text2:"Would you like to share your personal information with the operator to serve you better?",
+  },
+  {
+    id:3,
+    btn:null,
+    check:null,
+    text1:"Manage your data",
+    text2:"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod?",
+  },
+  {
+    id:4,
+    btn:null,
+    check:null,
+    text1:"Password and Security",
+    text2:"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod?",
+  },
+  {
+    id:5,
+    btn:1,
+    check:null,
+    text1:"Notifications",
+    text2:"Which type of notifications would you like to receive?",
+  },
+  {
+    id:6,
+    btn:1,
+    check:1,
+    text1:"Language",
+    text2:"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod?",
+  },
+]
+const dataFeedBack = [
+  {
+    id: 1,
+    image: holiday,
+    image_title: "Men's Golf League",
+    image_date: "Nov 10-29, 2022",
+    image_review: "123 reviews",
+    date: "Nov 17, 2022",
+    main_para:"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elit.",
+    main_title: "Great experience!",
+  },
+  {
+    id: 2,
+    image: islandImage,
+    image_title: "Swimming game for below 18 year kids",
+    image_date: "Nov 10-29, 2022",
+    image_review: "123 reviews",
+    date: "Nov 17, 2022",
+    main_para:null,
+    main_title:
+      "Hey Charlie, you haven't added you feedback yet. Please share your experience with us to serve you better next time.",
+  },
+  {
+    id: 3,
+    image: music1,
+    image_title: "Live comedy Performance in front of live audience",
+    image_date: "Nov 10-29, 2022",
+    image_review: "123 reviews",
+    date: "Nov 17, 2022",
+    main_para:"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elit.",
+    main_title: "Thank you Unified Guests for this great experience!",
+  },
+  {
+    id: 4,
+    image: golfImage,
+    image_title: "Men's Golf League",
+    image_date: "Nov 10-29, 2022",
+    image_review: "123 reviews",
+    date: "Nov 17, 2022",
+    main_para:"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elit.",
+    main_title: "Great experience!",
+  },
+];
 
 const formData = [
   {
@@ -233,5 +324,7 @@ export {
   dataDashBoardCard3,
   dataDashBoardCard4,
   dataMyFavoritesCard,
+  dataFeedBack,
   formData,
+  settingData,
 };

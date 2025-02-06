@@ -10,10 +10,9 @@ import DashBoardCard1 from "../Components/DashboardCards/DashBoardCard1";
 import DashBoardCard3 from "../Components/DashboardCards/DashBoardCard3";
 import DashBoardCard4 from "../Components/DashboardCards/DashBoardCard4";
 import DashBoardCard2 from "../Components/DashboardCards/DashBoardCard2";
+import DashBoardMain from "../Components/DashboardCards/DashBoardMain";
 
 export default function DashBoard({ handleClickReview }) {
-
-  
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentIndexCard2, setCurrentIndexCard2] = useState(0);
 
@@ -37,7 +36,6 @@ export default function DashBoard({ handleClickReview }) {
     }
   };
 
-
   const goToNextImageCard2 = () => {
     if (currentIndexCard2 < dataDashBoardCard2.length - itemsPerViewCard2) {
       setCurrentIndexCard2(currentIndexCard2 + 1);
@@ -46,7 +44,6 @@ export default function DashBoard({ handleClickReview }) {
 
   return (
     <>
-     
       <section className="mt-[29px] ">
         <h2
           style={{ fontFamily: "IvyMode, sans-serif" }}
@@ -61,17 +58,12 @@ export default function DashBoard({ handleClickReview }) {
         </p>
 
         <div className="relative ">
-          <div
-            className="flex gap-[21px] transition-transform duration-300 ease-in-out"
-            style={{
-              transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)`,
-              
-            }}
-          >
-            {dataDashBoardCard1.map((list) => (
-              <DashBoardCard1 key={list.id} list={list} />
-            ))}
-          </div>
+          <DashBoardMain
+            data={dataDashBoardCard1}
+            itemsPerView={itemsPerView}
+            currentIndex={currentIndex}
+            renderItem={(list) => <DashBoardCard1 key={list.id} list={list} />}
+          />
         </div>
 
         <Slider
@@ -91,22 +83,18 @@ export default function DashBoard({ handleClickReview }) {
           </h2>
 
           <div className="relative ">
-            <div
-              style={{
-                transform: `translateX(-${
-                  currentIndexCard2 * (100 / itemsPerViewCard2)
-                }%)`,
-              }}
-              className="flex items-center mt-[15px] gap-[23px] transition-transform duration-300 ease-in-out"
-            >
-              {dataDashBoardCard2.map((card2) => (
+            <DashBoardMain
+              data={dataDashBoardCard2}
+              itemsPerView={itemsPerViewCard2}
+              currentIndex={currentIndexCard2}
+              renderItem={(card2) => (
                 <DashBoardCard2
                   key={card2.id}
                   card2={card2}
                   handleClickReview={handleClickReview}
                 />
-              ))}
-            </div>
+              )}
+            />
             <Outlet />
           </div>
 
@@ -160,6 +148,9 @@ export default function DashBoard({ handleClickReview }) {
             Find events on map
           </h1>
         </div>
+
+
+        
       </section>
     </>
   );

@@ -9,6 +9,8 @@ import Footer from "./Components/Footer/Footer";
 import ProfilePage from "./Pages/ProfilePage";
 import Header from "../src/Components/Header/Header";
 import UpComming from "./Pages/UpComming";
+import FeedBackPage from "./Pages/FeedBackPage";
+import SettingsPage from "./Pages/SettingsPage";
 
 export default function App() {
   const [modal, setModal] = useState(false);
@@ -23,7 +25,10 @@ export default function App() {
   }
 
   return (
-    <div style={{ background: "#F9F7F2 0% 0% no-repeat padding-box" }} className="overflow-x-hidden">
+    <div
+      style={{ background: "#F9F7F2 0% 0% no-repeat padding-box" }}
+      className="overflow-x-hidden"
+    >
       <BrowserRouter>
         <Header />
         <div className="app">
@@ -42,14 +47,8 @@ export default function App() {
             <Route path="modal" element={<MyModal />} />
             <Route path="edit-profile" element={<ProfilePage />} />
             <Route path="events" element={<UpComming />} />
-            {/* <HomePage handleClickReview={handleClickReview} /> */}
-            {/* {modal && (
-            <MyModal
-              handleViboMeter={handleViboMeter}
-              closeModal={closeModal}
-            />
-          )}
-          {vibe && <VibeMeter closeModalVibe={closeModalVibe} />} */}
+            <Route path="feedback" element={<FeedBackPage />} />
+            <Route path="settings" element={<SettingsPage />} />
           </Routes>
         </div>
         <Footer />
