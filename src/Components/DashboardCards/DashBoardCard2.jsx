@@ -6,10 +6,11 @@ export default function DashBoardCard2({ card2, handleClickReview }) {
       <div className="flex flex-col items-start w-[520px] h-[490px]">
         <div className="flex items-center w-[510px] h-[310px] relative">
           <img
-            className=" absolute w-[28px] top-[30px] left-[10px] object-cover"
+            className=" absolute w-[38px] top-[30px] left-[15px] object-cover"
             src={card2.emoji}
           />
           <img
+          
             className="w-[510px] h-[280px] rounded-[10px]"
             src={card2.image}
             alt="mountainImage"

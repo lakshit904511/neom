@@ -8,7 +8,7 @@ const DashBoardMain = ({
 }) => {
   return (
     <div
-      className="flex items-center mt-[15px] gap-[23px] transition-transform duration-300 ease-in-out"
+      className="flex items-center mt-[10px] gap-[23px] transition-transform duration-300 ease-in-out"
       style={{
         transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)`,
       }}

@@ -62,7 +62,7 @@ export default function Header() {
                   setSelected(index);
                 }}
                 className={({ isActive }) =>
-                  `text-sm block cursor-pointer pb-1 transition-all duration-300 border-b-2 ${
+                  `text-[12px] block cursor-pointer pb-1 transition-all duration-300 border-b-2 ${
                     isActive || selected === index
                       ? "text-[#FF385C] border-[#FF385C] font-bold"
                       : "text-gray-600 border-transparent"

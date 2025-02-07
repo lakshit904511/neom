@@ -11,6 +11,7 @@ import DashBoardCard3 from "../Components/DashboardCards/DashBoardCard3";
 import DashBoardCard4 from "../Components/DashboardCards/DashBoardCard4";
 import DashBoardCard2 from "../Components/DashboardCards/DashBoardCard2";
 import DashBoardMain from "../Components/DashboardCards/DashBoardMain";
+import Map from "../Components/DashboardCards/Map";
 
 export default function DashBoard({ handleClickReview }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -44,7 +45,7 @@ export default function DashBoard({ handleClickReview }) {
 
   return (
     <>
-      <section className="mt-[29px] ">
+      <section className="mt-[20px] ">
         <h2
           style={{ fontFamily: "IvyMode, sans-serif" }}
           className="w-[375px] h-[52px] text-left text-[25px] leading-[44px] tracking-[1.16px] text-[#222222]"
@@ -52,7 +53,7 @@ export default function DashBoard({ handleClickReview }) {
           Good morning Charlie!
         </h2>
 
-        <p className="w-[602px] h-[46px] text-left text-[18px] leading-[26px] tracking-[0.4px] text-[#222222] font-[BrownLight] opacity-100">
+        <p className="w-[602px] h-[46px] text-left text-[14px] leading-[20px] tracking-[0.4px] text-[#222222] font-[BrownLight] opacity-100">
           Below listed are your itineraries, have a look to the timings and the
           location. We wish you to enjoy the activities and the weather!
         </p>
@@ -115,7 +116,7 @@ export default function DashBoard({ handleClickReview }) {
           >
             Today's recommendations for you, Charlie!
           </h1>
-          <div className="mt-[20px] flex items-center gap-[15px]">
+          <div className="mt-[30px] flex items-center gap-[13px]">
             {dataDashBoardCard3.map((card3) => (
               <DashBoardCard3 key={card3.id} card3={card3} />
             ))}
@@ -147,6 +148,7 @@ export default function DashBoard({ handleClickReview }) {
           >
             Find events on map
           </h1>
+          <Map />
         </div>
 
 

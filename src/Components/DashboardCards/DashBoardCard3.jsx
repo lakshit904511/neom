@@ -31,7 +31,7 @@ export default function DashBoardCard3({ card3, fav = null, up = null }) {
       </p>
       <p
         style={{ fontFamily: "IvyMode, sans-serif" }}
-        className="text-left text-[#222222]  text-[12px] leading-[20px] tracking-[0.59px] "
+        className="text-left text-[#222222]  text-[12px] leading-[30px] tracking-[0.59px] "
       >
         {card3.name}
       </p>

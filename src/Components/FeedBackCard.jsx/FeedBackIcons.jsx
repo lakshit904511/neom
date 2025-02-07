@@ -10,13 +10,17 @@ export default function FeedBackIcons() {
   const [selectedIcon, setSelectedIcon] = useState(null);
 
   const handleIconClick = (iconName) => {
-    setSelectedIcon(iconName);
+    if(selectedIcon===iconName){
+      setSelectedIcon(null);
+    }
+    if(selectedIcon!==iconName)
+    {setSelectedIcon(iconName);}
   };
   return (
-    <div className="mt-[25px] gap-[20px] flex items-center">
+    <div className="mt-[15px] gap-[20px] flex items-center">
       <img
         onClick={() => handleIconClick("over")}
-        className={`w-[40px] h-[40px] ${
+        className={`w-[30px] h-[30px] ${
           selectedIcon === "over" ? "" : "filter grayscale"
         }`}
         src={over}
@@ -24,7 +28,7 @@ export default function FeedBackIcons() {
       />
       <img
         onClick={() => handleIconClick("anger")}
-        className={`w-[40px] h-[40px] ${
+        className={`w-[30px] h-[30px] ${
           selectedIcon === "anger" ? "" : "filter grayscale"
         }`}
         src={anger}
@@ -32,7 +36,7 @@ export default function FeedBackIcons() {
       />
       <img
         onClick={() => handleIconClick("appre")}
-        className={`w-[40px] h-[40px] ${
+        className={`w-[30px] h-[30px] ${
           selectedIcon === "appre" ? "" : "filter grayscale"
         }`}
         src={appre}
@@ -40,7 +44,7 @@ export default function FeedBackIcons() {
       />
       <img
         onClick={() => handleIconClick("bore")}
-        className={`w-[40px] h-[40px] ${
+        className={`w-[30px] h-[30px] ${
           selectedIcon === "bore" ? "" : "filter grayscale"
         }`}
         src={bore}
@@ -48,7 +52,7 @@ export default function FeedBackIcons() {
       />
       <img
         onClick={() => handleIconClick("joy")}
-        className={`w-[40px] h-[40px] ${
+        className={`w-[30px] h-[30px] ${
           selectedIcon === "joy" ? "" : "filter grayscale"
         }`}
         src={joy}
@@ -56,7 +60,7 @@ export default function FeedBackIcons() {
       />
       <img
         onClick={() => handleIconClick("disapp")}
-        className={`w-[40px] h-[40px] ${
+        className={`w-[30px] h-[30px] ${
           selectedIcon === "disapp" ? "" : "filter grayscale"
         }`}
         src={disapp}

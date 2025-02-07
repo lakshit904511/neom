@@ -11,6 +11,7 @@ import Header from "../src/Components/Header/Header";
 import UpComming from "./Pages/UpComming";
 import FeedBackPage from "./Pages/FeedBackPage";
 import SettingsPage from "./Pages/SettingsPage";
+import DetailedPage from "./Pages/DetailedPage";
 
 export default function App() {
   const [modal, setModal] = useState(false);
@@ -49,6 +50,7 @@ export default function App() {
             <Route path="events" element={<UpComming />} />
             <Route path="feedback" element={<FeedBackPage />} />
             <Route path="settings" element={<SettingsPage />} />
+            <Route path="details" element={<DetailedPage />} />
           </Routes>
         </div>
         <Footer />

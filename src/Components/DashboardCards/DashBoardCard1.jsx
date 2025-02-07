@@ -4,13 +4,17 @@ import { CiCalendar } from "react-icons/ci";
 import over from '../../assets/img/overwhelmed.svg'
 import { CiGrid41 } from "react-icons/ci";
 import cloud from "../../assets/img/Temprature.svg";
+import { useNavigate } from "react-router-dom";
 
 export default function DashBoardCard1({ list }) {
+  const navigate=useNavigate();
+
   return (
-    <div className="w-[520px] h-[290px] mt-[60px] border border-[#222222]  rounded-[12px] opacity-100 flex justify-center items-center">
-      <div className="w-[211px] h-[288px] relative">
+    <div className="w-[600px] h-[240px] mt-[30px] border border-[#222222]  rounded-[12px] opacity-100 flex justify-center items-center">
+      <div className="w-[211px] h-[238px] relative">
         <img
-          className="w-[211px] h-[288px] rounded-l-[12px] object-cover"
+          onClick={()=>(navigate("/details"))}
+          className="w-[211px] h-full rounded-l-[12px] object-cover cursor-pointer"
           src={list.img}
           alt="golf"
         />
@@ -19,7 +23,7 @@ export default function DashBoardCard1({ list }) {
           src={cloud}
         />
       </div>
-      <div className="w-[312px] h-[288px] rounded-r-[12px] pt-[15px]  flex flex-col items-start pl-[15px] ">
+      <div className="w-[312px] h-full rounded-r-[12px] pt-[10px]  flex flex-col items-start pl-[15px] ">
         <h1 style={{fontFamily:"IvyMode, sans-serif"}}
           className="w-[157px] h-[35px] text-left text-[18px] leading-[35px] tracking-[0.79px] text-[#222222] opacity-100
 "
@@ -37,13 +41,13 @@ export default function DashBoardCard1({ list }) {
           </div>
           <span style={{fontFamily:"BrownLight, sans-serif"} } className="pt-0.5">5.0 (23 Reviews)</span>
         </div>
-        <p style={{fontFamily:"BrownLight, sans-serif"}} className="w-[290px] h-[53px] tracking-[.35px] text-left text-[#222222] text-[12px] leading-[15px] mt-[18px] opacity-100">
+        <p style={{fontFamily:"BrownLight, sans-serif"}} className="w-[290px] h-[53px] tracking-[.35px] text-left text-[#222222] text-[12px] leading-[15px] mt-[8px] opacity-100">
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
           nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat…{" "}
           <span className="text-[#FF385C]">read more</span>
         </p>
 
-        <ul className="w-[290px] h-[76px] mt-[18px] flex flex-col gap-1.5">
+        <ul className="w-[290px] h-[56px] mt-[8px] flex flex-col gap-1.5">
           <li className="flex items-center gap-2">
             <CiCalendar className=" w-[14px] h-[16px] text-[#FF385C]" />
             <span style={{fontFamily:"BrownLight, sans-serif"}} className=" w-[218px] text-left text-[11px] leading-[17px] tracking-[0.31px] text-[#222222] ">
@@ -62,7 +66,7 @@ export default function DashBoardCard1({ list }) {
               Golf
             </span>
           </li>
-          <li className="flex items-center gap-2 pt-[16px]">
+          <li className="flex items-center gap-2 pt-[8px]">
             <img src={over} className="w-[14px] h-[16px] text-[#55BF3B]" />
             <span style={{fontFamily:"BrownLight, sans-serif"}} className="pt-[2px] w-[230px] text-left text-[11px] leading-[17px] tracking-[0.31px] text-[#222222] ">
               Overwhelmed vibes are coming here

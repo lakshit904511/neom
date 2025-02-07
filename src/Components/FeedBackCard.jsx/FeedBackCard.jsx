@@ -4,8 +4,8 @@ import FeedBackIcons from "./FeedBackIcons";
 export default function FeedBackCard({ feed }) {
   return (
     <div className=" flex w-[720px] pb-[25px] border-b border-[#c0bdb3] ">
-      <div className="relative w-[260px] h-[300px]">
-        <img className="w-[260px] h-[300px] rounded-[8px]" src={feed.image} alt="Holiday" />
+      <div className="relative w-[220px] h-[250px]">
+        <img className="w-full h-full rounded-[8px]" src={feed.image} alt="Holiday" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
         <p
           style={{ fontFamily: "Brown, sans-serif" }}
@@ -30,13 +30,13 @@ export default function FeedBackCard({ feed }) {
       <div className="w-[460px] pl-[30px] flex flex-col">
         <p
           style={{ fontFamily: "Brown, sans-serif" }}
-          className="text-left text-[12px] leading-[38px] tracking-[0.60px] text-[#222222]  opacity-70"
+          className="text-left text-[12px] leading-[28px] tracking-[0.60px] text-[#222222]  opacity-70"
         >
           {feed.date}
         </p>
         <p
           style={{ fontFamily: "IvyMode, sans-serif" }}
-          className="w-[500px] text-left text-[22px] leading-[38px] font-medium tracking-[0.60px] text-[#222222]  opacity-100"
+          className="w-[450px] text-left text-[18px] leading-[28px] font-medium tracking-[0.60px] text-[#222222]  opacity-100"
         >
           {feed.main_title}
         </p>
@@ -44,7 +44,7 @@ export default function FeedBackCard({ feed }) {
         {feed.main_para !== null ? (
           <p
             style={{ fontFamily: "BrownLight, sans-serif" }}
-            className="mt-[6px] w-[650px]  text-justify text-[16px] leading-[24px] tracking-[0.15px] text-[#222222]  opacity-100"
+            className="mt-[10px] w-[550px]  text-justify text-[14px]  tracking-[0.15px] text-[#222222]  opacity-100"
           >
             {feed.main_para}
           </p>
@@ -57,7 +57,7 @@ export default function FeedBackCard({ feed }) {
         ) : (
           <button
             style={{ fontFamily: "BrownLight, sans-serif" }}
-            className=" text-[#ffffff] rounded-[8px] w-[147px] mt-[40px] px-[28px] py-[13px] bg-[#222222] flex items-center justify-center text-center"
+            className=" text-[#ffffff] rounded-[4px] text-[14px] w-[147px] mt-[30px] px-[28px] py-[10px] bg-[#222222] flex items-center justify-center text-center"
           >
             Add a Review
           </button>

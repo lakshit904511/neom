@@ -24,12 +24,10 @@ export default function MyFavrouites() {
     if (currentIndexCard3 <= dataMyFavoritesCard.length - itemsPerViewCard3) {
       setCurrentIndexCard3(currentIndexCard3 + 1);
     }
-    
   };
 
   return (
     <>
-     
       <section className="mt-[29px]">
         <h2
           style={{ fontFamily: "IvyMode, sans-serif" }}
@@ -40,7 +38,7 @@ export default function MyFavrouites() {
 
         <p
           style={{ fontFamily: "BrownLight, sans-serif" }}
-          className="text-left text-[18px] opacity-80 text-[#222222]"
+          className="text-left text-[18px] font-medium opacity-80 text-[#000000]"
         >
           You have short listed 10 events to join later.
         </p>
@@ -98,13 +96,11 @@ export default function MyFavrouites() {
         <div className="mt-[20px]">
           <div className="mt-[20px] flex items-center gap-[15px]">
             {dataDashBoardCard3.map((card3) => (
-              <DashBoardCard3 key={card3.id} card3={card3} fav={1} />
+              <DashBoardCard3 key={card3.id} card3={card3} />
             ))}
           </div>
         </div>
-
       </section>
-      
     </>
   );
 }

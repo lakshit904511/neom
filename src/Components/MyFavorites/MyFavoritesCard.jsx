@@ -4,7 +4,7 @@ export default function MyFavoritesCard({ favCard }) {
   return (
     <div className="relative ">
       <img
-        className="w-[60vw] rounded-[8px] max-w-none h-[450px]"
+        className="w-[60vw] rounded-[8px] max-w-none h-[460px]"
         src={favCard.image}
       />
 
