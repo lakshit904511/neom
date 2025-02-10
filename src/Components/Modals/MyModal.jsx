@@ -12,7 +12,6 @@ export default function MyModal() {
     <>
     <HomePage />
     <div
-      onClick={closeModal}
       className="fixed inset-0 flex items-center justify-center bg-gradient-to-b from-black/50 to-black/20 "
     >
       <div className="w-[550px] h-[527px] bg-white p-[25px] rounded-lg shadow-lg relative">
@@ -108,7 +107,7 @@ export default function MyModal() {
           />
         </div>
         <button
-          // onClick={handleViboMeter}
+          onClick={()=>(navigate("/vibe"))}
           className="mt-4 text-[12px] px-8 py-2 bg-[#222222] text-white rounded-[6px]"
         >
           Submit

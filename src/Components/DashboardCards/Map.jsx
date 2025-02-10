@@ -31,11 +31,11 @@ const locations = [
 
 const Map = () => {
   return (
-    <div className="h-[500px] w-full mt-[20px]">
+    <div className="h-[500px] w-full mt-[35px]">
       <MapContainer
         center={[28.05, 34.716]}
         zoom={17}
-        style={{ height: "100%", width: "100%",padding:"0px" }}
+        style={{ height: "100%", width: "100%",padding:"0px",borderRadius:"8px" }}
       >
         <TileLayer url="https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}" />
 

@@ -1,5 +1,5 @@
 import styles from "../Header/header.module.css";
-import logo from '../../assets/img/logo2.png';
+import logo from "../../assets/img/logo2.png";
 import { RiGlobalLine } from "react-icons/ri";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { BsList } from "react-icons/bs";
@@ -43,10 +43,9 @@ export default function Header() {
   }, []);
 
   return (
-   
     <nav className={styles.main}>
       <NavLink to="/">
-      <img className={styles.neom_logo} src={logo} alt="Neom Logo" />
+        <img className={styles.neom_logo} src={logo} alt="Neom Logo" />
       </NavLink>
       <ul className={`${styles.item} menu-list`}>
         <div
@@ -57,13 +56,9 @@ export default function Header() {
             <li key={index}>
               <NavLink
                 to={item.path}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setSelected(index);
-                }}
                 className={({ isActive }) =>
-                  `text-[12px] block cursor-pointer pb-1 transition-all duration-300 border-b-2 ${
-                    isActive || selected === index
+                  `text-[10px] tracking-[.40px] block cursor-pointer pb-1 transition-all duration-300 border-b-2 ${
+                    isActive
                       ? "text-[#FF385C] border-[#FF385C] font-bold"
                       : "text-gray-600 border-transparent"
                   }`
@@ -86,23 +81,25 @@ export default function Header() {
               Login
             </button>
           ) : ( */}
-            <div className="relative">
-              <div
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setShowProfile(!showProfile);
-                }}
-                className="profile-icon flex w-[81px] flex-row items-center justify-evenly bg-white px-3 py-2 rounded-4xl cursor-pointer"
-              >
-                <BsList className="w-[35px]" />
-                <button className="px-2 bg-red-300 rounded-[100px]">P</button>
-              </div>
-              {showProfile && <ModalProfile />}
+          <div className="relative">
+            <div
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowProfile(!showProfile);
+              }}
+              className="profile-icon flex w-[55px] flex-row items-center justify-evenly bg-white px-1 py-2 rounded-4xl cursor-pointer"
+            >
+              <BsList className="w-[15px]" />
+              <button className="px-2 bg-red-300 text-[12px] rounded-[100px]">
+                P
+              </button>
             </div>
-        
+            {showProfile && <ModalProfile />}
+          </div>
+
           <li className="relative">
             <RiGlobalLine
-              className="w-[38px] object-contain cursor-pointer language-icon"
+              className="object-contain cursor-pointer language-icon"
               onClick={(e) => {
                 e.stopPropagation();
                 setShowLanguage(!showLanguage);
@@ -113,6 +110,5 @@ export default function Header() {
         </div>
       </ul>
     </nav>
-    
   );
 }

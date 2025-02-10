@@ -1,6 +1,6 @@
 
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import vibe from '../Components/assets/img/vibe-o-meter.svg'
+import vibe from '../../assets/img/vibe-o-meter.svg';
 
 export default function VibeMeter({closeModalVibe}) {
   return  <div

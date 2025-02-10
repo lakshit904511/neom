@@ -20,6 +20,14 @@ import golfImage from "../img/golf.jpg";
 import surfingImage from "../img/surfing.jpg";
 import islandImage from "../img/island.jpg";
 
+import user1 from '../img/user1.png';
+import user2 from '../img/user2.png';
+import user3 from '../img/user3.png';
+import user4 from '../img/user4.png';
+import user5 from '../img/user5.png';
+
+
+
 const settingData = [
   {
     id: 1,
@@ -337,6 +345,29 @@ const dataFilters = [
   "RAMP Walk",
 ];
 
+const dataDetailedCard=[
+  {id:1,
+   name:"Anastasia",
+   image:user1
+  },
+  {id:2,
+    name:"Warren",
+    image:user2
+   },
+   {id:3,
+    name:"Martin",
+    image:user3
+   },
+   {id:4,
+    name:"Michelle",
+    image:user4
+   },
+   {id:5,
+    name:"Pamela",
+    image:user5
+   },
+]
+
 export {
   dataDashBoardCard1,
   dataDashBoardCard2,
@@ -344,6 +375,7 @@ export {
   dataDashBoardCard4,
   dataMyFavoritesCard,
   dataFeedBack,
+  dataDetailedCard,
   formData,
   settingData,
   dataFilters,

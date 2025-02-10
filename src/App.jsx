@@ -12,6 +12,8 @@ import UpComming from "./Pages/UpComming";
 import FeedBackPage from "./Pages/FeedBackPage";
 import SettingsPage from "./Pages/SettingsPage";
 import DetailedPage from "./Pages/DetailedPage";
+import CommonPage from "./Components/CommonPage/CommonPage";
+import VibeMeter from "./Components/Modals/VibeMeter";
 
 export default function App() {
   const [modal, setModal] = useState(false);
@@ -51,6 +53,8 @@ export default function App() {
             <Route path="feedback" element={<FeedBackPage />} />
             <Route path="settings" element={<SettingsPage />} />
             <Route path="details" element={<DetailedPage />} />
+            <Route path="details2" element={<CommonPage />} />
+            <Route path="vibe" element={<VibeMeter />} />
           </Routes>
         </div>
         <Footer />

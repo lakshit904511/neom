@@ -116,7 +116,7 @@ export default function DashBoard({ handleClickReview }) {
           >
             Today's recommendations for you, Charlie!
           </h1>
-          <div className="mt-[30px] flex items-center gap-[13px]">
+          <div className="mt-[30px] flex items-center gap-[10px]">
             {dataDashBoardCard3.map((card3) => (
               <DashBoardCard3 key={card3.id} card3={card3} />
             ))}
@@ -125,14 +125,14 @@ export default function DashBoard({ handleClickReview }) {
 
         {/* card4 */}
 
-        <div className="mt-[50px]">
+        <div className="mt-[90px]">
           <h1
             style={{ fontFamily: "IvyMode, sans-serif" }}
-            className="w-[600px] text-left text-[#222222] tracking-[1px] text-[24px]"
+            className="w-[700px] text-left text-[#222222] tracking-[1px] text-[26px]"
           >
             Charlie, here is your master journey with us so far
           </h1>
-          <div className="mt-[20px] flex items-center gap-[15px]">
+          <div className="mt-[30px] flex items-center gap-[10px]">
             {dataDashBoardCard4.map((card4) => (
               <DashBoardCard4 key={card4.id} card4={card4} />
             ))}
@@ -141,7 +141,7 @@ export default function DashBoard({ handleClickReview }) {
 
         {/* map */}
 
-        <div className="mt-[85px]">
+        <div className="mt-[105px]">
           <h1
             style={{ fontFamily: "IvyMode, sans-serif" }}
             className="text-center text-3xl tracking-[.69px]"

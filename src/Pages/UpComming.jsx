@@ -22,7 +22,7 @@ export default function UpComming() {
         Let's find something exiting for you.
       </h1>
       <div className="mt-[20px] flex flex-col items-start w-full">
-        <div className="flex justify-center items-start gap-[40px]">
+        <div className="flex justify-center items-start gap-[30px]">
           <div className="flex flex-col gap-[10px]">
             <h1
               style={{ fontFamily: "BrownLight, sans-serif" }}
@@ -30,7 +30,7 @@ export default function UpComming() {
             >
               What suits your schedules?
             </h1>
-            <div className="w-[400px] flex  gap-[20px]">
+            <div className="w-[400px] flex  gap-[15px]">
               <div className="w-[120px] pl-[10px] bg-[#F9F7F2] border border-[#222222] rounded-[24px] opacity-100 h-[40px] flex  items-center gap-[5px]">
                 <CiCalendar className="text-[#FF385C]" />
                 <button className="text-left  font-normal text-[12px]  tracking-[0px] text-[#222222] opacity-100">
@@ -56,7 +56,7 @@ export default function UpComming() {
             <div className="w-[770px] flex  gap-[15px]">
               <div
                 style={{ fontFamily: "BrownLight, sans-serif" }}
-                className="w-[365px] border border-[#222222] bg-[#F9F7F2] rounded-[24px] opacity-100
+                className="w-[362px] border border-[#222222] bg-[#F9F7F2] rounded-[24px] opacity-100
  flex"
               >
                 <button
@@ -143,9 +143,9 @@ export default function UpComming() {
 
         <button
           style={{ fontFamily: "BrownLight, sans-serif" }}
-          className="mx-auto text-[#ffffff] rounded-[8px] w-[142px] mt-[40px] px-[28px] py-[13px] bg-[#222222] flex items-center justify-center text-center"
+          className="mx-auto text-[#ffffff] rounded-[4px] text-[14px]  mt-[40px] px-[24px] py-[8px] bg-[#222222] flex items-center justify-center text-center"
         >
-          Load More
+          Load more
         </button>
       </div>
 

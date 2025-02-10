@@ -1,12 +1,15 @@
 
 import { IoIosStar } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 export default function DashBoardCard4({ card4 }) {
+  const navigate=useNavigate();
   return (
     <div className="w-[300px] h-[350px] flex flex-col items-start">
       <div className="flex items-center justify-center">
         <img
-          className="w-[230px] h-[280px] object-cover rounded-[8px]"
+          onClick={()=>navigate("/details")}
+          className="w-[220px] h-[280px] object-cover rounded-[8px] cursor-pointer"
           src={card4.image}
         />
       </div>
