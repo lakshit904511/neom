@@ -14,6 +14,7 @@ import SettingsPage from "./Pages/SettingsPage";
 import DetailedPage from "./Pages/DetailedPage";
 import CommonPage from "./Components/CommonPage/CommonPage";
 import VibeMeter from "./Components/Modals/VibeMeter";
+import ReschedulePage from "./Pages/ReschedulePage";
 
 export default function App() {
   const [modal, setModal] = useState(false);
@@ -55,6 +56,7 @@ export default function App() {
             <Route path="details" element={<DetailedPage />} />
             <Route path="details2" element={<CommonPage />} />
             <Route path="vibe" element={<VibeMeter />} />
+            <Route path="schedule" element={<ReschedulePage />} />
           </Routes>
         </div>
         <Footer />

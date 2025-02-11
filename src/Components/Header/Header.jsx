@@ -3,10 +3,12 @@ import logo from "../../assets/img/logo2.png";
 import { RiGlobalLine } from "react-icons/ri";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { BsList } from "react-icons/bs";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ModalLanguage from "../Modals/ModalLanguage";
 import ModalProfile from "../Modals/ModalProfile";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import RescheduleModal from "../Modals/RescheduleModal";
+import RescheduleNow from "../Modals/RescheduleNow";
 
 const navItems = [
   { name: "Dashboard", path: "/dashboard" },
@@ -15,10 +17,24 @@ const navItems = [
 ];
 export default function Header() {
   const [selected, setSelected] = useState(null);
-  const [login, setLogin] = useState(false);
   const [showLanguage, setShowLanguage] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
-
+  const notificationRef = useRef(null);
+  const navigate=useNavigate();
+  const [show, setShow] = useState([false, null]);
+  const handleShow = () => {
+    setShow([false, null]);
+  };
+  const handleCancel2 = () => {
+    setShow([true, 2]);
+  };
+  const handleReschedule = () => {
+    setShow([true, 1]);
+  };
+  const handleReschedule1 = () => {
+    setShow([false, null]);
+    navigate("/schedule");
+  };
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.target.closest(".menu-list")) {
@@ -70,17 +86,21 @@ export default function Header() {
           ))}
         </div>
         <div className={styles.item2}>
-          <li>
-            <IoIosNotificationsOutline className="w-[18px]" />
-          </li>
-          {/* {!login ? (
-            <button
-              onClick={() => setLogin(true)}
-              className="flex w-[81px] flex-row items-center justify-evenly bg-white px-3 py-2 rounded-4xl border border-red-100"
-            >
-              Login
-            </button>
-          ) : ( */}
+          <div className="relative">
+            <li ref={notificationRef}>
+              <IoIosNotificationsOutline className="w-[18px]" />
+            </li>
+            <RescheduleModal
+              notificationRef={notificationRef}
+              handleCancel2={handleCancel2}
+              handleReschedule={handleReschedule}
+            />
+            <RescheduleNow
+              show={show}
+              handleShow={handleShow}
+              handleReschedule1={handleReschedule1}
+            />
+          </div>
           <div className="relative">
             <div
               onClick={(e) => {
