@@ -50,15 +50,16 @@ export default function RescheduleModal({ notificationRef,handleReschedule,handl
         >
             <IoIosCloseCircleOutline onClick={handleCancel} className="text-white float-right text-[25px]"/>
           <div className="flex mt-[10px] items-center space-x-2">
-            <h2 style={{ fontFamily: "IvyMode, sans-serif" }} className="text-[20px] text-[#EEFF00]">Hey Charlie</h2>
+            <h2 style={{ fontFamily: "IvyMode, sans-serif" }} className="text-[20px] opacity-75 text-[#EEFF00]">Hey Charlie</h2>
             <MdNotificationsActive 
               style={{ color: "#EEFF00", fontSize: "24px" }}
+              className="opacity-75"
             />
           </div>
 
           <p
             style={{ fontFamily: "BrownLight, sans-serif" }}
-            className="my-3 text-[12px] tracking-wider"
+            className="my-3 text-[12px] tracking-wider opacity-75"
           >
             "We regret to inform you that the current weather conditions are not
             conducive for a golf session. Would you like to reschedule or cancel
@@ -68,13 +69,13 @@ export default function RescheduleModal({ notificationRef,handleReschedule,handl
           <div className="flex gap-[30px] mt-5">
             <button
               onClick={handleReschedule}
-              className="bg-white text-[12px] text-black py-2 px-6 rounded cursor-pointer"
+              className="bg-white text-[12px] text-black py-2 px-6 opacity-90 rounded cursor-pointer"
             >
               Reschedule
             </button>
             <button
               onClick={handleCancel2}
-              className="text-white text-[12px] border-b-2 border-white cursor-pointer"
+              className="text-white text-[12px] border-b-2 border-white opacity-90 cursor-pointer"
             >
               Cancel
             </button>

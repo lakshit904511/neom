@@ -10,8 +10,8 @@ export default function DashBoardCard1({ list }) {
   const navigate = useNavigate();
 
   return (
-    <div className="w-[37.5rem] h-[15rem] mt-[1.875rem] border border-[#222222] rounded-[0.75rem] opacity-100 flex justify-center items-center">
-      <div className="w-[13.1875rem] h-[14.875rem] relative ">
+    <div className="w-[37.5rem] h-[14.5rem] mt-[1.875rem] border border-[#222222] rounded-[0.75rem] opacity-100 flex justify-center items-center">
+      <div className="w-[13.1875rem] h-[14.375rem] relative ">
         <img
           onClick={() => navigate("/details")}
           className="w-[13.1875rem] h-full rounded-l-[0.75rem] object-cover cursor-pointer"
