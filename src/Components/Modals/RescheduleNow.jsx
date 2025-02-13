@@ -7,7 +7,7 @@ export default function RescheduleNow({ show,handleShow,handleReschedule1 }) {
           <h1 style={{fontFamily:"IvyMode, sans-serif"}} className="text-[28px] font-medium opacity-80">Hey Charlie,</h1>
           <h2 style={{fontFamily:"IvyMode, sans-serif"}} className="text-[18px] font-medium opacity-80">{show[1]===1?"Are you sure you want to reschedule this event?":"Are you sure you want to Cancel this event?"}</h2>
           <div className="flex gap-[30px] mt-5">
-            <button onClick={handleReschedule1} className="bg-black cursor-pointer opacity-80 text-[12px] text-white py-2 px-6 rounded">
+            <button onClick={()=>handleReschedule1(show[1])} className="bg-black cursor-pointer opacity-80 text-[12px] text-white py-2 px-6 rounded">
               Yes, I am sure
             </button>
             <button onClick={handleShow} className="text-black cursor-pointer text-[10px] border-b border-gray-500 ">

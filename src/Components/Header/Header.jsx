@@ -1,7 +1,7 @@
 import styles from "../Header/header.module.css";
 import logo from "../../assets/img/logo2.png";
 import { RiGlobalLine } from "react-icons/ri";
-import { IoIosNotificationsOutline } from "react-icons/io";
+import { MdNotifications  } from "react-icons/md";
 import { BsList } from "react-icons/bs";
 import { useEffect, useRef, useState } from "react";
 import ModalLanguage from "../Modals/ModalLanguage";
@@ -22,19 +22,30 @@ export default function Header() {
   const notificationRef = useRef(null);
   const navigate=useNavigate();
   const [show, setShow] = useState([false, null]);
+
+
   const handleShow = () => {
     setShow([false, null]);
   };
+
+
   const handleCancel2 = () => {
     setShow([true, 2]);
   };
+
+
   const handleReschedule = () => {
     setShow([true, 1]);
   };
-  const handleReschedule1 = () => {
+
+
+  const handleReschedule1 = (val) => {
     setShow([false, null]);
-    navigate("/schedule");
+    console.log(val);
+    navigate("/schedule",{state:{text:val}});
   };
+
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.target.closest(".menu-list")) {
@@ -88,7 +99,8 @@ export default function Header() {
         <div className={styles.item2}>
           <div className="relative">
             <li ref={notificationRef}>
-              <IoIosNotificationsOutline className="w-[18px]" />
+              <MdNotifications  className="relative w-[18px] text-gray-400" />
+              <div className="absolute top-0 right-1 border-2 opacity-80 rounded-[100px] border-[#9c7c27]"></div>
             </li>
             <RescheduleModal
               notificationRef={notificationRef}

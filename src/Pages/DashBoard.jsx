@@ -45,15 +45,17 @@ export default function DashBoard({ handleClickReview }) {
 
   return (
     <>
-      <section className="mt-[20px] ">
+      <section className="mt-[1.25rem] ">
         <h2
           style={{ fontFamily: "IvyMode, sans-serif" }}
-          className="w-[375px] h-[52px] text-left text-[25px] leading-[44px] tracking-[1.16px] text-[#222222]"
+          className="w-[23.44rem] h-[3.25rem] text-left text-[1.5rem] leading-[2.75rem] tracking-[0.0725rem]
+ text-[#222222]"
         >
           Good morning Charlie!
         </h2>
 
-        <p className="w-[602px] h-[46px] text-left text-[14px] leading-[20px] tracking-[0.4px] text-[#222222] font-[BrownLight] opacity-100">
+        <p className="w-[28.125rem] h-[2.875rem] text-left text-[0.8125rem] leading-[1.25rem]
+ tracking-wide text-[#222222] font-[BrownLight] opacity-100">
           Below listed are your itineraries, have a look to the timings and the
           location. We wish you to enjoy the activities and the weather!
         </p>
@@ -75,7 +77,7 @@ export default function DashBoard({ handleClickReview }) {
           itemsPerView={itemsPerView}
         />
 
-        <div className="mt-[50px]">
+        <div className="mt-[55px]">
           <h2
             style={{ fontFamily: "IvyMode, sans-serif" }}
             className="w-[500px] text-left text-[26px] leading-[28px] tracking-[1.19px] text-[#222222]"
@@ -150,9 +152,6 @@ export default function DashBoard({ handleClickReview }) {
           </h1>
           <Map />
         </div>
-
-
-        
       </section>
     </>
   );

@@ -1,9 +1,33 @@
+import { useLocation} from "react-router-dom";
 import { dataDashBoardCard3 } from "../assets/Dummy_Data/data";
 import music from "../assets/img/music.jpg";
+import golf from "../assets/img/golf.jpg";
+
 import DashBoardCard3 from "../Components/DashboardCards/DashBoardCard3";
+import UpcommingButtons from "../Components/Upcomming/UpcommingButtons";
+import GolfMatch from "../Components/Modals/GolfMatch";
+import { useState } from "react";
+import TimeCircle from "../Components/Reschedule/TimeCircle";
 
 export default function ReschedulePage() {
-    const total=3;
+  const [golfModal, setGolfModal] = useState(false);
+  const value = useLocation();
+  var check;
+  if (value.state === null) {
+    check = "";
+  } else {
+    check = value.state.text;
+  }
+
+  function handleClick() {
+    setGolfModal(true);
+  }
+
+  function closeModal() {
+    setGolfModal(false);
+  }
+  const total = 3;
+
   return (
     <section className="mt-[20px]">
       <div className="flex items-center justify-between pl-[28px] pr-[15px] py-[20px] w-full border border-[#222222] rounded-[12px]">
@@ -18,104 +42,84 @@ export default function ReschedulePage() {
             style={{ fontFamily: "IvyMode, sans-serif" }}
             className="mt-[5px] text-left tracking-[1px] font-normal text-[16px]  text-[#222222] opacity-100"
           >
-            You have just cancelled your "Round of Golf" event. We have found a
-            few similar event for you against your today's cancelled event. And
-            one of them is just starting in an hour and 5 minutes drive away.
+            {check === 1
+              ? "We have a few similar event for you against your today's rescheduled event of Round of Golf. And one of them is just starting in an hour and 5 minutes drive away."
+              : "You have just cancelled your Round of Golf event. We have found a few similar event for you against your today's cancelled event one of them is just starting in an hour and 5 minutes drive away"}
           </h1>
         </div>
       </div>
 
       <div className="relative flex mt-[30px] items-center justify-center w-full ">
         <img
-          className=" rounded-[14px] h-[430px] object-cover w-full"
-          src={music}
+          className=" rounded-[14px] h-[430px] object-center w-full"
+          src={check === 1 ? golf : music}
         />
+
         <h1
           style={{ fontFamily: "IvyMode, sans-serif" }}
-          className="text-[30px] tracking-widest absolute  font-extrabold top-[40px] text-center mx-auto text-[#ffffff]"
+          className={`${
+            check == 1 ? "top-[100px]" : "top-[40px]"
+          } text-[30px] tracking-widest absolute  font-extrabold  text-center mx-auto text-[#ffffff]`}
         >
-          Music
-        </h1>
-        <h1
-          style={{ fontFamily: "IvyMode, sans-serif" }}
-          className="text-[30px] tracking-widest absolute  font-extrabold top-[80px] text-center mx-auto text-[#ffffff]"
-        >
-          Jazz Concert
-        </h1>
-        <h1
-          style={{ fontFamily: "Brown, sans-serif" }}
-          className="text-[17px] tracking-wide absolute  font-medium top-[130px] text-center mx-auto text-[#ffffff]"
-        >
-          Sindalah City, Dubai
-        </h1>
-        <h1
-          style={{ fontFamily: "Brown, sans-serif" }}
-          className="text-[17px] tracking-wide absolute  font-medium top-[160px] text-center mx-auto text-[#ffffff]"
-        >
-          Jan 01, 2023 at 00:00
+          {check == 1 ? "Round of Golf" : "Music"}
         </h1>
 
-        <div className="absolute w-[400px] mx-auto top-[220px] flex justify-evenly items-center">
-          <div className="flex flex-col items-center justify-center border border-yellow-200 rounded-[100px] w-[80px] h-[80px] ">
-            <p
-              style={{ fontFamily: "Brown, sans-serif" }}
-              className="text-sm tracking-wide opacity-80 text-[#ffffff] font-normal"
-            >
-              Days
-            </p>
-            <p
-              style={{ fontFamily: "Brown, sans-serif" }}
-              className="text-[22px] tracking-wider font-semibold text-[#ffffff]"
-            >
-              0
-            </p>
-          </div>
-          <div className="flex flex-col items-center justify-center border border-blue-400 rounded-[100px] w-[80px] h-[80px] ">
-            <p
-              style={{ fontFamily: "Brown, sans-serif" }}
-              className="text-sm tracking-wide opacity-80 text-[#ffffff] font-normal"
-            >
-              Hours
-            </p>
-            <p
-              style={{ fontFamily: "Brown, sans-serif" }}
-              className="text-[22px] tracking-wider font-semibold text-[#ffffff]"
-            >
-              0
-            </p>
-          </div>
-          <div className="flex flex-col items-center justify-center border border-orange-300 rounded-[100px] w-[80px] h-[80px] ">
-            <p
-              style={{ fontFamily: "Brown, sans-serif" }}
-              className="text-sm tracking-wide opacity-80 text-[#ffffff] font-normal"
-            >
-              Minutes
-            </p>
-            <p
-              style={{ fontFamily: "Brown, sans-serif" }}
-              className="text-[22px] tracking-wider font-semibold text-[#ffffff]"
-            >
-              45
-            </p>
-          </div>
-          <div className="flex flex-col items-center justify-center border border-red-500 rounded-[100px] w-[80px] h-[80px] ">
-            <p
-              style={{ fontFamily: "Brown, sans-serif" }}
-              className="text-sm tracking-wide opacity-80 text-[#ffffff] font-normal"
-            >
-              Seconds
-            </p>
-            <p
-              style={{ fontFamily: "Brown, sans-serif" }}
-              className="text-[22px] tracking-wider font-semibold text-[#ffffff]"
-            >
-              59
-            </p>
-          </div>
-        </div>
 
-        <button className="absolute text-[14px] tracking-wider mx-auto bottom-[50px] bg-[#ffffff] text-black px-6 py-3 rounded-[8px] flex justify-evenly items-center">
-          Yes I am in
+        {check === 1 ? (
+          ""
+        ) : (
+          <h1
+            style={{ fontFamily: "IvyMode, sans-serif" }}
+            className="text-[30px] tracking-widest absolute  font-extrabold top-[80px] text-center mx-auto text-[#ffffff]"
+          >
+            Jazz Concert
+          </h1>
+        )}
+
+
+        <h1
+          style={{ fontFamily: "Brown, sans-serif" }}
+          className={`${
+            check == 1 ? "top-[160px] font-normal" : "top-[40px] font-medium"
+          } text-[17px] tracking-wide absolute   top-[130px] text-center mx-auto text-[#ffffff]`}
+        >
+          {check === 1 ? "Sindalah Island" : "Sindalah City, Dubai"}
+        </h1>
+
+
+        <h1
+          style={{ fontFamily: "Brown, sans-serif" }}
+          className={`${
+            check == 1 ? "top-[205px]" : "top-[40px]"
+          } text-[17px] tracking-wide absolute  font-medium top-[160px] text-center mx-auto text-[#ffffff]`}
+        >
+          {check === 1 ? "Jan 01, 2023" : "Jan 01, 2023 at 00:00"}
+        </h1>
+
+
+
+        {check === 1 ? (
+          <h1
+            style={{ fontFamily: "Brown, sans-serif" }}
+            className={`${
+              check == 1 ? "top-[230px]" : "top-[40px]"
+            } text-[17px] tracking-wide absolute  font-medium top-[160px] text-center mx-auto text-[#ffffff]`}
+          >
+            {check === 1 ? "07:00 AM | 11:00 AM | 03:00 PM" : ""}
+          </h1>
+        ) : (
+          ""
+        )}
+
+        {check === 2 ? <TimeCircle /> : ""}
+
+        <button
+          onClick={check === 1 ? handleClick : null}
+          className={`${
+            check == 1 ? "bottom-[100px]" : "bottom-[50px]"
+          } absolute text-[14px] tracking-wider mx-auto  bg-[#ffffff] text-black px-6 py-3 rounded-[8px] flex justify-evenly items-center`}
+        >
+          {check === 1 ? "Reschedule" : "Yes I am in"}
         </button>
       </div>
 
@@ -127,55 +131,10 @@ export default function ReschedulePage() {
       </h1>
 
       <div className="w-[720px] mt-[15px] flex  gap-[15px]">
-        <div
-          style={{ fontFamily: "BrownLight, sans-serif" }}
-          className="w-[350px] border border-[#222222] bg-[#F9F7F2] rounded-[24px] opacity-100
- flex"
-        >
-          <button
-            className="rounded-l-[24px] tracking-[.30px] px-[15px] border-r border-[#222222] leading-[38px] text-left font-normal text-[11px]  text-[#222222] opacity-100 hover:bg-black hover:text-white
-"
-          >
-            10 mins walking
-          </button>
-          <button
-            className="tracking-[.30px] px-[15px] border-r border-[#222222] leading-[38px] text-left font-normal text-[11px]  text-[#222222] opacity-100 hover:bg-black hover:text-white
-"
-          >
-            20 mins walking
-          </button>
-          <button
-            className="rounded-r-[24px] tracking-[.30px] px-[15px] leading-[38px] text-left font-normal text-[11px]  text-[#222222] opacity-100 hover:bg-black hover:text-white
-"
-          >
-            30 mins walking
-          </button>
-        </div>
-        <div
-          style={{ fontFamily: "BrownLight, sans-serif" }}
-          className="w-[350px] border border-[#222222] bg-[#F9F7F2] rounded-[24px] opacity-100
- flex"
-        >
-          <button
-            className="rounded-l-[24px] tracking-[.30px] px-[15px] border-r border-[#222222] leading-[38px] text-left font-normal text-[11px]  text-[#222222] opacity-100 hover:bg-black hover:text-white
-"
-          >
-            10 mins Drive
-          </button>
-          <button
-            className="tracking-[.30px] px-[15px] border-r border-[#222222] leading-[38px] text-left font-normal text-[11px]  text-[#222222] opacity-100 hover:bg-black hover:text-white
-"
-          >
-            20 mins Drive
-          </button>
-          <button
-            className="rounded-r-[24px] tracking-[.30px] px-[15px] leading-[38px] text-left font-normal text-[11px]  text-[#222222] opacity-100 hover:bg-black hover:text-white
-"
-          >
-            30 mins Drive
-          </button>
-        </div>
+        <UpcommingButtons />
       </div>
+
+
       <div className="mt-[16px] flex flex-col justify-center">
         {Array.from({ length: total }).map((_, i) => (
           <div key={i} className="mt-[20px] flex items-center gap-[15px]">
@@ -185,6 +144,8 @@ export default function ReschedulePage() {
           </div>
         ))}
       </div>
+
+      {golfModal && <GolfMatch closeModal={closeModal} />}
     </section>
   );
 }

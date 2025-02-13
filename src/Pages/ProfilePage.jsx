@@ -9,17 +9,17 @@ export default function ProfilePage() {
 
   return (
     <div className="flex items-center justify-center">
-      <div className=" relative  mt-[30px] w-[65vw] h-[1050px] bg-[#FFFFFF] border border-[#DDDDDD] ">
+      <div className=" relative  mt-[30px] w-[53vw] h-[850px] bg-[#FFFFFF] border border-[#DDDDDD] ">
         <h1
           style={{ fontFamily: "IvyMode, sans-serif" }}
-          className="mt-[40px] ml-[60px] text-left text-[30px] leading-[42px] tracking-[1.19px] text-[#222222] opacity-100 "
+          className="mt-[30px] ml-[55px] text-left text-[24px] leading-[42px] tracking-[1.19px] text-[#222222] opacity-100 "
         >
           Edit Charlie's profile
         </h1>
 
-        <div className="absolute top-[120px] left-[60px] w-[160px] rounded-[12px] overflow-hidden">
+        <div className="absolute top-[100px] left-[55px] w-[110px] rounded-[8px] overflow-hidden">
           <img
-            className="w-[160px] h-[160px] object-cover"
+            className="w-[110px] h-[110px] object-cover"
             src={social}
             alt="Social"
           />
@@ -31,39 +31,37 @@ export default function ProfilePage() {
           </button>
         </div>
 
-        <div className="absolute top-[100px] left-[265px]">
+        <div className="absolute top-[90px] left-[190px]">
           <form className="space-y-4">
             <label
               style={{ fontFamily: "Brown, sans-serif" }}
-              className="w-[174px] text-center text-[14px] leading-[44px] tracking-[0.31px] text-[#222222] opacity-100 font-[Brown]"
+              className="w-[194px] text-center text-[10px] leading-[24px] tracking-wide text-[#222222] opacity-100"
             >
               What should we call you?
             </label>
             <br />
             <input
               type="text"
-              className=" outline-gray-300 w-[460px] h-[40px] border border-[#DDDDDD] rounded-[6px]"
+              className=" outline-gray-300 w-[320px] h-[40px] border border-[#DDDDDD] rounded-[4px] placeholder: pl-2 text-[12px]"
             />
             <br />
 
             <label
               style={{ fontFamily: "Brown, sans-serif" }}
-              className=" w-[174px] text-center text-[14px] leading-[44px] tracking-[0.31px] text-[#222222] opacity-100 font-[Brown]"
-            >
+              className="w-[194px] text-center text-[10px] leading-[24px] tracking-wide text-[#222222] opacity-100"            >
               What's your email address?
             </label>
             <br />
             <input
               placeholder="tyagiparlakshit2k03@gmail.com"
               type="text"
-              className=" outline-gray-300 w-[460px] h-[40px] border border-[#DDDDDD] rounded-[6px] placeholder:text-left text-[14px] pl-[10px] leading-[24px] tracking-[0.4px] text-[#222222] bg-[#f2eeeeae] opacity-100"
+              className=" outline-gray-300 w-[320px] h-[40px] border border-[#DDDDDD] rounded-[4px] placeholder: pl-2 text-[12px]"
             />
             <br />
 
             <label
               style={{ fontFamily: "Brown, sans-serif" }}
-              className=" w-[174px] text-center text-[14px] leading-[44px] tracking-[0.31px] text-[#222222] opacity-100 font-[Brown]"
-            >
+              className="w-[194px] text-center text-[10px] leading-[24px] tracking-wide text-[#222222] opacity-100"            >
               On which number can we contact you?
             </label>
             <br />
@@ -71,34 +69,33 @@ export default function ProfilePage() {
               style={{ fontFamily: "BrownLight, sans-serif" }}
               type="number"
               placeholder="9045111609"
-              className=" outline-gray-300 w-[460px] h-[40px] border border-[#DDDDDD] rounded-[6px] placeholder:text-left text-[14px] pl-[10px] leading-[24px] tracking-[0.4px] text-[#222222] opacity-100"
+              className=" outline-gray-300 w-[320px] h-[40px] border border-[#DDDDDD] rounded-[4px] placeholder: pl-2 text-[12px]"
             />
             <br />
 
             <label
               style={{ fontFamily: "Brown, sans-serif" }}
-              className=" w-[174px] text-center text-[14px] leading-[44px] tracking-[0.31px] text-[#222222] opacity-100 font-[Brown]"
-            >
+              className="w-[194px] text-center text-[10px] leading-[24px] tracking-wide text-[#222222] opacity-100"            >
               When can we wish a happy birthday?
             </label>
             <br />
             <input
               placeholder="11/03/2003"
               type="date"
-              className=" outline-gray-300 w-[460px] h-[40px] border border-[#DDDDDD] rounded-[6px] placeholder:text-left text-[14px] bg- pl-[10px] leading-[24px] tracking-[0.4px] text-[#222222] opacity-100"
+              className=" outline-gray-300 w-[320px] h-[40px] border border-[#DDDDDD] rounded-[4px] placeholder: pl-2 text-[12px]"
             />
             <br />
 
-            <div className="mt-[20px] grid grid-cols-5 w-[500px] gap-[20px]">
+            <div className="mt-[20px] grid grid-cols-5 w-[400px] gap-3 ">
               {formData.map((data1) => (
                 <div className="relative w-[93px]">
                   <img
-                    className="w-[93px] h-[130px] object-cover rounded-[4px]"
+                    className="w-[73px] h-[100px] object-cover rounded-[4px]"
                     src={data1.image}
                     alt="Social"
                   />
 
-                  <p className="absolute bottom-3 left-3 text-center text-[13px] leading-[16px] tracking-[0.29px] text-[#FFFFFF] opacity-100 font-medium w-[60px]">
+                  <p className="absolute bottom-2 left-3 text-center text-[10px] leading-[16px] tracking-[0.29px] text-[#FFFFFF] opacity-100 font-medium w-[60px]">
                     {data1.name}
                   </p>
                 </div>
@@ -107,7 +104,7 @@ export default function ProfilePage() {
 
             <label
               style={{ fontFamily: "Brown, sans-serif" }}
-              className="w-[174px] text-center text-[14px] leading-[44px] tracking-[0.31px] text-[#222222] opacity-100 font-[Brown]"
+               className="w-[194px] text-center text-[10px] leading-[24px] tracking-wide text-[#222222] opacity-100"
             >
               Please let us know if you have some interests{" "}
             </label>
@@ -115,13 +112,14 @@ export default function ProfilePage() {
             <input
               placeholder="Add multiple interests comma ( , ) separated"
               type="text"
-              className=" outline-gray-300 w-[460px] h-[40px] border border-[#DDDDDD] rounded-[6px] placeholder:text-left text-[14px] bg- pl-[10px] leading-[24px] tracking-[0.4px] text-[#222222] opacity-100"
+              className=" outline-gray-300 w-[320px] h-[40px] border border-[#DDDDDD] rounded-[4px] placeholder: pl-2 text-[12px]"
+
             />
             <br />
 
-            <div className="flex gap-10 mt-[40px]">
-                <button onClick={()=>{navigate1("/")}} style={{ fontFamily: "BrownLight, sans-serif" }} className="bg-[#FF385C] rounded-[6px] opacity-100 px-10 py-3 text-left text-[14px] leading-[21px] tracking-[0.04px] text-[#FFFFFF] ">Save</button>
-                <button onClick={()=>{navigate1("/dashboard")}}  style={{ fontFamily: "BrownLight, sans-serif" }} className="bg-[#ffffff] border rounded-[6px] opacity-100 px-9 py-3 text-left text-[14px] leading-[21px] tracking-[0.04px] text-[##222222] ">Cancel</button>
+            <div className="flex gap-5 mt-[10px]">
+                <button onClick={()=>{navigate1("/")}} style={{ fontFamily: "BrownLight, sans-serif" }} className="bg-[#FF385C] rounded-[4px] opacity-100 px-8 py-2 text-left text-[12px] leading-[21px] tracking-[0.04px] text-[#FFFFFF] ">Save</button>
+                <button onClick={()=>{navigate1("/dashboard")}}  style={{ fontFamily: "BrownLight, sans-serif" }} className="bg-[#ffffff] border rounded-[4px] opacity-100 px-8 py-2 text-left text-[12px] leading-[21px] tracking-[0.04px] text-[##222222] ">Cancel</button>
 
             </div>
           </form>

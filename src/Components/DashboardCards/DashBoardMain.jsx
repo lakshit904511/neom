@@ -1,4 +1,3 @@
-
 const DashBoardMain = ({
   data,
   itemsPerView,
@@ -8,7 +7,7 @@ const DashBoardMain = ({
 }) => {
   return (
     <div
-      className="flex items-center mt-[10px] gap-[23px] transition-transform duration-300 ease-in-out"
+      className="flex items-center mt-[0.295rem] gap-[0.875rem] transition-transform duration-300 ease-in-out"
       style={{
         transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)`,
       }}

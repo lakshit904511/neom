@@ -12,7 +12,7 @@ export default function RescheduleModal({ notificationRef,handleReschedule,handl
       if (loc.pathname === "/dashboard") {
         setShowModal(true);
       }
-    }, 10000);
+    }, 7000);
 
     return () => clearInterval(interval);
   }, []);
@@ -50,7 +50,7 @@ export default function RescheduleModal({ notificationRef,handleReschedule,handl
         >
             <IoIosCloseCircleOutline onClick={handleCancel} className="text-white float-right text-[25px]"/>
           <div className="flex mt-[10px] items-center space-x-2">
-            <h2 style={{ fontFamily: "IvyMode, sans-serif" }} className="text-[20px]">Hey Charlie</h2>
+            <h2 style={{ fontFamily: "IvyMode, sans-serif" }} className="text-[20px] text-[#EEFF00]">Hey Charlie</h2>
             <MdNotificationsActive 
               style={{ color: "#EEFF00", fontSize: "24px" }}
             />

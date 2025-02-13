@@ -19,11 +19,6 @@ import ReschedulePage from "./Pages/ReschedulePage";
 export default function App() {
   const [modal, setModal] = useState(false);
 
-  // function closeModalVibe() {
-  //   setModal(!modal);
-  //   setVibe(!vibe);
-  // }
-
   function handleClickReview() {
     setModal(!modal);
   }
