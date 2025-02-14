@@ -1,27 +1,24 @@
 .main {
-  width: 1349px;
-  padding-inline: 110px;
-  border-bottom: 1px solid #f7e9f7;
-  height: 70px;
-  /* UI Properties */
+  width: 84.3125rem; 
+  padding-inline: 6.875rem; 
+  border-bottom: 0.0625rem solid #f7e9f7; 
+  height: 4.375rem; 
   background: #f9f7f2 0% 0% no-repeat padding-box;
-  background: #f9f7f2 0% 0% no-repeat padding-box;
-  /* box-shadow: 0px 1px 0px #eeeeee; */
   opacity: 1;
   display: flex;
   flex-direction: row;
   justify-items: center;
   justify-content: space-between;
-  padding-top: 10px;
-  /* border-bottom: 1px solid ; */
+  padding-top: 0.625rem; 
+ 
 }
 
 .neom_logo {
-  width: 66px;
-  height: 56px;
+  width: 4.125rem;
+  height: 3.5rem;
   opacity: 1;
   object-fit: contain;
-  padding-right: 24px;
+  padding-right: 1.5rem; 
 }
 
 .item {
@@ -29,14 +26,15 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 31px;
+  gap: 1.9375rem; 
   cursor: pointer;
 }
+
 .item1 {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 15px;
+  gap: 0.9375rem; 
   cursor: pointer;
 }
 
@@ -44,10 +42,11 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 14px;
+  gap: 0.875rem; 
   cursor: pointer;
-  margin-bottom: 4px;
+  margin-bottom: 0.25rem; 
 }
+
 /* .item li a:hover{
    border-bottom:  2px solid #FF385C;
 } */
