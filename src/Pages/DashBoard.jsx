@@ -56,7 +56,8 @@ export default function DashBoard({ handleClickReview }) {
 
         <p className="w-[28.125rem] h-[2.875rem] text-left text-[0.8125rem] leading-[1.25rem]
  tracking-wide text-[#222222] font-[BrownLight] opacity-100">
-          Below listed are your itineraries, have a look to the timings 
+          Below listed are your itineraries, have a look to the timings and the
+          location. We wish you to enjoy the activities and the weather!
         </p>
 
         <div className="relative ">
