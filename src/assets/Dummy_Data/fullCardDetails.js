@@ -3,7 +3,6 @@ import yoga from "../img/yoga.jpg";
 import surfing from "../img/surfing.jpg";
 import holiday from "../img/holiday_0.png";
 import disappoint from "../img/disappointed.svg";
-import joy from "../img/joy.svg";
 import over from "../img/overwhelmed.svg";
 import Children from "../img/child.png";
 import chinese from "../img/chinese.png";

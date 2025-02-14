@@ -8,6 +8,9 @@ import { useNavigate } from "react-router-dom";
 
 export default function DashBoardCard1({ list }) {
   const navigate = useNavigate();
+  console.log(list);
+
+  const stars = list.starReview;
 
   return (
     <div className="w-[37.5rem] h-[14.5rem] mt-[1.875rem] border border-[#222222] rounded-[0.75rem] opacity-100 flex justify-center items-center">
@@ -15,12 +18,12 @@ export default function DashBoardCard1({ list }) {
         <img
           onClick={() => navigate("/details")}
           className="w-[13.1875rem] h-full rounded-l-[0.75rem] object-cover cursor-pointer"
-          src={list.img}
+          src={list.imageMain}
           alt="golf"
         />
         <img
           className="absolute bottom-[0.375rem] right-[0.375rem] h-[2.1875rem]"
-          src={cloud}
+          src={list.imageCloud}
         />
       </div>
       <div className="w-[19.5rem] h-full rounded-r-[0.75rem] pt-[0.625rem] flex flex-col items-start pl-[0.7875rem] ">
@@ -28,22 +31,23 @@ export default function DashBoardCard1({ list }) {
           style={{ fontFamily: "IvyMode, sans-serif" }}
           className="w-[9.8125rem] text-left text-[1.125rem] leading-[1.9875rem] tracking-[0.049375rem] text-[#222222] opacity-100"
         >
-          {list.title}
+          {list.name}
         </h1>
 
         <div className="flex items-center gap-[0.625rem] w-[12.5rem] text-[0.75rem] tracking-[0.019375rem] text-[#222222] opacity-100">
           <div className="flex items-center gap-0 text-[0.8375rem]">
-            <MdOutlineStar className="text-[#FF385C]" />
-            <MdOutlineStar className="text-[#FF385C]" />
-            <MdOutlineStar className="text-[#FF385C]" />
-            <MdOutlineStar className="text-[#FF385C]" />
-            <MdOutlineStar className="text-[#FF385C]" />
+            {stars.map((star, index) => (
+              <MdOutlineStar
+                key={index}
+                className="text-[#FF385C] w-[13px] h-[13px]"
+              />
+            ))}
           </div>
           <span
             style={{ fontFamily: "BrownLight, sans-serif" }}
             className="pt-[0.0585rem] text-[.610rem]"
           >
-            5.0 (23 Reviews)
+            {list.starReview} ({list.noOfReview} Reviews)
           </span>
         </div>
         <p

@@ -12,9 +12,10 @@ import DashBoardCard4 from "../Components/DashboardCards/DashBoardCard4";
 import DashBoardCard2 from "../Components/DashboardCards/DashBoardCard2";
 import DashBoardMain from "../Components/DashboardCards/DashBoardMain";
 import Map from "../Components/DashboardCards/Map";
+import userData from "../assets/Dummy_Data/userData";
+import cardData from "../assets/Dummy_Data/fullCardDetails";
 
-
-export default function DashBoard({ handleClickReview }) {
+export default function DashBoard() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentIndexCard2, setCurrentIndexCard2] = useState(0);
 
@@ -44,6 +45,10 @@ export default function DashBoard({ handleClickReview }) {
     }
   };
 
+
+  const filteroutCards=cardData.filter(onecardData=>userData[0].scheduledEventCards.includes(onecardData.id));
+
+
   return (
     <>
       <section className="mt-[1.25rem] ">
@@ -62,8 +67,10 @@ export default function DashBoard({ handleClickReview }) {
         </p>
 
         <div className="relative ">
+
+          
           <DashBoardMain
-            data={dataDashBoardCard1}
+            data={filteroutCards}
             itemsPerView={itemsPerView}
             currentIndex={currentIndex}
             renderItem={(list) => <DashBoardCard1 key={list.id} list={list} />}
@@ -95,7 +102,6 @@ export default function DashBoard({ handleClickReview }) {
                 <DashBoardCard2
                   key={card2.id}
                   card2={card2}
-                  handleClickReview={handleClickReview}
                 />
               )}
             />

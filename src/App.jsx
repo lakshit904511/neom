@@ -17,11 +17,7 @@ import VibeMeter from "./Components/Modals/VibeMeter";
 import ReschedulePage from "./Pages/ReschedulePage";
 
 export default function App() {
-  const [modal, setModal] = useState(false);
-
-  function handleClickReview() {
-    setModal(!modal);
-  }
+  
 
   return (
     <div
@@ -34,11 +30,11 @@ export default function App() {
           <Routes>
             <Route
               index
-              element={<DashBoard handleClickReview={handleClickReview} />}
+              element={<DashBoard  />}
             />
             <Route
               path="dashboard"
-              element={<DashBoard handleClickReview={handleClickReview} />}
+              element={<DashBoard  />}
             >
               <Route path="modal" element={<MyModal />} />
             </Route>

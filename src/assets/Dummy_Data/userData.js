@@ -9,7 +9,7 @@ const userData = [
     //  these numbers are the id's of array of cards of scheduled event and all
 
 
-    scheduledEventCards: [1, 2, 3, 2, 1, 2],
+    scheduledEventCards: [1, 2, 3, 4, 1, 5],
 
     attendedEventCards: [
       { id: 1, review: 5 },
