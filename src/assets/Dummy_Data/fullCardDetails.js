@@ -29,15 +29,21 @@ import cloud from "../img/Temprature.svg";
 import joy from "../img/joy.svg";
 import { dataDetailedCard } from "./data";
 
-const cardData = [
+function truncateName(name, maxLength) {
+  return name.length > maxLength ? name.substring(0, maxLength) + "..." : name;
+}
+
+
+const fullCardDetails = [
   {
     id: 1,
     imageMain: golfImage,
     imageCloud: cloud,
     nameImage: "Golf",
-    name: "Round of Golf",
+    name: truncateName("Round of Golf",18),
     starReview: 5,
     noOfReview: 23,
+    date:"Nov 10, 2022",
     title: "",
     location: "Sindalah City",
     reviewImage: over,
@@ -72,9 +78,10 @@ const cardData = [
     imageMain: surfingImage,
     imageCloud: cloud,
     nameImage: "Surfing",
-    name: "Surfing at leisure",
+    name: truncateName("Surfing at leisure",18),
     starReview: 5,
     noOfReview: 23,
+    date:"Nov 12, 2022",
     title: "",
     location: "Sindalah City",
     reviewImage: over,
@@ -109,9 +116,10 @@ const cardData = [
     imageMain: islandImage,
     imageCloud: cloud,
     nameImage: "Island",
-    name: "Dive into Exciting Island Holiday Experience",
+    name: truncateName("Dive into Exciting Island Holiday Experience",18),
     starReview: 5,
     noOfReview: 23,
+    date:"Nov 20, 2022",
     title: "",
     location: "Sindalah City",
     reviewImage: over,
@@ -120,7 +128,7 @@ const cardData = [
 
     // details till now dashboardcard1
 
-    lastEvent: [{ guestNumber: 3, eventRating: 5 }],
+    lastEvent: [{ guestNumber: 3, eventRating: null }],
 
     detailedEvent: [
       {
@@ -146,9 +154,10 @@ const cardData = [
     imageMain: golfImage,
     imageCloud: cloud,
     nameImage: "Golf",
-    name: "Round of Golf",
+    name: truncateName("Round of Golf",18),
     starReview: 5,
     noOfReview: 23,
+    date:"Nov 25, 2022",
     title: "",
     location: "Sindalah City",
     reviewImage: over,
@@ -183,9 +192,10 @@ const cardData = [
     imageMain: surfingImage,
     imageCloud: cloud,
     nameImage: "Surfing",
-    name: "Surfing at leisure",
+    name: truncateName("Surfing at leisure",18),
     starReview: 5,
     noOfReview: 23,
+    date:"Nov 16, 2022",
     title: "",
     location: "Sindalah City",
     reviewImage: over,
@@ -218,4 +228,4 @@ const cardData = [
 ];
 
 
-export default cardData;
+export default fullCardDetails;

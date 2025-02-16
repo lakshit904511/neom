@@ -1,10 +1,7 @@
 import { useState } from "react";
-import Header from "../Components/Header/header";
 import { Outlet } from "react-router-dom";
 import { dataDashBoardCard2 } from "../assets/Dummy_Data/data";
 import { dataDashBoardCard3 } from "../assets/Dummy_Data/data";
-import { dataDashBoardCard4 } from "../assets/Dummy_Data/data";
-import { dataDashBoardCard1 } from "../assets/Dummy_Data/data";
 import Slider from "../Components/Slider/Slider";
 import DashBoardCard1 from "../Components/DashboardCards/DashBoardCard1";
 import DashBoardCard3 from "../Components/DashboardCards/DashBoardCard3";
@@ -13,14 +10,28 @@ import DashBoardCard2 from "../Components/DashboardCards/DashBoardCard2";
 import DashBoardMain from "../Components/DashboardCards/DashBoardMain";
 import Map from "../Components/DashboardCards/Map";
 import userData from "../assets/Dummy_Data/userData";
-import cardData from "../assets/Dummy_Data/fullCardDetails";
+import fullCardDetails from "../assets/Dummy_Data/fullCardDetails";
 
 export default function DashBoard() {
+
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentIndexCard2, setCurrentIndexCard2] = useState(0);
 
   const itemsPerView = 2;
   const itemsPerViewCard2 = 2;
+
+  // cards jo schedule honge starting mai hi data for card1 in dashboard
+  const filteroutCards = userData[0].scheduledEventCards.flatMap(eventId =>
+    fullCardDetails.filter(onecardData => onecardData.id === eventId)
+  );
+
+  // cards jo attend honge starting mai hi data for card1 in dashboard
+  const attendedEventCards = userData[0].attendedEventCards.flatMap(eventId =>
+    fullCardDetails.filter(onecardData => onecardData.id === eventId)
+  );
+
+
 
   const goToPrevImage = () => {
     if (currentIndex > 0) {
@@ -29,7 +40,7 @@ export default function DashBoard() {
   };
 
   const goToNextImage = () => {
-    if (currentIndex < dataDashBoardCard1.length - itemsPerView) {
+    if (currentIndex < filteroutCards.length - itemsPerView) {
       setCurrentIndex(currentIndex + 1);
     }
   };
@@ -46,7 +57,7 @@ export default function DashBoard() {
   };
 
 
-  const filteroutCards=cardData.filter(onecardData=>userData[0].scheduledEventCards.includes(onecardData.id));
+
 
 
   return (
@@ -68,7 +79,7 @@ export default function DashBoard() {
 
         <div className="relative ">
 
-          
+
           <DashBoardMain
             data={filteroutCards}
             itemsPerView={itemsPerView}
@@ -79,6 +90,7 @@ export default function DashBoard() {
 
         <Slider
           value={1}
+          filteroutCards={filteroutCards}
           goToPrevImage={goToPrevImage}
           goToNextImage={goToNextImage}
           currentIndex={currentIndex}
@@ -142,7 +154,7 @@ export default function DashBoard() {
             Charlie, here is your master journey with us so far
           </h1>
           <div className="mt-[30px] flex items-center gap-[10px]">
-            {dataDashBoardCard4.map((card4) => (
+            {attendedEventCards.map((card4) => (
               <DashBoardCard4 key={card4.id} card4={card4} />
             ))}
           </div>

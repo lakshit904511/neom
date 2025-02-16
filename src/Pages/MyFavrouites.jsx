@@ -3,16 +3,20 @@ import {
   dataMyFavoritesCard,
 } from "../assets/Dummy_Data/data";
 import DashBoardCard3 from "../Components/DashboardCards/DashBoardCard3";
-import Footer from "../Components/Footer/Footer";
-import Header from "../Components/Header/header";
 import MyFavoritesCard from "../Components/MyFavorites/MyFavoritesCard";
 import Slider from "../Components/Slider/Slider";
 import { useState } from "react";
+import userData from "../assets/Dummy_Data/userData";
+import fullCardDetails from "../assets/Dummy_Data/fullCardDetails";
 
 export default function MyFavrouites() {
   const [currentIndexCard3, setCurrentIndexCard3] = useState(0);
 
   const itemsPerViewCard3 = 1.5;
+
+  const favouriteCards = userData[0].favoriteEventCards.flatMap(eventId =>
+    fullCardDetails.filter(onecardData => onecardData.id === eventId)
+  );
 
   const goToPrevImageCard3 = () => {
     if (currentIndexCard3 > 0) {
