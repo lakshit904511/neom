@@ -1,6 +1,13 @@
+import { useLocation } from "react-router-dom";
 import CommonPage from "../Components/CommonPage/CommonPage";
 
 export default function DetailedPage() {
+
+  const data=useLocation();
+
+  const detailedData=data.state.text;
+
+
   return (
     <section className="mt-[20px]">
       <div className="flex items-center justify-between pl-[28px] pr-[15px] py-[20px] w-full border border-[#222222] rounded-[12px]">
@@ -25,7 +32,7 @@ export default function DetailedPage() {
         </button>
       </div>
       
-      <CommonPage />
+      <CommonPage detailedData={detailedData}/>
       
     </section>
   );

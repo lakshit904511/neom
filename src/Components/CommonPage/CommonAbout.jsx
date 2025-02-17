@@ -2,7 +2,7 @@ import { BiCategory } from "react-icons/bi";
 import { CiLocationOn } from "react-icons/ci";
 import joy from "../../assets/img/joy.svg";
 
-export default function CommonAbout() {
+export default function CommonAbout({datadetailedEvent}) {
 
 
   return (
@@ -24,13 +24,13 @@ export default function CommonAbout() {
                 style={{ fontFamily: "Brown, sans-serif" }}
                 className="text-left font-medium tracking-[.50px]  text-[14px] text-[#222222] opacity-90 "
               >
-                Golf
+                {datadetailedEvent.iconTitle}
               </p>
               <p
                 style={{ fontFamily: "BrownLight, sans-serif" }}
                 className="text-left opacity-90  tracking-[.30px]  text-[12px] text-[#222222]  "
               >
-                This is one of the many events comes under the Golf category.
+                {datadetailedEvent.iconPara}
               </p>
             </div>
           </div>
@@ -42,13 +42,13 @@ export default function CommonAbout() {
                 style={{ fontFamily: "Brown, sans-serif" }}
                 className="text-left font-medium tracking-[.50px] opacity-90  text-[14px] text-[#222222] "
               >
-                Great location
+                {datadetailedEvent.locationTitle}
               </p>
               <p
                 style={{ fontFamily: "BrownLight, sans-serif" }}
                 className="text-left opacity-90  tracking-[.30px]  text-[12px] text-[#222222]  "
               >
-                Every guest has given a five star rating to this location.{" "}
+                {datadetailedEvent.locationPara}
               </p>
             </div>
           </div>
@@ -60,13 +60,13 @@ export default function CommonAbout() {
                 style={{ fontFamily: "Brown, sans-serif" }}
                 className="text-left font-medium  tracking-[.30px] opacity-90  text-[14px] text-[#222222] "
               >
-                Invigorating & uplifting experience
+                {datadetailedEvent.upliftTitle}
               </p>
               <p
                 style={{ fontFamily: "BrownLight, sans-serif" }}
                 className="text-left opacity-90  tracking-[.50px]  text-[12px] text-[#222222]  "
               >
-                This event has a rating of 5.0 that make this event overwhelmed.{" "}
+                {datadetailedEvent.upliftPara}
               </p>
             </div>
           </div>
@@ -76,24 +76,14 @@ export default function CommonAbout() {
             style={{ fontFamily: "BrownLight, sans-serif" }}
             className="w-[650px] text-left border-t border-gray-200  leading-5 opacity-90   tracking-wide pt-[20px]  text-[12px] text-[#222222]  "
           >
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-            sadipscing elit.
+            {datadetailedEvent.mainDescription}
           </p>
 
           <p
             style={{ fontFamily: "BrownLight, sans-serif" }}
             className="w-[650px] border-b leading-5 pb-[15px] border-gray-200 text-left mt-[15px] opacity-90  tracking-wide  text-[12px] text-[#222222]  "
           >
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-            sadipscing elit.
+            {datadetailedEvent.mainDescription}
           </p>
         </div>
       </div>

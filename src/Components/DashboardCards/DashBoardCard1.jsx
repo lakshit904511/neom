@@ -3,7 +3,6 @@ import { CiLocationOn } from "react-icons/ci";
 import { CiCalendar } from "react-icons/ci";
 import over from "../../assets/img/overwhelmed.svg";
 import { CiGrid41 } from "react-icons/ci";
-import cloud from "../../assets/img/Temprature.svg";
 import { useNavigate } from "react-router-dom";
 
 export default function DashBoardCard1({ list }) {
@@ -17,7 +16,7 @@ export default function DashBoardCard1({ list }) {
     <div className="w-[37.5rem] h-[14.5rem] mt-[1.875rem] border border-[#222222] rounded-[0.75rem] opacity-100 flex justify-center items-center">
       <div className="w-[13.1875rem] h-[14.375rem] relative ">
         <img
-          onClick={() => navigate("/details")}
+          onClick={() => navigate("/details",{state:{text:list}})}
           className="w-[13.1875rem] h-full rounded-l-[0.75rem] object-cover cursor-pointer"
           src={list.imageMain}
           alt="golf"

@@ -1,11 +1,12 @@
-import walk from "../assets/img/walking.png";
 import social from "../assets/img/socializing.png";
 import { FiEdit3 } from "react-icons/fi";
-import { formData } from "../assets/Dummy_Data/data";
 import { useNavigate } from "react-router-dom";
+
+import serverData from "../assets/Dummy_Data/serverData";
+
+
 export default function ProfilePage() {
     const navigate1=useNavigate();
-    const navigate2=useNavigate();
 
   return (
     <div className="flex items-center justify-center">
@@ -87,7 +88,7 @@ export default function ProfilePage() {
             <br />
 
             <div className="mt-[20px] grid grid-cols-5 w-[400px] gap-3 ">
-              {formData.map((data1) => (
+              {serverData[0].formData.map((data1) => (
                 <div className="relative w-[93px]">
                   <img
                     className="w-[73px] h-[100px] object-cover rounded-[4px]"

@@ -8,15 +8,13 @@ const userData = [
 
     //  these numbers are the id's of array of cards of scheduled event and all
 
-
     scheduledEventCards: [1, 2, 3, 4, 1, 5],
 
     attendedEventCards: [1, 2, 3, 1, 2],
 
+    favoriteEventCards: [1, 2, 3, 1, 2, 1, 3, 4, 2, 1],
 
-    favoriteEventCards: [1, 2, 3, 1, 3, 1, 1, 4,2,1],
-
-
+    
   },
 ];
 

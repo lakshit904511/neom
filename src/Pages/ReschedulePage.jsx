@@ -1,5 +1,4 @@
 import { useLocation} from "react-router-dom";
-import { dataDashBoardCard3 } from "../assets/Dummy_Data/data";
 import music from "../assets/img/music.jpg";
 import golf from "../assets/img/golf.jpg";
 
@@ -8,11 +7,22 @@ import UpcommingButtons from "../Components/Upcomming/UpcommingButtons";
 import GolfMatch from "../Components/Modals/GolfMatch";
 import { useState } from "react";
 import TimeCircle from "../Components/Reschedule/TimeCircle";
+import serverData from "../assets/Dummy_Data/serverData";
+import fullCardDetails from "../assets/Dummy_Data/fullCardDetails";
+
 
 export default function ReschedulePage() {
+
+
   const [golfModal, setGolfModal] = useState(false);
+
+  const upcommingeventCards = serverData[0].upcommingEvents.flatMap(eventId =>
+    fullCardDetails.filter(onecardData => onecardData.id === eventId)
+  );
+
   const value = useLocation();
   var check;
+
   if (value.state === null) {
     check = "";
   } else {
@@ -26,7 +36,7 @@ export default function ReschedulePage() {
   function closeModal() {
     setGolfModal(false);
   }
-  const total = 3;
+
 
   return (
     <section className="mt-[20px]">
@@ -136,13 +146,13 @@ export default function ReschedulePage() {
 
 
       <div className="mt-[16px] flex flex-col justify-center">
-        {Array.from({ length: total }).map((_, i) => (
-          <div key={i} className="mt-[20px] flex items-center gap-[15px]">
-            {dataDashBoardCard3.map((card3) => (
+        
+          <div  className="mt-[20px] grid grid-cols-5 items-center gap-[15px]">
+            {upcommingeventCards.map((card3) => (
               <DashBoardCard3 key={card3.id} card3={card3} up={1} />
             ))}
           </div>
-        ))}
+       
       </div>
 
       {golfModal && <GolfMatch closeModal={closeModal} />}

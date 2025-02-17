@@ -4,30 +4,44 @@ const stars = [1, 2, 3, 4, 5];
 import CommonPageCard from "./CommonPageCard";
 import Slider from "../Slider/Slider";
 import DashBoardCard3 from "../DashboardCards/DashBoardCard3";
-import { dataDashBoardCard3 } from "../../assets/Dummy_Data/data";
 import { useLocation } from "react-router-dom";
 import ImageGrid from "./ImageGrid";
 import CommonAbout from "./CommonAbout";
 import ReserveCard from "./ReserveCard";
+import fullCardDetails from "../../assets/Dummy_Data/fullCardDetails";
+import serverData from "../../assets/Dummy_Data/serverData";
 
-export default function CommonPage() {
+export default function CommonPage({ detailedData = null }) {
+  var mainCommonPageData = null;
+  var check = null;
   const value = useLocation();
-  var check;
-  if(value.state===null){
-    check="";
-  }else{
-    check = value.state.text
-  }
-  
 
-  const total = 2;
+  if (detailedData === null) {
+    if (value.state.text !== null) {
+      check = value.state.text;
+    }
+    if (value.state.text === null) {
+      check = "";
+    }
+    mainCommonPageData = value.state.data;
+  } else {
+    mainCommonPageData = detailedData;
+  }
+
+  const recommendationCards = serverData[0].recommendataEvents.flatMap(
+    (eventId) =>
+      fullCardDetails.filter((onecardData) => onecardData.id === eventId)
+  );
+
+  console.log(mainCommonPageData);
+
   return (
     <div className="mt-[20px]">
       <h1
         style={{ fontFamily: "IvyMode, sans-serif" }}
         className="text-left font-normal text-[24px]  tracking-[1.19px] text-[#222222] opacity-100"
       >
-        Round of Golf
+        {mainCommonPageData.name}
       </h1>
 
       <div className="flex mt-[8px] items-center gap-[10px]">
@@ -43,20 +57,23 @@ export default function CommonPage() {
           style={{ fontFamily: "Brown, sans-serif" }}
           className=" text-left text-[10px] tracking-[0.31px] text-[#222222]"
         >
-          5.0 . <span className="border-b">23 reviews</span>
+          {mainCommonPageData.starReview} .{" "}
+          <span className="border-b">
+            {mainCommonPageData.noOfReview} reviews
+          </span>
         </span>
         <span
           style={{ fontFamily: "Brown, sans-serif" }}
           className=" text-left text-[10px] tracking-[0.31px] text-[#222222]"
         >
-          . Sindalah City, Dubai
+          . {mainCommonPageData.location}, Dubai
         </span>
       </div>
 
-       <ImageGrid />
+      <ImageGrid val={mainCommonPageData.imageMain} />
 
       <div className="px-[80px] flex justify-between mt-[25px] ">
-        <CommonAbout />
+        <CommonAbout datadetailedEvent={mainCommonPageData.detailedEvent[0]} />
 
         <ReserveCard check={check} />
       </div>
@@ -66,7 +83,7 @@ export default function CommonPage() {
           style={{ fontFamily: "IvyMode, sans-serif" }}
           className="mt-[20px] text-left font-normal text-[20px]  tracking-[1.19px] text-[#222222] opacity-100"
         >
-          Operator River Stone
+          {mainCommonPageData.detailedEvent[0].operatorTitle}
         </h1>
         <div className="flex items-start mt-[10px]  justify-start">
           {stars.map((star, index) => (
@@ -86,20 +103,14 @@ export default function CommonPage() {
           style={{ fontFamily: "BrownLight, sans-serif" }}
           className="w-[650px] text-left mt-[20px] leading-5 opacity-90  tracking-wide  text-[12px] text-[#222222]  "
         >
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-          rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-          ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-          sadipscing elit.
+          {mainCommonPageData.detailedEvent[0].mainDescription}
         </p>
       </div>
 
+      
       <CommonPageCard />
 
-      <Slider value={1} />
-
-      <div className="mt-[35px]">
+      <div className="mt-[45px]">
         <h1
           style={{ fontFamily: "IvyMode, sans-serif" }}
           className="text-left text-[25px] leading-[44px] tracking-[1.16px] text-[#222222]"
@@ -108,18 +119,13 @@ export default function CommonPage() {
         </h1>
 
         <div className="flex flex-col justify-center">
-          {Array.from({ length: total }).map((_, i) => (
-            <div key={i} className="mt-[20px] flex items-center gap-[15px]">
-              {dataDashBoardCard3.map((card3) => (
-                <DashBoardCard3 key={card3.id} card3={card3} up={1} />
-              ))}
-            </div>
-          ))}
+          <div className="mt-[20px] grid grid-cols-5 items-center gap-[15px]">
+            {recommendationCards.map((card3) => (
+              <DashBoardCard3 key={card3.id} card3={card3} up={1} />
+            ))}
+          </div>
         </div>
-
       </div>
-
-
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { dataDashBoardCard2 } from "../assets/Dummy_Data/data";
-import { dataDashBoardCard3 } from "../assets/Dummy_Data/data";
 import Slider from "../Components/Slider/Slider";
 import DashBoardCard1 from "../Components/DashboardCards/DashBoardCard1";
 import DashBoardCard3 from "../Components/DashboardCards/DashBoardCard3";
@@ -11,6 +10,7 @@ import DashBoardMain from "../Components/DashboardCards/DashBoardMain";
 import Map from "../Components/DashboardCards/Map";
 import userData from "../assets/Dummy_Data/userData";
 import fullCardDetails from "../assets/Dummy_Data/fullCardDetails";
+import serverData from "../assets/Dummy_Data/serverData";
 
 export default function DashBoard() {
 
@@ -23,6 +23,11 @@ export default function DashBoard() {
 
   // cards jo schedule honge starting mai hi data for card1 in dashboard
   const filteroutCards = userData[0].scheduledEventCards.flatMap(eventId =>
+    fullCardDetails.filter(onecardData => onecardData.id === eventId)
+  );
+
+  // cards top events jo dikhenge
+  const topeventCards = serverData[0].topEventsDetails.flatMap(eventId =>
     fullCardDetails.filter(onecardData => onecardData.id === eventId)
   );
 
@@ -138,7 +143,7 @@ export default function DashBoard() {
             Today's recommendations for you, Charlie!
           </h1>
           <div className="mt-[30px] flex items-center gap-[10px]">
-            {dataDashBoardCard3.map((card3) => (
+            {topeventCards.map((card3) => (
               <DashBoardCard3 key={card3.id} card3={card3} />
             ))}
           </div>

@@ -1,5 +1,4 @@
 import {
-  dataDashBoardCard3,
   dataMyFavoritesCard,
 } from "../assets/Dummy_Data/data";
 import DashBoardCard3 from "../Components/DashboardCards/DashBoardCard3";
@@ -8,13 +7,18 @@ import Slider from "../Components/Slider/Slider";
 import { useState } from "react";
 import userData from "../assets/Dummy_Data/userData";
 import fullCardDetails from "../assets/Dummy_Data/fullCardDetails";
+import serverData from "../assets/Dummy_Data/serverData";
 
 export default function MyFavrouites() {
   const [currentIndexCard3, setCurrentIndexCard3] = useState(0);
 
   const itemsPerViewCard3 = 1.5;
 
-  const favouriteCards = userData[0].favoriteEventCards.flatMap(eventId =>
+  const favouriteCards = userData[0].favoriteEventCards.flatMap((eventId) =>
+    fullCardDetails.filter((onecardData) => onecardData.id === eventId)
+  );
+
+  const topeventCards = serverData[0].topEventsDetails.flatMap(eventId =>
     fullCardDetails.filter(onecardData => onecardData.id === eventId)
   );
 
@@ -48,13 +52,8 @@ export default function MyFavrouites() {
         </p>
 
         <div className="mt-[36px]">
-          <div className="mt-[20px] flex items-center gap-[15px]">
-            {dataDashBoardCard3.map((card3) => (
-              <DashBoardCard3 key={card3.id} card3={card3} fav={1} />
-            ))}
-          </div>
-          <div className="mt-[20px] flex items-center gap-[15px]">
-            {dataDashBoardCard3.map((card3) => (
+          <div className="mt-[20px] grid grid-cols-5 gap-[15px]">
+            {favouriteCards.map((card3) => (
               <DashBoardCard3 key={card3.id} card3={card3} fav={1} />
             ))}
           </div>
@@ -99,7 +98,7 @@ export default function MyFavrouites() {
 
         <div className="mt-[20px]">
           <div className="mt-[20px] flex items-center gap-[15px]">
-            {dataDashBoardCard3.map((card3) => (
+            {topeventCards.map((card3) => (
               <DashBoardCard3 key={card3.id} card3={card3} />
             ))}
           </div>
