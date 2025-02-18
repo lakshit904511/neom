@@ -1,5 +1,5 @@
-import { settingData } from "../assets/Dummy_Data/data";
 import SettingCard from "../Components/SettingComponent/SettingCard";
+import serverData from "../assets/Dummy_Data/serverData";
 
 export default function SettingsPage() {
   return (
@@ -20,7 +20,7 @@ export default function SettingsPage() {
         </p>
       </div>
       <div className="mt-[40px] flex flex-col space-y-10">
-        {settingData.map((data1) => (
+        {serverData[0].settingData.map((data1) => (
           <SettingCard key={data1.id} data1={data1} />
         ))}
       </div>

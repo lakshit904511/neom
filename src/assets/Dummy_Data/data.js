@@ -4,20 +4,10 @@ import surfing from "../img/surfing.jpg";
 import holiday from "../img/holiday_0.png";
 import disappoint from "../img/disappointed.svg";
 import joy from "../img/joy.svg";
-import over from "../img/overwhelmed.svg";
-import Children from "../img/child.png";
-import chinese from "../img/chinese.png";
-import socialize from "../img/cooking-dining.png";
-import cooking from "../img/exploring.png";
-import golfPng from "../img/golf.png";
-import music from "../img/music.png";
+
+
 import music1 from "../img/music.jpg";
-
-import play from "../img/plays.png";
-import room from "../img/rooms.png";
-
 import golfImage from "../img/golf.jpg";
-import surfingImage from "../img/surfing.jpg";
 import islandImage from "../img/island.jpg";
 
 import user1 from "../img/user1.png";
@@ -26,55 +16,7 @@ import user3 from "../img/user3.png";
 import user4 from "../img/user4.png";
 import user5 from "../img/user5.png";
 
-const settingData = [
-  {
-    id: 1,
-    text1: "Personal and Account Information",
-    check: null,
-    btn: null,
-    text2:
-      "Would you like to share your personal information with us to know you better?",
-  },
-  {
-    id: 2,
-    btn: null,
-    check: null,
-    text1: "Consent for sharing information with operators",
-    text2:
-      "Would you like to share your personal information with the operator to serve you better?",
-  },
-  {
-    id: 3,
-    btn: null,
-    check: null,
-    text1: "Manage your data",
-    text2:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod?",
-  },
-  {
-    id: 4,
-    btn: null,
-    check: null,
-    text1: "Password and Security",
-    text2:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod?",
-  },
-  {
-    id: 5,
-    btn: 1,
-    check: null,
-    text1: "Notifications",
-    text2: "Which type of notifications would you like to receive?",
-  },
-  {
-    id: 6,
-    btn: 1,
-    check: 1,
-    text1: "Language",
-    text2:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod?",
-  },
-];
+
 const dataFeedBack = [
   {
     id: 1,
@@ -122,139 +64,8 @@ const dataFeedBack = [
   },
 ];
 
-const formData = [
-  {
-    id: 1,
-    image: Children,
-    name: "Screaming children",
-  },
-  {
-    id: 2,
-    image: chinese,
-    name: "Chinese food",
-  },
-  {
-    id: 3,
-    image: socialize,
-    name: "Socializing",
-  },
-  {
-    id: 4,
-    image: golfPng,
-    name: "Golf",
-  },
-  {
-    id: 5,
-    image: cooking,
-    name: "Cooking and dining",
-  },
-  {
-    id: 6,
-    image: music,
-    name: "Music",
-  },
-  {
-    id: 7,
-    image: play,
-    name: "Plays",
-  },
-  {
-    id: 8,
-    image: room,
-    name: "Rooms",
-  },
-];
 
-const dataDashBoardCard4 = [
-  {
-    id: 1,
-    date: "Nov 10, 2022",
-    image: golfImage,
-    guest: 2,
-    name: "Round of Golf",
-    rating: 5,
-  },
-  {
-    id: 2,
-    date: "Nov 12, 2022",
-    image: surfing,
-    guest: 3,
-    name: "Surfing",
-    rating: 5,
-  },
-  {
-    id: 3,
-    date: "Nov 14, 2022",
-    image: holiday,
-    guest: 1,
-    name: "Jazz Concert",
-    rating: null,
-  },
-  {
-    id: 4,
-    date: "Nov 1, 2022",
-    image: islandImage,
-    guest: 4,
-    name: "Sweet Wonderland",
-    rating: null,
-  },
-  {
-    id: 5,
-    date: "Nov 15, 2022",
-    image: surfing,
-    guest: 5,
-    name: "Kite Surfing",
-    rating: 5,
-  },
-];
 
-const dataDashBoardCard3 = [
-  {
-    id: 1,
-    title: "Invigorating & Uplifting",
-    date: "Nov 10-29",
-    image: golfImage,
-    icon: joy,
-    name: "Round of Golf",
-    time: "10:30 AM - 7:30 PM",
-  },
-  {
-    id: 2,
-    title: "Active & Energizing",
-    date: "Nov 10-29",
-    image: surfing,
-    icon: over,
-    name: "Surfing",
-    time: "10:30 AM - 7:30 PM",
-  },
-  {
-    id: 3,
-    title: "Vibrant & Social",
-    date: "Nov 10-29",
-    image: holiday,
-    icon: over,
-    name: "Jazz Concert",
-    time: "10:30 AM - 7:30 PM",
-  },
-  {
-    id: 4,
-    title: "Glamorous & Grand",
-    date: "Nov 10-29",
-    image: islandImage,
-    icon: joy,
-    name: "Sweet Wonderland",
-    time: "10:30 AM - 7:30 PM",
-  },
-  {
-    id: 5,
-    title: "Active & Energizing",
-    date: "Nov 10-29",
-    image: surfing,
-    icon: joy,
-    name: "Kite Surfing",
-    time: "10:30 AM - 7:30 PM",
-  },
-];
 
 const dataDashBoardCard2 = [
   {
@@ -289,23 +100,6 @@ const dataDashBoardCard2 = [
   },
 ];
 
-const dataDashBoardCard1 = [
-  {
-    id: 1,
-    title: "Round of Golf",
-    img: golfImage,
-  },
-  {
-    id: 2,
-    title: "Surfing at leisure",
-    img: surfingImage,
-  },
-  {
-    id: 3,
-    title: "Island Holiday",
-    img: islandImage,
-  },
-];
 
 const dataMyFavoritesCard = [
   {
@@ -352,14 +146,9 @@ const dataDetailedCard = [
 ];
 
 export {
-  dataDashBoardCard1,
   dataDashBoardCard2,
-  dataDashBoardCard3,
-  dataDashBoardCard4,
   dataMyFavoritesCard,
   dataFeedBack,
   dataDetailedCard,
-  formData,
-  settingData,
   dataFilters,
 };

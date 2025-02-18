@@ -1,13 +1,18 @@
-
 import { dataFilters } from "../assets/Dummy_Data/data";
-import { dataDashBoardCard3 } from "../assets/Dummy_Data/data";
 import DashBoardCard3 from "../Components/DashboardCards/DashBoardCard3";
 import UpcommingButtons from "../Components/Upcomming/UpcommingButtons";
 import UpcommingButton2 from "../Components/Upcomming/UpCommingButton2";
+import serverData from "../assets/Dummy_Data/serverData";
+import fullCardDetails from "../assets/Dummy_Data/fullCardDetails";
 
 export default function UpComming() {
-  const total = 3;
+  
+  const upcommingeventCards = serverData[0].upcommingEvents.flatMap(eventId =>
+    fullCardDetails.filter(onecardData => onecardData.id === eventId)
+  );
 
+  const perclickView=3;
+  
   return (
     <>
       <h1
@@ -55,13 +60,13 @@ export default function UpComming() {
       </div>
 
       <div className="mt-[26px] flex flex-col justify-center">
-        {Array.from({ length: total }).map((_, i) => (
-          <div key={i} className="mt-[20px] flex items-center gap-[15px]">
-            {dataDashBoardCard3.map((card3) => (
+        {
+          <div className="mt-[20px] grid grid-cols-5 gap-[15px]">
+            {upcommingeventCards.map((card3) => (
               <DashBoardCard3 key={card3.id} card3={card3} up={1} />
             ))}
           </div>
-        ))}
+        }
 
         <button
           style={{ fontFamily: "BrownLight, sans-serif" }}

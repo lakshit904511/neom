@@ -1,6 +1,6 @@
 
 import { GoHeartFill } from "react-icons/go";
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
 
 export default function Image({ value, card3 }) {
   const navigate=useNavigate();
@@ -26,9 +26,9 @@ export default function Image({ value, card3 }) {
           {card3.id}
         </div>
         <img
-          onClick={()=>(navigate("/details2"))}
+          onClick={()=>(navigate("/details2",{state:{text:null,data:card3}}))}
           className="w-[220px] h-[280px] object-cover cursor-pointer rounded-[8px]"
-          src={card3.image}
+          src={card3.imageMain}
         />
       </div>
     );
@@ -39,9 +39,9 @@ export default function Image({ value, card3 }) {
       <div className="flex items-center justify-center relative">
         <GoHeartFill className="absolute size-6 top-3 right-3 text-black " />
         <img
-         onClick={()=>(navigate("/details2",{ state: { text: "favorite" } }))}
+         onClick={()=>(navigate("/details2",{ state: { text: "favorite",data:card3 } }))}
           className="w-[220px] h-[280px] object-cover rounded-[8px] cursor-pointer"
-          src={card3.image}
+          src={card3.imageMain}
         />
       </div>
     );
@@ -57,9 +57,9 @@ export default function Image({ value, card3 }) {
           Remove
         </a>
         <img
-          onClick={()=>(navigate("/details2",{ state: { text: "remove" } }))}
+          onClick={()=>(navigate("/details2",{ state: { text: "remove",data:card3 } }))}
           className="w-[220px] h-[280px] object-cover cursor-pointer rounded-[8px]"
-          src={card3.image}
+          src={card3.imageMain}
         />
       </div>
     );
