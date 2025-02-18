@@ -1,16 +1,15 @@
-
 import FeedBackCard from "../Components/FeedBackCard.jsx/FeedBackCard";
-import vibe from "../assets/img/vibe-o-meter.svg";
-import over from "../assets/img/overwhelmed.svg";
 import { dataFeedBack } from "../assets/Dummy_Data/data";
-
+import over from "../assets/img/overwhelmed.svg";
+import Speedometer from "../Components/Speedometer/Speedometer";
 
 export default function FeedBackPage() {
-  
   return (
     <>
-      <div className="w-[1370px] h-[320px]   flex flex-row-reverse justify-between bg-[linear-gradient(116deg,#fee8a6_0%,#f1d9ff_86%)] items-center px-[110px] ml-[-110px] bg-white shadow-md shadow-black/5 opacity-100 backdrop-blur-[30px] p-4 rounded-lg">
-        <img className="w-[400px] h-[250px] " src={vibe} />
+      <div className="w-[1370px] h-[320px]  justify-between flex flex-row-reverse gap-[60px] bg-[linear-gradient(116deg,#fee8a6_0%,#f1d9ff_86%)] items-center px-[110px] ml-[-110px] bg-white shadow-md shadow-black/5 opacity-100 backdrop-blur-[30px] p-4 rounded-lg">
+        <div className=" mt-[60px]">
+          <Speedometer />
+        </div>
         <div className="flex mt-[45px] h-[250px] flex-col gap-[8px]">
           <img className="w-[55px] h-[55px]" src={over} />
           <h1
@@ -46,7 +45,9 @@ export default function FeedBackPage() {
           </h1>
 
           <div className="mt-[45px] flex flex-col gap-[20px]">
-           { dataFeedBack.map((feed)=>(<FeedBackCard key={feed.id} feed={feed}/>))}
+            {dataFeedBack.map((feed) => (
+              <FeedBackCard key={feed.id} feed={feed} />
+            ))}
           </div>
         </div>
       </div>

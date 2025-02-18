@@ -12,6 +12,7 @@ import fullCardDetails from "../../assets/Dummy_Data/fullCardDetails";
 import serverData from "../../assets/Dummy_Data/serverData";
 
 export default function CommonPage({ detailedData = null }) {
+  
   var mainCommonPageData = null;
   var check = null;
   const value = useLocation();

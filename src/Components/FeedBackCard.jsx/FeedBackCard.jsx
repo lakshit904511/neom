@@ -5,7 +5,11 @@ export default function FeedBackCard({ feed }) {
   return (
     <div className=" flex w-[680px] pb-[25px] border-b border-[#c0bdb3] ">
       <div className="relative w-[220px] h-[240px]">
-        <img className="w-full h-full rounded-[8px]" src={feed.image} alt="Holiday" />
+        <img
+          className="w-full h-full rounded-[8px]"
+          src={feed.image}
+          alt="Holiday"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
         <p
           style={{ fontFamily: "Brown, sans-serif" }}
