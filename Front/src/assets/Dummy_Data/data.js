@@ -127,15 +127,14 @@ const dataMyFavoritesCard = [
 ];
 
 const dataFilters = [
-  "Stand Up Comedy",
-  "Book Exhibitions",
+  "Swimming",
   "Kite Surfing",
-  "Talks Shows",
-  "Singing",
+  "Fitness",
+  "Music",
   "Golf Tournament",
   "Swimming",
-  "Box Cricket",
-  "RAMP Walk",
+  "Cricket",
+  "Mountains",
 ];
 
 const dataDetailedCard = [
