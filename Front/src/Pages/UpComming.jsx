@@ -4,17 +4,19 @@ import UpcommingButtons from "../Components/Upcomming/UpcommingButtons";
 import UpcommingButton2 from "../Components/Upcomming/UpCommingButton2";
 import serverData from "../assets/Dummy_Data/serverData";
 import fullCardDetails from "../assets/Dummy_Data/fullCardDetails";
+import Header from "../Components/Header/Header";
+import Footer from "../Components/Footer/Footer";
 
 export default function UpComming() {
-  
-  const upcommingeventCards = serverData[0].upcommingEvents.flatMap(eventId =>
-    fullCardDetails.filter(onecardData => onecardData.id === eventId)
+  const upcommingeventCards = serverData[0].upcommingEvents.flatMap((eventId) =>
+    fullCardDetails.filter((onecardData) => onecardData.id === eventId)
   );
 
-  const perclickView=3;
-  
+  const perclickView = 3;
+
   return (
     <>
+      <Header />
       <h1
         style={{ fontFamily: "IvyMode, sans-serif" }}
         className="mt-[30px] text-left font-normal text-[28px]  tracking-[1.19px] text-[#222222] opacity-100"
@@ -56,7 +58,6 @@ export default function UpComming() {
             })}
           </div>
         </div>
-
       </div>
 
       <div className="mt-[26px] flex flex-col justify-center">
@@ -75,7 +76,7 @@ export default function UpComming() {
           Load more
         </button>
       </div>
-
+      <Footer />
     </>
   );
 }

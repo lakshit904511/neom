@@ -1,8 +1,9 @@
 .main {
   width: 84.3125rem; 
+  margin-left:-115px ;
   padding-inline: 6.875rem; 
   border-bottom: 0.0625rem solid #f7e9f7; 
-  height: 4.375rem; 
+  height: 4.475rem; 
   background: #f9f7f2 0% 0% no-repeat padding-box;
   opacity: 1;
   display: flex;

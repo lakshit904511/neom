@@ -8,6 +8,8 @@ import { useState } from "react";
 import userData from "../assets/Dummy_Data/userData";
 import fullCardDetails from "../assets/Dummy_Data/fullCardDetails";
 import serverData from "../assets/Dummy_Data/serverData";
+import Header from "../Components/Header/Header";
+import Footer from "../Components/Footer/Footer";
 
 export default function MyFavrouites() {
   const [currentIndexCard3, setCurrentIndexCard3] = useState(0);
@@ -36,6 +38,7 @@ export default function MyFavrouites() {
 
   return (
     <>
+      <Header />
       <section className="mt-[29px]">
         <h2
           style={{ fontFamily: "IvyMode, sans-serif" }}
@@ -104,6 +107,7 @@ export default function MyFavrouites() {
           </div>
         </div>
       </section>
+      <Footer />
     </>
   );
 }

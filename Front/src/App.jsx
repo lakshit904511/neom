@@ -15,9 +15,9 @@ import DetailedPage from "./Pages/DetailedPage";
 import CommonPage from "./Components/CommonPage/CommonPage";
 import VibeMeter from "./Components/Modals/VibeMeter";
 import ReschedulePage from "./Pages/ReschedulePage";
+import LoginPage from "./Pages/LoginPage";
 
 export default function App() {
-  
 
   return (
     <div
@@ -25,17 +25,10 @@ export default function App() {
       className="overflow-x-hidden"
     >
       <BrowserRouter>
-        <Header />
         <div className="app">
           <Routes>
-            <Route
-              index
-              element={<DashBoard  />}
-            />
-            <Route
-              path="dashboard"
-              element={<DashBoard  />}
-            >
+            <Route index element={<LoginPage />} />
+            <Route path="dashboard" element={<DashBoard />}>
               <Route path="modal" element={<MyModal />} />
             </Route>
             <Route path="favourites" element={<MyFavrouites />} />
@@ -50,7 +43,7 @@ export default function App() {
             <Route path="schedule" element={<ReschedulePage />} />
           </Routes>
         </div>
-        <Footer />
+       
       </BrowserRouter>
     </div>
   );

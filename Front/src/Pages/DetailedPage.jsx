@@ -1,5 +1,7 @@
 import { useLocation } from "react-router-dom";
 import CommonPage from "../Components/CommonPage/CommonPage";
+import Header from "../Components/Header/Header";
+import Footer from "../Components/Footer/Footer";
 
 export default function DetailedPage() {
 
@@ -17,6 +19,8 @@ export default function DetailedPage() {
 
 
   return (
+    <>
+    <Header />
     <section className="mt-[20px]">
       <div className="flex items-center justify-between pl-[28px] pr-[15px] py-[20px] w-full border border-[#222222] rounded-[12px]">
         <div className="flex w-[775px] flex-col justify-between">
@@ -43,5 +47,7 @@ export default function DetailedPage() {
       <CommonPage detailedData={detailedData} detailedText={detailedText} />
       
     </section>
+    <Footer />
+    </>
   );
 }

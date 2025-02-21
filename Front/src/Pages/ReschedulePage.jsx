@@ -9,6 +9,8 @@ import { useState } from "react";
 import TimeCircle from "../Components/Reschedule/TimeCircle";
 import serverData from "../assets/Dummy_Data/serverData";
 import fullCardDetails from "../assets/Dummy_Data/fullCardDetails";
+import Header from "../Components/Header/Header";
+import Footer from "../Components/Footer/Footer";
 
 
 export default function ReschedulePage() {
@@ -39,6 +41,8 @@ export default function ReschedulePage() {
 
 
   return (
+    <>
+    <Header />
     <section className="mt-[20px]">
       <div className="flex items-center justify-between pl-[28px] pr-[15px] py-[20px] w-full border border-[#222222] rounded-[12px]">
         <div className="flex w-full flex-col justify-between">
@@ -157,5 +161,7 @@ export default function ReschedulePage() {
 
       {golfModal && <GolfMatch closeModal={closeModal} />}
     </section>
+    <Footer />
+    </>
   );
 }

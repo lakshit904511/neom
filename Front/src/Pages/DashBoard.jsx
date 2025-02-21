@@ -11,6 +11,8 @@ import Map from "../Components/DashboardCards/Map";
 import userData from "../assets/Dummy_Data/userData";
 import fullCardDetails from "../assets/Dummy_Data/fullCardDetails";
 import serverData from "../assets/Dummy_Data/serverData";
+import Header from "../Components/Header/Header";
+import Footer from "../Components/Footer/Footer";
 
 export default function DashBoard() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -71,6 +73,7 @@ export default function DashBoard() {
 
   return (
     <>
+      <Header />
       <section className="mt-[1.25rem] ">
         <h2
           style={{ fontFamily: "IvyMode, sans-serif" }}
@@ -178,6 +181,7 @@ export default function DashBoard() {
           <Map />
         </div>
       </section>
+      <Footer />
     </>
   );
 }

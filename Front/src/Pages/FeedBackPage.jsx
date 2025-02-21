@@ -2,10 +2,13 @@ import FeedBackCard from "../Components/FeedBackCard.jsx/FeedBackCard";
 import { dataFeedBack } from "../assets/Dummy_Data/data";
 import over from "../assets/img/overwhelmed.svg";
 import Speedometer from "../Components/Speedometer/Speedometer";
+import Header from "../Components/Header/Header";
+import Footer from "../Components/Footer/Footer";
 
 export default function FeedBackPage() {
   return (
     <>
+      <Header />
       <div className="w-[1370px] h-[320px]  justify-between flex flex-row-reverse gap-[60px] bg-[linear-gradient(116deg,#fee8a6_0%,#f1d9ff_86%)] items-center px-[110px] ml-[-110px] bg-white shadow-md shadow-black/5 opacity-100 backdrop-blur-[30px] p-4 rounded-lg">
         <div className=" mt-[60px]">
           <Speedometer />
@@ -51,6 +54,7 @@ export default function FeedBackPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
