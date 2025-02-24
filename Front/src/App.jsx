@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MyModal from "./Components/Modals/MyModal";
 // import VibeMeter from "./Pages/VibeMeter";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -18,6 +18,24 @@ import ReschedulePage from "./Pages/ReschedulePage";
 import LoginPage from "./Pages/LoginPage";
 
 export default function App() {
+  const [isAuth, setIsAuth] = useState(false);
+
+  function loginHandle() {
+    window.location.href = "http://localhost:5000/auth/google";
+  }
+
+  useEffect(() => {
+    async function checkAuth() {
+      const res = await fetch("http://localhost:5000/auth/user", {
+        method: "GET",
+        credentials: "include",
+      });
+      const data = await res.json();
+      console.log(data);
+      setIsAuth(data.authenticated);
+    }
+    checkAuth();
+  }, []);
 
   return (
     <div
@@ -27,7 +45,16 @@ export default function App() {
       <BrowserRouter>
         <div className="app">
           <Routes>
-            <Route index element={<LoginPage />} />
+            <Route
+              index
+              element={
+                isAuth === false ? (
+                  <LoginPage loginHandle={loginHandle} />
+                ) : (
+                  <DashBoard />
+                )
+              }
+            />
             <Route path="dashboard" element={<DashBoard />}>
               <Route path="modal" element={<MyModal />} />
             </Route>
@@ -43,7 +70,6 @@ export default function App() {
             <Route path="schedule" element={<ReschedulePage />} />
           </Routes>
         </div>
-       
       </BrowserRouter>
     </div>
   );

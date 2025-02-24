@@ -1,11 +1,9 @@
 import { FaGoogle } from "react-icons/fa";
 
-export default function LoginPage({ setLogin }) {
+export default function LoginPage({ loginHandle }) {
 
 
-   function loginHandle() {
-    window.location.href = "http://localhost:5000/auth/google";
-  }
+  
 
   return (
     <div className="flex flex-col justify-center items-center bg-gray-300 h-[100vh] mx-[-120px]">
