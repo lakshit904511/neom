@@ -9,7 +9,7 @@ export default function LoginPage({ loginHandle }) {
     <div className="flex flex-col justify-center items-center bg-gray-300 h-[100vh] mx-[-120px]">
          
       <div className=" flex w-full flex-col justify-center px-5 pt-0 md:h-[unset] md:max-w-[50%] lg:h-[100vh] min-h-[100vh] lg:max-w-[50%] lg:px-6">
-        <h1 className="text-center text-[32px] font-bold text-zinc-950 dark:text-white mb-[60px]">WELCOME TO NEOM</h1>
+        <h1 style={{fontFamily:"IvyMode, sans-serif"}} className="text-center text-[32px] tracking-widest font-bold text-zinc-950 dark:text-white mb-[60px]">WELCOME TO NEOM</h1>
         <div className=" flex flex-col items-center w-[400px] justify-center ml-[120px]">
         
           <div className="w-[400px] ">
@@ -17,8 +17,10 @@ export default function LoginPage({ loginHandle }) {
               <div className="grid gap-2">
                 <div className="grid gap-1">
                   <label
-                    className="text-zinc-950 dark:text-white"
+                    className="text-zinc-950 dark:text-white tracking-wider"
                     htmlFor="email"
+                    style={{fontFamily:"IvyMode, sans-serif"}}
+                    
                   >
                     Email
                   </label>
@@ -33,8 +35,9 @@ export default function LoginPage({ loginHandle }) {
                     name="email"
                   />
                   <label
-                    className="text-zinc-950 mt-2 dark:text-white"
+                    className="text-zinc-950 mt-2 dark:text-white tracking-wider"
                     htmlFor="password"
+                    style={{fontFamily:"IvyMode, sans-serif"}}
                   >
                     Password
                   </label>
@@ -50,6 +53,7 @@ export default function LoginPage({ loginHandle }) {
                 <button
                   className="border bg-white whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 mt-2 flex h-[unset] w-full items-center justify-center rounded-lg px-4 py-4 text-sm font-medium"
                   type="submit"
+                  
                 >
                   Sign in
                 </button>

@@ -16,25 +16,25 @@ import CommonPage from "./Components/CommonPage/CommonPage";
 import VibeMeter from "./Components/Modals/VibeMeter";
 import ReschedulePage from "./Pages/ReschedulePage";
 import LoginPage from "./Pages/LoginPage";
+import { getAllUserData } from "./Features/User/UserSlice";
+import store from "../Store";
+import { useSelector } from "react-redux";
+import getEmojiImage from "./util/emojiFinder";
 
 export default function App() {
-  const [isAuth, setIsAuth] = useState(false);
+
+  console.log(getEmojiImage(2));
+  const userDetails=useSelector((store)=>store.user);
+  console.log(userDetails);
+
+  const {authorized}=userDetails;
 
   function loginHandle() {
     window.location.href = "http://localhost:5000/auth/google";
   }
 
   useEffect(() => {
-    async function checkAuth() {
-      const res = await fetch("http://localhost:5000/auth/user", {
-        method: "GET",
-        credentials: "include",
-      });
-      const data = await res.json();
-      console.log(data);
-      setIsAuth(data.authenticated);
-    }
-    checkAuth();
+      store.dispatch(getAllUserData());
   }, []);
 
   return (
@@ -48,7 +48,7 @@ export default function App() {
             <Route
               index
               element={
-                isAuth === false ? (
+                authorized === false ? (
                   <LoginPage loginHandle={loginHandle} />
                 ) : (
                   <DashBoard />

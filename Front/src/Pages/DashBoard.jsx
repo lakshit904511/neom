@@ -13,8 +13,15 @@ import fullCardDetails from "../assets/Dummy_Data/fullCardDetails";
 import serverData from "../assets/Dummy_Data/serverData";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
+import { useSelector } from "react-redux";
 
 export default function DashBoard() {
+
+  const userDetails=useSelector((store)=>store.user);
+  console.log(userDetails);
+
+  const {authorized,fullName,scheduledData}=userDetails;
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentIndexCard2, setCurrentIndexCard2] = useState(0);
 
@@ -35,18 +42,18 @@ export default function DashBoard() {
   const attendedEventCards = userData[0].attendedEventCards.flatMap((eventId) =>
     fullCardDetails.filter((onecardData) => onecardData.id === eventId)
   );
-  async function fetchdata() {
-    try {
-      const data = await fetch("http://localhost:5000/details/carddetails");
-      const res = await data.json();
-      console.log(res);
-    } catch (error) {
-      console.log("error occur while fetching", error);
-    }
-  }
-  useEffect(() => {
-    fetchdata();
-  }, []);
+  // async function fetchdata() {
+  //   try {
+  //     const data = await fetch("http://localhost:5000/details/carddetails");
+  //     const res = await data.json();
+  //     console.log(res);
+  //   } catch (error) {
+  //     console.log("error occur while fetching", error);
+  //   }
+  // }
+  // useEffect(() => {
+  //   fetchdata();
+  // }, []);
 
   const goToPrevImage = () => {
     if (currentIndex > 0) {
@@ -80,7 +87,7 @@ export default function DashBoard() {
           className="w-[23.44rem] h-[3.25rem] text-left text-[1.5rem] leading-[2.75rem] tracking-[0.0725rem]
  text-[#222222]"
         >
-          Good morning Charlie!
+          Good morning {authorized===true?fullName:"Charlie"}
         </h2>
 
         <p
