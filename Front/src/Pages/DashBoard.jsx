@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { dataDashBoardCard2 } from "../assets/Dummy_Data/data";
 import Slider from "../Components/Slider/Slider";
@@ -10,7 +10,6 @@ import DashBoardMain from "../Components/DashboardCards/DashBoardMain";
 import Map from "../Components/DashboardCards/Map";
 import userData from "../assets/Dummy_Data/userData";
 import fullCardDetails from "../assets/Dummy_Data/fullCardDetails";
-import serverData from "../assets/Dummy_Data/serverData";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 import { useSelector } from "react-redux";
@@ -20,7 +19,9 @@ export default function DashBoard() {
   const userDetails=useSelector((store)=>store.user);
   console.log(userDetails);
 
-  const {authorized,fullName,scheduledData}=userDetails;
+  const {authorized,fullName,scheduledEvents,attendedEvents,serverTopEventLists}=userDetails;
+
+  console.log(scheduledEvents);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentIndexCard2, setCurrentIndexCard2] = useState(0);
@@ -29,31 +30,10 @@ export default function DashBoard() {
   const itemsPerViewCard2 = 2;
 
   // cards jo schedule honge starting mai hi data for card1 in dashboard
-  const filteroutCards = userData[0].scheduledEventCards.flatMap((eventId) =>
-    fullCardDetails.filter((onecardData) => onecardData.id === eventId)
-  );
+  // const filteroutCards = userData[0].scheduledEventCards.flatMap((eventId) =>
+  //   fullCardDetails.filter((onecardData) => onecardData.id === eventId)
+  // );
 
-  // cards top events jo dikhenge
-  const topeventCards = serverData[0].topEventsDetails.flatMap((eventId) =>
-    fullCardDetails.filter((onecardData) => onecardData.id === eventId)
-  );
-
-  // cards jo attend honge starting mai hi data for card1 in dashboard
-  const attendedEventCards = userData[0].attendedEventCards.flatMap((eventId) =>
-    fullCardDetails.filter((onecardData) => onecardData.id === eventId)
-  );
-  // async function fetchdata() {
-  //   try {
-  //     const data = await fetch("http://localhost:5000/details/carddetails");
-  //     const res = await data.json();
-  //     console.log(res);
-  //   } catch (error) {
-  //     console.log("error occur while fetching", error);
-  //   }
-  // }
-  // useEffect(() => {
-  //   fetchdata();
-  // }, []);
 
   const goToPrevImage = () => {
     if (currentIndex > 0) {
@@ -62,7 +42,7 @@ export default function DashBoard() {
   };
 
   const goToNextImage = () => {
-    if (currentIndex < filteroutCards.length - itemsPerView) {
+    if (currentIndex < scheduledEvents.length - itemsPerView) {
       setCurrentIndex(currentIndex + 1);
     }
   };
@@ -100,7 +80,7 @@ export default function DashBoard() {
 
         <div className="relative ">
           <DashBoardMain
-            data={filteroutCards}
+            data={scheduledEvents}
             itemsPerView={itemsPerView}
             currentIndex={currentIndex}
             renderItem={(list) => <DashBoardCard1 key={list.id} list={list} />}
@@ -109,7 +89,7 @@ export default function DashBoard() {
 
         <Slider
           value={1}
-          filteroutCards={filteroutCards}
+          scheduledEvents={scheduledEvents}
           goToPrevImage={goToPrevImage}
           goToNextImage={goToNextImage}
           currentIndex={currentIndex}
@@ -154,7 +134,7 @@ export default function DashBoard() {
             Today's recommendations for you, Charlie!
           </h1>
           <div className="mt-[30px] flex items-center gap-[10px]">
-            {topeventCards.map((card3) => (
+            {serverTopEventLists.map((card3) => (
               <DashBoardCard3 key={card3.id} card3={card3} />
             ))}
           </div>
@@ -170,7 +150,7 @@ export default function DashBoard() {
             Charlie, here is your master journey with us so far
           </h1>
           <div className="mt-[30px] flex items-center gap-[10px]">
-            {attendedEventCards.map((card4) => (
+            {attendedEvents.map((card4) => (
               <DashBoardCard4 key={card4.id} card4={card4} />
             ))}
           </div>

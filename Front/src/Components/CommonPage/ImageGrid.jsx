@@ -1,7 +1,6 @@
-import golf from "../../assets/img/golf.jpg";
 
 
-export default function ImageGrid({val}) {
+export default function ImageGrid({val,status}) {
   return (
     <div className="flex justify-between  w-full gap-2 mt-[15px] ">
       <div className="grid grid-cols-2  w-1/2 gap-2 ">
@@ -22,7 +21,7 @@ export default function ImageGrid({val}) {
           style={{ fontFamily: "Brown, sans-serif" }}
           className="absolute top-[-20px] right-0  text-left text-[10px] tracking-[0.31px] text-[#222222]"
         >
-          Completed
+         {status}
         </span>
       </div>
     </div>

@@ -1,29 +1,30 @@
 import { MdOutlineStar } from "react-icons/md";
 import { CiLocationOn } from "react-icons/ci";
 import { CiCalendar } from "react-icons/ci";
-import over from "../../assets/img/overwhelmed.svg";
+import getEmojiImage from "../../util/emojiFinder";
 import { CiGrid41 } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
+import formatEventDate from "../../util/DateFormatter";
+import truncateName from "../../util/truncateName";
 
 export default function DashBoardCard1({ list }) {
   const navigate = useNavigate();
-  console.log(list);
 
-  const stars = list.starReview;
+  const stars = list.star_review;
   console.log(stars);
-
+ 
   return (
     <div className="w-[37.5rem] h-[14.5rem] mt-[1.875rem] border border-[#222222] rounded-[0.75rem] opacity-100 flex justify-center items-center">
       <div className="w-[13.1875rem] h-[14.375rem] relative ">
         <img
           onClick={() => navigate("/details",{state:{text:null,val:list}})}
           className="w-[13.1875rem] h-full rounded-l-[0.75rem] object-cover cursor-pointer"
-          src={list.imageMain}
-          alt="golf"
+          src={list.image_main}
+          alt={list.event_type_title}
         />
         <img
           className="absolute bottom-[0.375rem] right-[0.375rem] h-[2.1875rem]"
-          src={list.imageCloud}
+          src={list.image_cloud}
         />
       </div>
       <div className="w-[19.5rem] h-full rounded-r-[0.75rem] pt-[0.625rem] flex flex-col items-start pl-[0.7875rem] ">
@@ -31,7 +32,7 @@ export default function DashBoardCard1({ list }) {
           style={{ fontFamily: "IvyMode, sans-serif" }}
           className="w-[10.1125rem] text-left text-[1.125rem] leading-[1.9875rem] tracking-[0.049375rem] text-[#222222] opacity-100"
         >
-          {list.name}
+          {truncateName(list.name,13)}
         </h1>
 
         <div className="flex items-center gap-[0.625rem] w-[12.5rem] text-[0.75rem] tracking-[0.019375rem] text-[#222222] opacity-100">
@@ -48,7 +49,7 @@ export default function DashBoardCard1({ list }) {
             style={{ fontFamily: "BrownLight, sans-serif" }}
             className="pt-[0.0585rem] text-[.610rem]"
           >
-            {list.starReview} {list.noOfReview} Reviews
+            {list.star_review}.0 ({list.no_of_review} Reviews)
           </span>
         </div>
         <p
@@ -67,7 +68,7 @@ export default function DashBoardCard1({ list }) {
               style={{ fontFamily: "BrownLight, sans-serif" }}
               className=" w-[13.625rem] text-left text-[0.5875rem] leading-[1.0625rem] tracking-[0.029375rem] text-[#222222] "
             >
-              Nov 10, 10:30 AM - Nov 29. 6:30 PM
+              {formatEventDate(list.start_date,list.end_date)}
             </span>
           </li>
           <li className="flex items-center gap-[0.325rem]">
@@ -76,7 +77,7 @@ export default function DashBoardCard1({ list }) {
               style={{ fontFamily: "BrownLight, sans-serif" }}
               className=" w-[13.625rem] text-left text-[0.5875rem] leading-[1.0625rem] tracking-[0.029375rem] text-[#222222] "
             >
-              {list.location}
+              {list.city}<span className="ml-[5px]">{list.country}</span>
             </span>
           </li>
           <li className="flex items-center gap-[0.325rem]">
@@ -85,22 +86,22 @@ export default function DashBoardCard1({ list }) {
               style={{ fontFamily: "BrownLight, sans-serif" }}
               className=" w-[13.625rem] text-left text-[0.5875rem] leading-[1.0625rem] tracking-[0.029375rem] text-[#222222]"
             >
-              {list.nameImage}
+              {list.event_type_title}
             </span>
           </li>
-          <li className="flex items-center gap-[0.125rem] pt-[0.5rem]">
-            <img src={over} className="w-[0.645rem] text-[#55BF3B]" />
+          <li className="flex items-center gap-[0.225rem] pt-[0.5rem]">
+            <img src={getEmojiImage(list.star_review)} className="w-[0.645rem] text-[#55BF3B]" />
             <span
               style={{ fontFamily: "BrownLight, sans-serif" }}
               className="pt-[0.125rem] w-[14.375rem] text-left text-[0.5875rem] leading-[1.0625rem] tracking-[0.059375rem] text-[#222222] "
             >
-              {list.reviewTitle}
+              {list.review_desc}
             </span>
             <span
               style={{ fontFamily: "Brown, sans-serif" }}
               className=" text-left text-[0.61875rem] leading-[1.0625rem] tracking-[0.019375rem] text-[#222222]  pr-[0.625rem]"
             >
-              {list.reviewSchedule}
+              {list.status}
             </span>
           </li>
         </ul>

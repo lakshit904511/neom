@@ -6,13 +6,15 @@ import serverData from "../assets/Dummy_Data/serverData";
 import fullCardDetails from "../assets/Dummy_Data/fullCardDetails";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
+import { useSelector } from "react-redux";
 
 export default function UpComming() {
-  const upcommingeventCards = serverData[0].upcommingEvents.flatMap((eventId) =>
-    fullCardDetails.filter((onecardData) => onecardData.id === eventId)
-  );
 
-  const perclickView = 3;
+  const userDetails=useSelector((store)=>store.user);
+  console.log(userDetails);
+
+  const {totalCards}=userDetails;
+
 
   return (
     <>
@@ -63,7 +65,7 @@ export default function UpComming() {
       <div className="mt-[26px] flex flex-col justify-center">
         {
           <div className="mt-[20px] grid grid-cols-5 gap-[15px]">
-            {upcommingeventCards.map((card3) => (
+            {totalCards.map((card3) => (
               <DashBoardCard3 key={card3.id} card3={card3} up={1} />
             ))}
           </div>

@@ -10,8 +10,15 @@ import fullCardDetails from "../assets/Dummy_Data/fullCardDetails";
 import serverData from "../assets/Dummy_Data/serverData";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
+import { useSelector } from "react-redux";
 
 export default function MyFavrouites() {
+
+  const userDetails=useSelector((store)=>store.user);
+  console.log(userDetails);
+
+  const {favouriteEvents,serverTopEventLists}=userDetails;
+
   const [currentIndexCard3, setCurrentIndexCard3] = useState(0);
 
   const itemsPerViewCard3 = 1.5;
@@ -56,7 +63,7 @@ export default function MyFavrouites() {
 
         <div className="mt-[36px]">
           <div className="mt-[20px] grid grid-cols-5 gap-[15px]">
-            {favouriteCards.map((card3) => (
+            {favouriteEvents.map((card3) => (
               <DashBoardCard3 key={card3.id} card3={card3} fav={1} />
             ))}
           </div>
@@ -101,7 +108,7 @@ export default function MyFavrouites() {
 
         <div className="mt-[20px]">
           <div className="mt-[20px] flex items-center gap-[15px]">
-            {topeventCards.map((card3) => (
+            {serverTopEventLists.map((card3) => (
               <DashBoardCard3 key={card3.id} card3={card3} />
             ))}
           </div>

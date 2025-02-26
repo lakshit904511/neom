@@ -23,12 +23,12 @@ export default function Image({ value, card3 }) {
           }}
           className="absolute right-1 text-[6rem]  mb-[-18px] font-extrabold bottom-0 text-gray-400 opacity-90  "
         >
-          {card3.id}
+          {card3.top_event_id}
         </div>
         <img
           onClick={()=>(navigate("/details2",{state:{text:"top",data:card3}}))}
           className="w-[220px] h-[280px] object-cover cursor-pointer rounded-[8px]"
-          src={card3.imageMain}
+          src={card3.image_main}
         />
       </div>
     );
@@ -41,7 +41,7 @@ export default function Image({ value, card3 }) {
         <img
          onClick={()=>(navigate("/details2",{ state: { text: "favorite",data:card3 } }))}
           className="w-[220px] h-[280px] object-cover rounded-[8px] cursor-pointer"
-          src={card3.imageMain}
+          src={card3.image_main}
         />
       </div>
     );
@@ -59,7 +59,7 @@ export default function Image({ value, card3 }) {
         <img
           onClick={()=>(navigate("/details2",{ state: { text: "remove",data:card3 } }))}
           className="w-[220px] h-[280px] object-cover cursor-pointer rounded-[8px]"
-          src={card3.imageMain}
+          src={card3.image_main}
         />
       </div>
     );

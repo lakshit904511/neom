@@ -1,6 +1,6 @@
 const initialServerState = {
-  topEventLists: null,
-  upComingEventList: null,
+  topEventLists: [],
+  upComingEventList: [],
   questionsList: null,
 };
 
