@@ -17,7 +17,7 @@ export default function MyFavrouites() {
   const userDetails=useSelector((store)=>store.user);
   console.log(userDetails);
 
-  const {favouriteEvents,serverTopEventLists}=userDetails;
+  const {authorized,fullName,favouriteEvents,serverTopEventLists}=userDetails;
 
   const [currentIndexCard3, setCurrentIndexCard3] = useState(0);
 
@@ -49,16 +49,16 @@ export default function MyFavrouites() {
       <section className="mt-[29px]">
         <h2
           style={{ fontFamily: "IvyMode, sans-serif" }}
-          className="w-[375px] h-[52px] text-left text-[25px] leading-[44px] tracking-[1.16px] text-[#222222]"
+          className="w-[475px] h-[52px] text-left text-[25px] leading-[44px] tracking-[1.16px] text-[#222222]"
         >
-          Good morning Charlie!
+          Good morning {authorized===true?fullName:"Charlie"}!
         </h2>
 
         <p
           style={{ fontFamily: "BrownLight, sans-serif" }}
           className="text-left text-[18px] font-medium opacity-80 text-[#000000]"
         >
-          You have short listed 10 events to join later.
+          You have short listed {favouriteEvents.length} events to join later.
         </p>
 
         <div className="mt-[36px]">
@@ -73,7 +73,7 @@ export default function MyFavrouites() {
           style={{ fontFamily: "IvyMode, sans-serif" }}
           className="mt-[45px] text-left text-[26px] leading-[44px] tracking-[1px] text-[#222222] opacity-100"
         >
-          Charlie, we have find some recommendation for you
+          {authorized===true?fullName:"Charlie"}, we have find some recommendation for you
         </h1>
 
         <div className="relative">

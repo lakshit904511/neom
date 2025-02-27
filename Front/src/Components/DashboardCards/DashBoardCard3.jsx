@@ -22,7 +22,7 @@ export default function DashBoardCard3({ card3, fav = null, up = null }) {
             style={{ fontFamily: "BrownLight, sans-serif" }}
             className="text-left text-[#222222] font-medium  text-[10px] leading-[18px]"
           >
-            {truncateName(card3.experience_title,25)}
+            {truncateName(card3?.experience_title||"",25)}
           </span>
         </div>
         <span

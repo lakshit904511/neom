@@ -1,19 +1,37 @@
 
 import { GoHeartFill } from "react-icons/go";
 import { data, useNavigate } from "react-router-dom";
+import store from "../../../Store";
+import {  handleFavouriteCard } from "../../Features/User/UserSlice";
+import { useSelector } from "react-redux";
+import { useState } from "react";
 
 export default function Image({ value, card3 }) {
   const navigate=useNavigate();
+  
+  const favouriteEvents = useSelector((state) => state.user.favouriteEvents);
+
+  // Check if this card is a favorite
+  const isFavorite = favouriteEvents.some((event) => event.id === card3.id);
+
+  console.log(isFavorite);
+
+  function handleFavorite(card){
+    console.log("clicked card",card);
+    store.dispatch(handleFavouriteCard(card));
+  }
+
+
   if (value === 1) {
     return (
       <div className="flex items-center justify-center relative">
         <GoHeartFill 
 
-          className="absolute size-6 opacity-50 top-3 right-3 text-white "
+          className={`absolute size-6 opacity-80 top-3 right-3 ${isFavorite?"text-red-600":"text-white"}` }
           style={{
             stroke: "white", 
             strokeWidth: "2px", 
-            fill: "black", 
+            fill: isFavorite?"red":"black", 
           }}
         />
         <div
@@ -35,9 +53,10 @@ export default function Image({ value, card3 }) {
   }
 
   if (value === 2) {
+    
     return (
       <div className="flex items-center justify-center relative">
-        <GoHeartFill className="absolute size-6 top-3 right-3 text-black " />
+        <GoHeartFill onClick={()=>handleFavorite(card3)} className={`absolute size-6 top-3 right-3 ${isFavorite?"text-red-600":"text-black"}`}  />
         <img
          onClick={()=>(navigate("/details2",{ state: { text: "favorite",data:card3 } }))}
           className="w-[220px] h-[280px] object-cover rounded-[8px] cursor-pointer"

@@ -132,9 +132,9 @@ const dataFilters = [
   "Fitness",
   "Music",
   "Golf Tournament",
-  "Swimming",
   "Cricket",
   "Mountains",
+  "Books"
 ];
 
 const dataDetailedCard = [

@@ -64,7 +64,7 @@ export default function DashBoard() {
       <section className="mt-[1.25rem] ">
         <h2
           style={{ fontFamily: "IvyMode, sans-serif" }}
-          className="w-[23.44rem] h-[3.25rem] text-left text-[1.5rem] leading-[2.75rem] tracking-[0.0725rem]
+          className="h-[3.25rem] text-left text-[1.5rem] leading-[2.75rem] tracking-[0.0725rem]
  text-[#222222]"
         >
           Good morning {authorized===true?fullName:"Charlie"}
@@ -99,9 +99,9 @@ export default function DashBoard() {
         <div className="mt-[55px]">
           <h2
             style={{ fontFamily: "IvyMode, sans-serif" }}
-            className="w-[500px] text-left text-[26px] leading-[28px] tracking-[1.19px] text-[#222222]"
+            className=" text-left text-[26px] leading-[28px] tracking-[1.19px] text-[#222222]"
           >
-            Charlie, hope we understand you better
+            {authorized===true?fullName:"Charlie"}, hope we understand you better
           </h2>
 
           <div className="relative ">
@@ -129,9 +129,9 @@ export default function DashBoard() {
         <div className="mt-[60px]">
           <h1
             style={{ fontFamily: "IvyMode, sans-serif" }}
-            className="w-[550px] text-left text-[#222222] tracking-[1px] text-[26px]  "
+            className=" text-left text-[#222222] tracking-[1px] text-[26px]  "
           >
-            Today's recommendations for you, Charlie!
+            Today's recommendations for you, {authorized===true?fullName:"Charlie"}!
           </h1>
           <div className="mt-[30px] flex items-center gap-[10px]">
             {serverTopEventLists.map((card3) => (
@@ -145,9 +145,9 @@ export default function DashBoard() {
         <div className="mt-[90px]">
           <h1
             style={{ fontFamily: "IvyMode, sans-serif" }}
-            className="w-[700px] text-left text-[#222222] tracking-[1px] text-[26px]"
+            className=" text-left text-[#222222] tracking-[1px] text-[26px]"
           >
-            Charlie, here is your master journey with us so far
+            {authorized===true?fullName:"Charlie"}, here is your master journey with us so far
           </h1>
           <div className="mt-[30px] flex items-center gap-[10px]">
             {attendedEvents.map((card4) => (

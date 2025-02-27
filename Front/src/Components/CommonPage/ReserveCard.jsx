@@ -1,4 +1,7 @@
-export default function ReserveCard({check}) {
+import { formatDate, formatEventShortDate, formatEventTime } from "../../util/DateFormatter";
+
+export default function ReserveCard({check,datadetailedEvent}) {
+  console.log(datadetailedEvent);
   return (
     <div
       className={`${
@@ -9,7 +12,7 @@ export default function ReserveCard({check}) {
         style={{ fontFamily: "Brown, sans-serif" }}
         className="text-left opacity-80 font-normal text-[16px]  tracking-[1.19px] text-[#222222]"
       >
-        10:30 AM - 7:30 PM
+        {formatEventTime(datadetailedEvent.start_date,datadetailedEvent.end_date)}
       </h1>
       <div className="mt-3  flex flex-col">
         <div
@@ -17,10 +20,10 @@ export default function ReserveCard({check}) {
           className=" border-b  rounded-[4px] text-left   opacity-90  tracking-[.50px]  text-[12px] text-[#222222] p-2 flex justify-between border border-gray-300 "
         >
           <p>
-            From<br></br>Nov 10, 2022
+            From<br></br>{formatDate(datadetailedEvent.start_date)}
           </p>
           <p>
-            To<br></br>Nov 29, 2022
+            To<br></br>{formatDate(datadetailedEvent.end_date)}
           </p>
         </div>
         <div
@@ -28,7 +31,7 @@ export default function ReserveCard({check}) {
           className=" border-b  text-left   opacity-80  tracking-[.50px]  text-[12px] text-[#222222] p-2 flex justify-between border border-gray-300 "
         >
           <p>
-            Guests<br></br>1 Adults
+            Guests<br></br>{datadetailedEvent.guest!==null?datadetailedEvent.guest:1} Adults
           </p>
         </div>
         {check === "favorite" || check === "remove" || check==="top" ? (

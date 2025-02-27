@@ -88,7 +88,7 @@ export default function CommonPage({
       <div className="px-[80px] flex justify-between mt-[25px] ">
         <CommonAbout datadetailedEvent={mainCommonPageData} />
 
-        <ReserveCard check={check} />
+        <ReserveCard check={check} datadetailedEvent={mainCommonPageData} />
       </div>
 
       <div className="flex px-[80px] flex-col w-[650px]">

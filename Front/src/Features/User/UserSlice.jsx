@@ -1,10 +1,14 @@
+import { useSelector } from "react-redux";
+
 const initialUserState = {
   loading: false,
   error: null,
   authorized: null,
   fullName: null,
   email: null,
+  filterCheck:null,
   mobileNo: null,
+  favIcon:null,
   totalCards: [],
   serverTopEventLists: [],
   serverRecommandedEventList: [],
@@ -23,6 +27,7 @@ export default function userReducer(state = initialUserState, action) {
         fullName: action.payload.user ? action.payload.user.name : null,
         mobileNo: action.payload.user ? action.payload.user.mobile_no : null,
         email: action.payload.user ? action.payload.user.email_id : null,
+        allCards:action.payload.cardData,
         totalCards: action.payload.cardData,
         scheduledEvents: action.payload.scheduledData,
         attendedEvents: action.payload.attendedData,
@@ -41,6 +46,32 @@ export default function userReducer(state = initialUserState, action) {
         ...state,
         error: action.payload,
       };
+
+    case "user/upcomingFilter":
+      return{
+        ...state,
+        totalCards:action.payload.cards,
+        filterCheck:action.payload.change,
+      }
+    
+    case "user/resetFilter":
+      return{
+        ...state,
+        totalCards:state.allCards
+      }
+    
+    case "user/favouriteCard":
+      const isAlreadyFavorite = state.favouriteEvents.some(
+        (event) => event.id === action.payload.card.id
+      );
+    
+      return {
+        ...state,
+        favouriteEvents: isAlreadyFavorite
+          ? state.favouriteEvents.filter((event) => event.id !== action.payload.card.id) 
+          : [...state.favouriteEvents, action.payload.card], 
+      };
+
 
     default:
       return state;
@@ -66,4 +97,30 @@ export function getAllUserData() {
       dispatch({ type: "user/loading", payload: false });
     }
   };
+}
+
+
+export const getFilterEvent = (val) => (dispatch, getState) => {
+  const state = getState();
+  
+  const allCards = state.user.allCards || []; 
+  const filterCheck = state.user.filterCheck;
+
+  let payload;
+
+  if (filterCheck === val) {
+    payload = {cards: allCards, change: null };  
+  } else {
+    const filterCards = allCards.filter((card) => card.category === val);
+    payload = { cards:filterCards, change: val };
+  }
+
+  dispatch({ type: "user/upcomingFilter", payload }); 
+};
+
+
+export const handleFavouriteCard=(card)=>(dispatch,getState)=>{
+  
+  dispatch({type:"user/favouriteCard",payload:{card}});
+    
 }
