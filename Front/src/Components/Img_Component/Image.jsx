@@ -37,7 +37,7 @@ export default function Image({ value, card3,notify1 ,notify2,notify3}) {
       <div className="flex items-center justify-center relative">
         <GoHeartFill 
 
-          className={`absolute size-6 opacity-80 top-3 right-3 ${isFavorite?"text-red-600":"text-white"}` }
+          className={`absolute size-6 cursor-pointer opacity-80 top-3 right-3 ${isFavorite?"text-red-600":"text-white"}` }
           style={{
             stroke: "white", 
             strokeWidth: "2px", 
@@ -67,7 +67,7 @@ export default function Image({ value, card3,notify1 ,notify2,notify3}) {
     
     return (
       <div className="flex items-center justify-center relative">
-        <GoHeartFill onClick={()=>handleFavorite(card3)} className={`absolute size-6 top-3 right-3 ${isFavorite?"text-red-600":"text-black"}`}  />
+        <GoHeartFill onClick={()=>handleFavorite(card3)} className={`absolute cursor-pointer size-6 top-3 right-3 ${isFavorite?"text-red-600":"text-black"}`}  />
         <img
          onClick={()=>(navigate("/details2",{ state: { text: "favorite",data:card3 } }))}
           className="w-[220px] h-[280px] object-cover rounded-[8px] cursor-pointer"
@@ -83,7 +83,7 @@ export default function Image({ value, card3,notify1 ,notify2,notify3}) {
         <button
           onClick={()=>handleRemove(card3)}
           style={{ fontFamily: "Brown, sans-serif" }}
-          className="cursor-pointer text-[10px] absolute flex items-center justify-center  top-3 right-2 text-[#FF385C] bg-white py-1 px-3 tracking-wide rounded-2xl"
+          className="cursor-pointer text-[10px] absolute flex items-center cursor-pointer justify-center  top-3 right-2 text-[#FF385C] bg-white py-1 px-3 tracking-wide rounded-2xl"
         >
           Remove
         </button>
