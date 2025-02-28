@@ -11,16 +11,17 @@ import serverData from "../assets/Dummy_Data/serverData";
 import fullCardDetails from "../assets/Dummy_Data/fullCardDetails";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
+import { useSelector } from "react-redux";
+import store from "../../Store";
 
 
 export default function ReschedulePage() {
 
-
+  const userDetails=useSelector((store)=>store.user);
+  const {authorized,fullName,totalCards}=userDetails;
   const [golfModal, setGolfModal] = useState(false);
 
-  const upcommingeventCards = serverData[0].upcommingEvents.flatMap(eventId =>
-    fullCardDetails.filter(onecardData => onecardData.id === eventId)
-  );
+
 
   const value = useLocation();
   var check;
@@ -50,7 +51,7 @@ export default function ReschedulePage() {
             style={{ fontFamily: "IvyMode, sans-serif" }}
             className="text-left font-normal text-[26px]  tracking-[1.19px] text-[#222222] opacity-100"
           >
-            Hey Charlie,
+            Hey {authorized!==null?fullName:"Charlie"},
           </h1>
           <h1
             style={{ fontFamily: "IvyMode, sans-serif" }}
@@ -141,7 +142,7 @@ export default function ReschedulePage() {
         style={{ fontFamily: "IvyMode, sans-serif" }}
         className="text-[26px] tracking-wide   font-normal mt-[60px] text-left mx-auto text-[#222222]"
       >
-        Some similar recommendation for you, Charlie.
+        Some similar recommendation for you, {authorized!==null?fullName:"Charlie"},.
       </h1>
 
       <div className="w-[720px] mt-[15px] flex  gap-[15px]">
@@ -152,7 +153,7 @@ export default function ReschedulePage() {
       <div className="mt-[16px] flex flex-col justify-center">
         
           <div  className="mt-[20px] grid grid-cols-5 items-center gap-[15px]">
-            {upcommingeventCards.map((card3) => (
+            {totalCards.slice(0,10).map((card3) => (
               <DashBoardCard3 key={card3.id} card3={card3} up={1} />
             ))}
           </div>
