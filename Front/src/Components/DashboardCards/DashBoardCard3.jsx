@@ -3,15 +3,15 @@ import getEmojiImage from "../../util/emojiFinder";
 import truncateName from "../../util/truncateName";
 import Image from "../Img_Component/Image";
 
-export default function DashBoardCard3({ card3, fav = null, up = null }) {
+export default function DashBoardCard3({ card3, fav = null, up = null ,notify1,notify2,notify3}) {
   return (
     <div className="w-[217px] h-[350px] flex flex-col items-start">
       {fav === null && up === null ? (
-        <Image value={1} card3={card3} />
+        <Image value={1} card3={card3} notify1="null" notify2="null" notify3="null" />
       ) : (
         <>
-          {fav !== null && <Image value={3} card3={card3} />}
-          {up !== null && <Image value={2} card3={card3} />}
+          {fav !== null && <Image value={3} card3={card3} notify1="null" notify2={notify2} notify3="null" />}
+          {up !== null && <Image value={2} card3={card3} notify1={notify1} notify2="null"  notify3={notify3}/>}
         </>
       )}
 

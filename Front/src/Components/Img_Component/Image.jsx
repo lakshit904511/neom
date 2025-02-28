@@ -2,25 +2,35 @@
 import { GoHeartFill } from "react-icons/go";
 import { data, useNavigate } from "react-router-dom";
 import store from "../../../Store";
-import {  handleFavouriteCard } from "../../Features/User/UserSlice";
+import {  handleFavouriteCard, handleRemoveCard } from "../../Features/User/UserSlice";
 import { useSelector } from "react-redux";
-import { useState } from "react";
 
-export default function Image({ value, card3 }) {
+
+export default function Image({ value, card3,notify1 ,notify2,notify3}) {
   const navigate=useNavigate();
   
   const favouriteEvents = useSelector((state) => state.user.favouriteEvents);
 
   // Check if this card is a favorite
   const isFavorite = favouriteEvents.some((event) => event.id === card3.id);
-
+ 
   console.log(isFavorite);
 
   function handleFavorite(card){
     console.log("clicked card",card);
     store.dispatch(handleFavouriteCard(card));
+    if(isFavorite){
+      notify3();
+    }else{
+      notify1();
+    }
+
   }
 
+  function handleRemove(card){
+    store.dispatch(handleRemoveCard(card));
+    notify2();
+  }
 
   if (value === 1) {
     return (
@@ -34,6 +44,7 @@ export default function Image({ value, card3 }) {
             fill: isFavorite?"red":"black", 
           }}
         />
+
         <div
           style={{
             WebkitTextStroke: "1px white",
@@ -69,12 +80,13 @@ export default function Image({ value, card3 }) {
   if (value === 3) {
     return (
       <div className="flex items-center justify-center relative">
-        <a
+        <button
+          onClick={()=>handleRemove(card3)}
           style={{ fontFamily: "Brown, sans-serif" }}
           className="cursor-pointer text-[10px] absolute flex items-center justify-center  top-3 right-2 text-[#FF385C] bg-white py-1 px-3 tracking-wide rounded-2xl"
         >
           Remove
-        </a>
+        </button>
         <img
           onClick={()=>(navigate("/details2",{ state: { text: "remove",data:card3 } }))}
           className="w-[220px] h-[280px] object-cover cursor-pointer rounded-[8px]"

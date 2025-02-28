@@ -1,13 +1,46 @@
 import social from "../assets/img/socializing.png";
 import { FiEdit3 } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer,toast } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 
 import serverData from "../assets/Dummy_Data/serverData";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
+import { useSelector } from "react-redux";
+import { formatDobDate } from "../util/DateFormatter";
+import store from "../../Store";
+import { HandleProfile } from "../Features/User/UserSlice";
+import { useRef, useState } from "react";
 
 export default function ProfilePage() {
+  const userName=useRef(null);
+  const userEmail=useRef(null);
+  const userMobile=useRef(null);
+
+  const userDetails=useSelector((store)=>store.user);
+  const {authorized,fullName,birthDate,mobileNo,email}=userDetails;
+  const dob=formatDobDate(birthDate);
+
+  const notify=()=>toast.success("User updated profile section",{
+    className:"text-[12px] w-[250px]!"
+  });
+
   const navigate1 = useNavigate();
+
+
+  function handleSaveProfile(e){
+    e.preventDefault();
+    const updatedName=userName.current.value;
+    const updatedEmail=userEmail.current.value;
+    const updatedMobile=userMobile.current.value;
+    console.log(updatedName,updatedMobile,updatedEmail);
+    store.dispatch(HandleProfile(updatedName,updatedEmail,updatedMobile));
+    notify();
+    
+    // navigate1("/dashboard");
+  }
+
 
   return (
     <>
@@ -18,7 +51,7 @@ export default function ProfilePage() {
             style={{ fontFamily: "IvyMode, sans-serif" }}
             className="mt-[30px] ml-[55px] text-left text-[24px] leading-[42px] tracking-[1.19px] text-[#222222] opacity-100 "
           >
-            Edit Charlie's profile
+            Edit {authorized===true?fullName:"Charlie"} profile
           </h1>
 
           <div className="absolute top-[100px] left-[55px] w-[110px] rounded-[8px] overflow-hidden">
@@ -34,9 +67,9 @@ export default function ProfilePage() {
               <FiEdit3 className="text-[#ffffff] w-[30px] h-[40px] opacity-80" />
             </button>
           </div>
-
+          <ToastContainer />
           <div className="absolute top-[90px] left-[190px]">
-            <form className="space-y-4">
+            <form onSubmit={handleSaveProfile} className="space-y-4">
               <label
                 style={{ fontFamily: "Brown, sans-serif" }}
                 className="w-[194px] text-center text-[10px] leading-[24px] tracking-wide text-[#222222] opacity-100"
@@ -45,6 +78,8 @@ export default function ProfilePage() {
               </label>
               <br />
               <input
+                defaultValue={fullName}
+                ref={userName}
                 type="text"
                 className=" outline-gray-300 w-[320px] h-[40px] border border-[#DDDDDD] rounded-[4px] placeholder: pl-2 text-[12px]"
               />
@@ -58,7 +93,8 @@ export default function ProfilePage() {
               </label>
               <br />
               <input
-                placeholder="tyagiparlakshit2k03@gmail.com"
+                ref={userEmail}
+                defaultValue={email}
                 type="text"
                 className=" outline-gray-300 w-[320px] h-[40px] border border-[#DDDDDD] rounded-[4px] placeholder: pl-2 text-[12px]"
               />
@@ -72,9 +108,10 @@ export default function ProfilePage() {
               </label>
               <br />
               <input
+                ref={userMobile}
                 style={{ fontFamily: "BrownLight, sans-serif" }}
                 type="number"
-                placeholder="9045111609"
+                defaultValue={mobileNo}
                 className=" outline-gray-300 w-[320px] h-[40px] border border-[#DDDDDD] rounded-[4px] placeholder: pl-2 text-[12px]"
               />
               <br />
@@ -87,8 +124,9 @@ export default function ProfilePage() {
               </label>
               <br />
               <input
-                placeholder="11/03/2003"
-                type="date"
+                disabled
+                defaultValue={dob}
+                type="text"
                 className=" outline-gray-300 w-[320px] h-[40px] border border-[#DDDDDD] rounded-[4px] placeholder: pl-2 text-[12px]"
               />
               <br />
@@ -125,9 +163,7 @@ export default function ProfilePage() {
 
               <div className="flex gap-5 mt-[10px]">
                 <button
-                  onClick={() => {
-                    navigate1("/");
-                  }}
+                  onClick={handleSaveProfile}
                   style={{ fontFamily: "BrownLight, sans-serif" }}
                   className="bg-[#FF385C] rounded-[4px] opacity-100 px-8 py-2 text-left text-[12px] leading-[21px] tracking-[0.04px] text-[#FFFFFF] "
                 >

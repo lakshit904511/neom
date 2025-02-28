@@ -132,7 +132,7 @@ export default function CommonPage({
 
         <div className="flex flex-col justify-center">
           <div className="mt-[20px] grid grid-cols-5 items-center gap-[15px]">
-            {totalCards.map((card3) => (
+            {totalCards.slice(0,10).map((card3) => (
               <DashBoardCard3 key={card3.id} card3={card3} up={1} />
             ))}
           </div>

@@ -11,6 +11,9 @@ import serverData from "../assets/Dummy_Data/serverData";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 import { useSelector } from "react-redux";
+import { ToastContainer,toast } from "react-toastify";
+import "react-toastify/ReactToastify.css";
+
 
 export default function MyFavrouites() {
 
@@ -23,13 +26,9 @@ export default function MyFavrouites() {
 
   const itemsPerViewCard3 = 1.5;
 
-  const favouriteCards = userData[0].favoriteEventCards.flatMap((eventId) =>
-    fullCardDetails.filter((onecardData) => onecardData.id === eventId)
-  );
-
-  const topeventCards = serverData[0].topEventsDetails.flatMap(eventId =>
-    fullCardDetails.filter(onecardData => onecardData.id === eventId)
-  );
+  const notify2=()=>toast.warn("card removed from favourites",{
+    className:"text-[12px] w-[250px]!"
+  });
 
   const goToPrevImageCard3 = () => {
     if (currentIndexCard3 > 0) {
@@ -53,7 +52,7 @@ export default function MyFavrouites() {
         >
           Good morning {authorized===true?fullName:"Charlie"}!
         </h2>
-
+        <ToastContainer />
         <p
           style={{ fontFamily: "BrownLight, sans-serif" }}
           className="text-left text-[18px] font-medium opacity-80 text-[#000000]"
@@ -64,7 +63,7 @@ export default function MyFavrouites() {
         <div className="mt-[36px]">
           <div className="mt-[20px] grid grid-cols-5 gap-[15px]">
             {favouriteEvents.map((card3) => (
-              <DashBoardCard3 key={card3.id} card3={card3} fav={1} />
+              <DashBoardCard3 key={card3.id} card3={card3} fav={1} notify1="null" notify2={notify2} notify3="null" />
             ))}
           </div>
         </div>

@@ -8,8 +8,21 @@ import { useSelector } from "react-redux";
 import store from "../../Store";
 import { getFilterEvent } from "../Features/User/UserSlice";
 import { useState } from "react";
+import { ToastContainer,toast } from "react-toastify";
+import "react-toastify/ReactToastify.css";
+
 
 export default function UpComming() {
+
+
+  const notify1=()=>toast.success("card added to favourites",{
+    className:"text-[12px] w-[250px]!"
+  });
+
+
+  const notify3=()=>toast.warn("card removed from favourites",{
+    className:"text-[12px] w-[250px]!"
+  });
 
   const [showcard,setShowCards]=useState(15);
   // cosnt [load,setLoad]=useState()
@@ -52,6 +65,7 @@ export default function UpComming() {
       >
         Let's find something exiting for you.
       </h1>
+      
       <div className="mt-[20px] flex flex-col items-start w-full">
         <div className="flex justify-center items-start gap-[30px]">
           <UpcommingButton2 />
@@ -85,12 +99,12 @@ export default function UpComming() {
           </div>
         </div>
       </div>
-
+      <ToastContainer />
       <div className="mt-[26px] flex flex-col justify-center">
         {
           <div className="mt-[20px] grid grid-cols-5 gap-[15px]">
             {totalCards.slice(0,showcard).map((card3) => (
-              <DashBoardCard3 key={card3.id} card3={card3} up={1} />
+              <DashBoardCard3 key={card3.id} card3={card3} up={1} notify1={notify1} notify3={notify3}/>
             ))}
           </div>
         }
@@ -101,7 +115,7 @@ export default function UpComming() {
             style={{ fontFamily: "BrownLight, sans-serif" }}
             className="mx-auto text-[#ffffff] rounded-[4px] text-[14px]  mt-[40px] px-[24px] py-[8px] bg-[#222222] flex items-center justify-center text-center"
           >
-            Load More
+           {showcard===24?"No more cards back to Default":"Load More"}
           </button>
      
       </div>

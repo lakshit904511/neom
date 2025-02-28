@@ -1,5 +1,9 @@
+import store from "../../../Store";
+import { getFilterEvent } from "../../Features/User/UserSlice";
 
 export default function UpcommingButtons() {
+
+
   const buttonGroups = [
     {
       label: "Walking",
@@ -16,19 +20,20 @@ export default function UpcommingButtons() {
       style={{ fontFamily: "BrownLight, sans-serif" }}
       className="border border-[#222222] bg-[#F9F7F2]  rounded-[24px] opacity-80 flex"
     >
-      {options.map((option, index) => (
+      {options.map((option,index) => (
         <button
-          key={index}
-          className={`${
-            index === 0
-              ? "rounded-l-[24px]"
-              : index === options.length - 1
-              ? "rounded-r-[24px]"
-              : ""
-          } tracking-wider px-[10px] border-r border-[#222222] leading-[38px] text-left font-normal text-[11px] text-[#222222] opacity-80 hover:bg-black hover:text-white`}
-        >
-          {option}
-        </button>
+        key={index}
+        className={`${
+          index === 0
+            ? "rounded-l-[24px]"
+            : index === options.length - 1
+            ? "rounded-r-[24px]"
+            : ""
+        } tracking-wider px-[10px] border-r border-[#222222] leading-[38px] text-left font-normal text-[11px] text-[#222222] opacity-80 hover:bg-black hover:text-white`}
+      >
+        {option}
+      </button>
+      
       ))}
     </div>
   );

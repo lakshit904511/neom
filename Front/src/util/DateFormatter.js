@@ -36,3 +36,9 @@ export  function formatDate(dateString) {
   const options = { year: "numeric", month: "short", day: "numeric" };
   return new Date(dateString).toLocaleDateString("en-US", options);
 }
+
+
+export function formatDobDate(isoString) {
+  let date = new Date(isoString);
+  return date.toLocaleDateString("en-GB"); 
+}
