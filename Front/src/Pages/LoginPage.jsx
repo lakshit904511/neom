@@ -1,9 +1,13 @@
 import { FcGoogle  } from "react-icons/fc";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage({ loginHandle }) {
 
-
-  
+   const navigate=useNavigate();
+    function handleSign(e){
+      e.preventDefault();
+      navigate("/SignIn");
+    }
 
   return (
     <div className="flex flex-col justify-center items-center bg-white h-[100vh] mx-[-120px]">
@@ -57,7 +61,7 @@ export default function LoginPage({ loginHandle }) {
                 >
                   Login In
                 </button>
-                {/* < */}
+                <p style={{fontFamily:"Brown, sans-serif"}}  className="text-[12px] font-normal text-gray-600 ">Don't Have an Account ? <button onClick={handleSign} className="text-blue-600 font-medium cursor-pointer">Sign In</button></p>
               </div>
             </form>
 

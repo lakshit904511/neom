@@ -83,7 +83,7 @@ export default function Image({ value, card3,notify1 ,notify2,notify3}) {
         <button
           onClick={()=>handleRemove(card3)}
           style={{ fontFamily: "Brown, sans-serif" }}
-          className="cursor-pointer text-[10px] absolute flex items-center cursor-pointer justify-center  top-3 right-2 text-[#FF385C] bg-white py-1 px-3 tracking-wide rounded-2xl"
+          className="cursor-pointer text-[10px] absolute flex items-center  justify-center  top-3 right-2 text-[#FF385C] bg-white py-1 px-3 tracking-wide rounded-2xl"
         >
           Remove
         </button>

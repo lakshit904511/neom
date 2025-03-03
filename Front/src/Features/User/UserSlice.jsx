@@ -8,11 +8,21 @@ const initialUserState = {
   email: null,
   filterCheck: null,
   mobileNo: null,
-  birthDate:null,
+  birthDate: null,
   favIcon: null,
   totalCards: [],
   serverTopEventLists: [],
   serverRecommandedEventList: [],
+  interestArray: [
+    ["Screaming children", false],
+    ["Chinese food", false],
+    ["Socializing", false],
+    ["Golf", false],
+    ["Cooking and dining", false],
+    ["Music", false],
+    ["Plays", false],
+    ["Rooms", false],
+  ],
   scheduledEvents: [],
   attendedEvents: [],
   favouriteEvents: [],
@@ -25,7 +35,9 @@ export default function userReducer(state = initialUserState, action) {
       return {
         ...state,
         authorized: action.payload.authenticated,
-        birthDate: action.payload.user ? action.payload.user.date_of_birth : null,
+        birthDate: action.payload.user
+          ? action.payload.user.date_of_birth
+          : null,
         fullName: action.payload.user ? action.payload.user.name : null,
         mobileNo: action.payload.user ? action.payload.user.mobile_no : null,
         email: action.payload.user ? action.payload.user.email_id : null,
@@ -98,12 +110,26 @@ export default function userReducer(state = initialUserState, action) {
       };
 
     case "user/profile":
+      return {
+        ...state,
+        email: action.payload.updatedEmail,
+        mobileNo: action.payload.updatedMobile,
+        fullName: action.payload.updatedName,
+      };
+
+    case "user/Like":
+      return {
+        ...state,
+        interestArray: action.payload,
+      };
+
+    case "user/InputHandle":
       return{
         ...state,
-        email:action.payload.updatedEmail,
-        mobileNo:action.payload.updatedMobile,
-        fullName:action.payload.updatedName
+        interestArray:action.payload,
       }
+
+    
     default:
       return state;
   }
@@ -162,7 +188,52 @@ export const handleReserve = (card) => (dispatch, getState) => {
   dispatch({ type: "user/ReserveSeat", payload: { card } });
 };
 
+export const HandleProfile =
+  (updatedName, updatedEmail, updatedMobile) => (dispatch, getState) => {
+    dispatch({
+      type: "user/profile",
+      payload: { updatedName, updatedEmail, updatedMobile },
+    });
+  };
 
-export const HandleProfile=(updatedName,updatedEmail,updatedMobile)=>(dispatch,getState)=>{
-  dispatch({type:"user/profile",payload:{updatedName,updatedEmail,updatedMobile}});
+export const handleLike = (value) => (dispatch, getState) => {
+  const state = getState();
+  const checks = state.user.interestArray;
+  // console.log("before click", checks);
+  const clickedValue = checks.findIndex((check) => check[0] === value);
+  console.log(clickedValue);
+  if (checks[clickedValue][1] === false) {
+    checks[clickedValue][1] = true;
+    // console.log(checks[clickedValue][1]);
+  } else {
+    checks[clickedValue][1] = false;
+    // console.log(checks[clickedValue][1]);
+  }
+  // console.log("after click", checks);
+  dispatch({ type: "user/Like", payload: checks });
+};
+
+
+export const handleInputChange=(likeArray)=>(dispatch,getState)=>{
+  dispatch({type:"user/InputHandle",payload:likeArray})
+}
+
+
+export const UserSignIn=(data)=>{
+  return async ()=>{
+    try {
+      const res=await fetch('http://localhost:5000/user/signIn',{
+        method:"POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+        credentials: "include", 
+      });
+
+      console.log("registration Succesful",res.json());
+    } catch (error) {
+      console.log("problem while sigining in",error.message);
+    }
+  }
 }

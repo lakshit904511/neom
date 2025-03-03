@@ -113,7 +113,7 @@ export default function UpComming() {
           <button
             onClick={handleLoad}
             style={{ fontFamily: "BrownLight, sans-serif" }}
-            className="mx-auto text-[#ffffff] rounded-[4px] text-[14px]  mt-[40px] px-[24px] py-[8px] bg-[#222222] flex items-center justify-center text-center"
+            className="mx-auto text-[#ffffff] cursor-pointer rounded-[4px] text-[14px]  mt-[40px] px-[24px] py-[8px] bg-[#222222] flex items-center justify-center text-center"
           >
            {showcard===24?"No more cards back to Default":"Load More"}
           </button>

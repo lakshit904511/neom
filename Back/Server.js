@@ -6,6 +6,7 @@ const cookie_parser=require('cookie-parser');
 
 const googleAuthRoutes=require('./Routes/AuthenticationRoutes/googleAuthRoute.js');
 const userVerifyRoutes=require('./Routes/userVerifyRoute/userRoute.js')
+const signInRoutes=require('./Routes/SignInRoute/SignIn.js');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -20,6 +21,8 @@ app.use(passport.initialize());
 
 app.use("/auth",googleAuthRoutes);
 app.use('/verify',userVerifyRoutes);
+app.use('/user',signInRoutes);
+
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

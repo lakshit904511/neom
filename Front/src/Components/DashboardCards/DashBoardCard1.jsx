@@ -14,8 +14,8 @@ export default function DashBoardCard1({ list }) {
   console.log(stars);
  
   return (
-    <div className="w-[37.5rem] h-[14.5rem] mt-[1.875rem] border border-[#222222] rounded-[0.75rem] opacity-100 flex justify-center items-center">
-      <div className="w-[13.1875rem] h-[14.375rem] relative ">
+    <div className="w-[37.5rem] h-[15.5rem] mt-[1.875rem] border border-[#222222] rounded-[0.75rem] opacity-100 flex justify-center items-center">
+      <div className="w-[13.1875rem] h-[15.375rem] relative ">
         <img
           onClick={() => navigate("/details",{state:{text:null,val:list}})}
           className="w-[13.1875rem] h-full rounded-l-[0.75rem] object-cover cursor-pointer"
@@ -54,19 +54,19 @@ export default function DashBoardCard1({ list }) {
         </div>
         <p
           style={{ fontFamily: "BrownLight, sans-serif" }}
-          className="w-[18.125rem] h-[3.3125rem] tracking-[.011875rem] text-left text-[#222222] text-[0.75rem] leading-[0.7675rem] mt-[0.450rem] opacity-100"
+          className="w-[18.125rem] h-[3.3125rem] tracking-[.011875rem] text-left text-[#222222] text-[0.75rem] leading-[0.7675rem] mt-[1rem] opacity-100"
         >
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
           nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat…{" "}
           <span className="text-[#FF385C]">read more</span>
         </p>
 
-        <ul className="w-[18.125rem] h-[3.5rem] mt-[0.170rem] flex flex-col gap-[0.29375rem]">
+        <ul className="w-[18.125rem] h-[3.5rem] mt-[0.170rem] flex flex-col gap-[0.49375rem]">
           <li className="flex items-center gap-[0.325rem]">
             <CiCalendar className=" w-[0.875rem] h-[1rem] text-[#FF385C]" />
             <span
               style={{ fontFamily: "BrownLight, sans-serif" }}
-              className=" w-[13.625rem] text-left text-[0.5875rem] leading-[1.0625rem] tracking-[0.029375rem] text-[#222222] "
+              className=" w-[13.625rem] text-left text-[0.5875rem] leading-[1.0625rem] tracking-[0.035375rem] text-[#222222] "
             >
               {formatEventDate(list.start_date,list.end_date)}
             </span>
@@ -75,7 +75,7 @@ export default function DashBoardCard1({ list }) {
             <CiLocationOn className="w-[0.875rem] h-[1rem] text-[#FF385C]" />
             <span
               style={{ fontFamily: "BrownLight, sans-serif" }}
-              className=" w-[13.625rem] text-left text-[0.5875rem] leading-[1.0625rem] tracking-[0.029375rem] text-[#222222] "
+              className=" w-[13.625rem] text-left text-[0.5875rem] leading-[1.0625rem] tracking-[0.035375rem] text-[#222222] "
             >
               {list.city}<span className="ml-[5px]">{list.country}</span>
             </span>
@@ -84,7 +84,7 @@ export default function DashBoardCard1({ list }) {
             <CiGrid41 className="w-[0.875rem] h-[1rem] text-[#FF385C]" />
             <span
               style={{ fontFamily: "BrownLight, sans-serif" }}
-              className=" w-[13.625rem] text-left text-[0.5875rem] leading-[1.0625rem] tracking-[0.029375rem] text-[#222222]"
+              className=" w-[13.625rem] text-left text-[0.5875rem] leading-[1.0625rem] tracking-[0.035375rem] text-[#222222]"
             >
               {list.event_type_title}
             </span>

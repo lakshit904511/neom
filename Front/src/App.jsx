@@ -20,6 +20,7 @@ import { getAllUserData } from "./Features/User/UserSlice";
 import store from "../Store";
 import { useSelector } from "react-redux";
 import getEmojiImage from "./util/emojiFinder";
+import SignInPage from "./Pages/SignInPage";
 
 export default function App() {
 
@@ -68,6 +69,7 @@ export default function App() {
             <Route path="details2" element={<CommonPage />} />
             <Route path="vibe" element={<VibeMeter />} />
             <Route path="schedule" element={<ReschedulePage />} />
+            <Route path="SignIn" element={<SignInPage />} />
           </Routes>
         </div>
       </BrowserRouter>

@@ -7,8 +7,6 @@ import UpcommingButtons from "../Components/Upcomming/UpcommingButtons";
 import GolfMatch from "../Components/Modals/GolfMatch";
 import { useState } from "react";
 import TimeCircle from "../Components/Reschedule/TimeCircle";
-import serverData from "../assets/Dummy_Data/serverData";
-import fullCardDetails from "../assets/Dummy_Data/fullCardDetails";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 import { useSelector } from "react-redux";
