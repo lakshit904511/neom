@@ -15,12 +15,12 @@ import "react-toastify/ReactToastify.css";
 export default function UpComming() {
 
 
-  const notify1=()=>toast.success("card added to favourites",{
+  const notify1=()=>toast.success("Events added to favourites Events",{
     className:"text-[12px] w-[250px]!"
   });
 
 
-  const notify3=()=>toast.warn("card removed from favourites",{
+  const notify3=()=>toast.warn("Event removed from favourites Events",{
     className:"text-[12px] w-[250px]!"
   });
 

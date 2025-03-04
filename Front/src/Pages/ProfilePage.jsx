@@ -211,7 +211,7 @@ export default function ProfilePage() {
                 <button
                   onClick={handleSaveProfile}
                   style={{ fontFamily: "BrownLight, sans-serif" }}
-                  className="bg-[#FF385C] rounded-[4px] opacity-100 px-8 py-2 text-left text-[12px] leading-[21px] tracking-[0.04px] text-[#FFFFFF] "
+                  className="bg-[#FF385C] rounded-[4px] cursor-pointer opacity-100 px-8 py-2 text-left text-[12px] leading-[21px] tracking-[0.04px] text-[#FFFFFF] "
                 >
                   Save
                 </button>
@@ -220,7 +220,7 @@ export default function ProfilePage() {
                     navigate1("/dashboard");
                   }}
                   style={{ fontFamily: "BrownLight, sans-serif" }}
-                  className="bg-[#ffffff] border rounded-[4px] opacity-100 px-8 py-2 text-left text-[12px] leading-[21px] tracking-[0.04px] text-[##222222] "
+                  className="bg-[#ffffff] border cursor-pointer rounded-[4px] opacity-100 px-8 py-2 text-left text-[12px] leading-[21px] tracking-[0.04px] text-[##222222] "
                 >
                   Cancel
                 </button>

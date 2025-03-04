@@ -8,7 +8,7 @@ console.log("in user verify controller file");
 
 const verifyUserController =async (req, res) => {
     const token = req.cookies.token;
-    console.log(token);
+    console.log("userverifytoken",token);
     if (!token) {
       return res.json({ authenticated: false, message: "token not found" });
     }

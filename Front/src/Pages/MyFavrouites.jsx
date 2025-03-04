@@ -26,7 +26,7 @@ export default function MyFavrouites() {
 
   const itemsPerViewCard3 = 1.5;
 
-  const notify2=()=>toast.warn("card removed from favourites",{
+  const notify2=()=>toast.warn("Event removed from favourites Events",{
     className:"text-[12px] w-[250px]!"
   });
 

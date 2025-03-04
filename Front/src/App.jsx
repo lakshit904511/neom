@@ -1,13 +1,10 @@
 import "./App.css";
-import { useEffect, useState } from "react";
 import MyModal from "./Components/Modals/MyModal";
 // import VibeMeter from "./Pages/VibeMeter";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MyFavrouites from "./Pages/MyFavrouites";
 import DashBoard from "./Pages/DashBoard";
-import Footer from "./Components/Footer/Footer";
 import ProfilePage from "./Pages/ProfilePage";
-import Header from "../src/Components/Header/Header";
 import UpComming from "./Pages/UpComming";
 import FeedBackPage from "./Pages/FeedBackPage";
 import SettingsPage from "./Pages/SettingsPage";
@@ -16,27 +13,30 @@ import CommonPage from "./Components/CommonPage/CommonPage";
 import VibeMeter from "./Components/Modals/VibeMeter";
 import ReschedulePage from "./Pages/ReschedulePage";
 import LoginPage from "./Pages/LoginPage";
-import { getAllUserData } from "./Features/User/UserSlice";
-import store from "../Store";
 import { useSelector } from "react-redux";
-import getEmojiImage from "./util/emojiFinder";
 import SignInPage from "./Pages/SignInPage";
+import LoaderPage from "./Pages/LoaderPage";
+import store from "../Store";
+import { getAllUserData } from "./Features/User/UserSlice";
+import { useEffect } from "react";
+
 
 export default function App() {
-
-  console.log(getEmojiImage(2));
+  
   const userDetails=useSelector((store)=>store.user);
   console.log(userDetails);
 
-  const {authorized}=userDetails;
+  const {loading,authorized}=userDetails;
 
-  function loginHandle() {
+  function loginHandlebyGoogle() {
     window.location.href = "http://localhost:5000/auth/google";
   }
 
   useEffect(() => {
-      store.dispatch(getAllUserData());
+    store.dispatch(getAllUserData());
   }, []);
+
+
 
   return (
     <div
@@ -49,12 +49,14 @@ export default function App() {
             <Route
               index
               element={
-                authorized === false ? (
-                  <LoginPage loginHandle={loginHandle} />
+                loading ? (
+                  <LoaderPage />
+                ) : authorized === false ? (
+                  <LoginPage loginHandlebyGoogle={loginHandlebyGoogle} />
                 ) : (
                   <DashBoard />
                 )
-              }
+              }              
             />
             <Route path="dashboard" element={<DashBoard />}>
               <Route path="modal" element={<MyModal />} />
@@ -70,6 +72,7 @@ export default function App() {
             <Route path="vibe" element={<VibeMeter />} />
             <Route path="schedule" element={<ReschedulePage />} />
             <Route path="SignIn" element={<SignInPage />} />
+            {/* <Route path="loader" element={<LoaderPage />} /> */}
           </Routes>
         </div>
       </BrowserRouter>

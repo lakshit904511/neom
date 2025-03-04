@@ -7,6 +7,9 @@ const cookie_parser=require('cookie-parser');
 const googleAuthRoutes=require('./Routes/AuthenticationRoutes/googleAuthRoute.js');
 const userVerifyRoutes=require('./Routes/userVerifyRoute/userRoute.js')
 const signInRoutes=require('./Routes/SignInRoute/SignIn.js');
+const loginInRoutes=require('./Routes/SignInRoute/loginIn.js');
+const cardRoutes=require('./Routes/CardRoutes/cardRoutes.js');
+
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -22,6 +25,9 @@ app.use(passport.initialize());
 app.use("/auth",googleAuthRoutes);
 app.use('/verify',userVerifyRoutes);
 app.use('/user',signInRoutes);
+app.use('/user',loginInRoutes);
+app.use('/card',cardRoutes);
+
 
 
 app.listen(PORT, () => {

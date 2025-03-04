@@ -3,7 +3,8 @@ import { useSelector } from "react-redux";
 const initialUserState = {
   loading: false,
   error: null,
-  authorized: null,
+  authorized: false,
+  user_id:null,
   fullName: null,
   email: null,
   filterCheck: null,
@@ -41,6 +42,7 @@ export default function userReducer(state = initialUserState, action) {
         fullName: action.payload.user ? action.payload.user.name : null,
         mobileNo: action.payload.user ? action.payload.user.mobile_no : null,
         email: action.payload.user ? action.payload.user.email_id : null,
+        user_id: action.payload.user ? action.payload.user.user_id : null,
         allCards: action.payload.cardData,
         totalCards: action.payload.cardData,
         scheduledEvents: action.payload.scheduledData,
@@ -124,12 +126,11 @@ export default function userReducer(state = initialUserState, action) {
       };
 
     case "user/InputHandle":
-      return{
+      return {
         ...state,
-        interestArray:action.payload,
-      }
+        interestArray: action.payload,
+      };
 
-    
     default:
       return state;
   }
@@ -176,17 +177,38 @@ export const getFilterEvent = (val) => (dispatch, getState) => {
   dispatch({ type: "user/upcomingFilter", payload });
 };
 
-export const handleFavouriteCard = (card) => (dispatch, getState) => {
+export const handleFavouriteCard = (card) => async(dispatch, getState) => {
+  // const state=getState();
+  // const data={cardId:card.id,userId:state.user.user_id};
+  // console.log(data);
+  //  await fetch("http://localhost:5000/card/fav", {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify(data),
+  // });
+
+  // await dispatch(getAllUserData());
+  
   dispatch({ type: "user/favouriteCard", payload: { card } });
 };
+
+
+
 
 export const handleRemoveCard = (card) => (dispatch, getState) => {
   dispatch({ type: "user/remove", payload: { card } });
 };
 
+
+
 export const handleReserve = (card) => (dispatch, getState) => {
   dispatch({ type: "user/ReserveSeat", payload: { card } });
 };
+
+
+
 
 export const HandleProfile =
   (updatedName, updatedEmail, updatedMobile) => (dispatch, getState) => {
@@ -195,6 +217,8 @@ export const HandleProfile =
       payload: { updatedName, updatedEmail, updatedMobile },
     });
   };
+
+
 
 export const handleLike = (value) => (dispatch, getState) => {
   const state = getState();
@@ -213,27 +237,62 @@ export const handleLike = (value) => (dispatch, getState) => {
   dispatch({ type: "user/Like", payload: checks });
 };
 
+export const handleInputChange = (likeArray) => (dispatch, getState) => {
+  dispatch({ type: "user/InputHandle", payload: likeArray });
+};
 
-export const handleInputChange=(likeArray)=>(dispatch,getState)=>{
-  dispatch({type:"user/InputHandle",payload:likeArray})
-}
-
-
-export const UserSignIn=(data)=>{
-  return async ()=>{
+export const UserSignIn = (data) => {
+  return async () => {
     try {
-      const res=await fetch('http://localhost:5000/user/signIn',{
-        method:"POST",
+      const res = await fetch("http://localhost:5000/user/signIn", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
-        credentials: "include", 
+        credentials: "include",
       });
 
-      console.log("registration Succesful",res.json());
+      const responseData = await res.json();
+
+      if (!res.ok) {
+        console.error("Error while signing in:", responseData.message);
+        return;
+      }
+
+      if (responseData.redirectUrl) {
+        window.location.href = responseData.redirectUrl;
+      }
     } catch (error) {
-      console.log("problem while sigining in",error.message);
+      console.error("Problem while signing in:", error.message);
     }
-  }
-}
+  };
+};
+
+export const userlogin = (data) => {
+  return async () => {
+    try {
+      const res = await fetch("http://localhost:5000/user/loginIn", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+        credentials: "include",
+      });
+
+      const responseData = await res.json();
+
+      if (!res.ok) {
+        console.error("Error while signing in:", responseData.message);
+        return;
+      }
+
+      if (responseData.redirectUrl) {
+        window.location.href = responseData.redirectUrl;
+      }
+    } catch (error) {
+      console.error("Problem while logining in:", error.message);
+    }
+  };
+};
