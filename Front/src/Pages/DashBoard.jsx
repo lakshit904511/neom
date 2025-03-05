@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { dataDashBoardCard2 } from "../assets/Dummy_Data/data";
 import Slider from "../Components/Slider/Slider";
@@ -29,11 +29,9 @@ export default function DashBoard() {
   const itemsPerView = 2;
   const itemsPerViewCard2 = 2;
 
-  // cards jo schedule honge starting mai hi data for card1 in dashboard
-  // const filteroutCards = userData[0].scheduledEventCards.flatMap((eventId) =>
-  //   fullCardDetails.filter((onecardData) => onecardData.id === eventId)
-  // );
-
+    useEffect(()=>{
+        console.log(serverTopEventLists);
+    },[serverTopEventLists])
 
   const goToPrevImage = () => {
     if (currentIndex > 0) {
@@ -134,7 +132,7 @@ export default function DashBoard() {
             Today's recommendations for you, {authorized===true?fullName:"Charlie"}!
           </h1>
           <div className="mt-[30px] flex items-center gap-[10px]">
-            {serverTopEventLists.map((card3) => (
+            {serverTopEventLists?.map((card3) => (
               <DashBoardCard3 key={card3.id} card3={card3} />
             ))}
           </div>

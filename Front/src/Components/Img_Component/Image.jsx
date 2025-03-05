@@ -36,7 +36,7 @@ export default function Image({ value, card3,notify1 ,notify2,notify3}) {
     return (
       <div className="flex items-center justify-center relative">
         <GoHeartFill 
-
+          onClick={()=>handleFavorite(card3)}
           className={`absolute size-6 cursor-pointer opacity-80 top-3 right-3 ${isFavorite?"text-red-600":"text-white"}` }
           style={{
             stroke: "white", 

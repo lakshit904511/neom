@@ -9,7 +9,7 @@ const userVerifyRoutes=require('./Routes/userVerifyRoute/userRoute.js')
 const signInRoutes=require('./Routes/SignInRoute/SignIn.js');
 const loginInRoutes=require('./Routes/SignInRoute/loginIn.js');
 const cardRoutes=require('./Routes/CardRoutes/cardRoutes.js');
-
+const stripeRoute=require('./Routes/PaymentRoute/StripeRoute.js');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -27,6 +27,7 @@ app.use('/verify',userVerifyRoutes);
 app.use('/user',signInRoutes);
 app.use('/user',loginInRoutes);
 app.use('/card',cardRoutes);
+app.use('/payment',stripeRoute);
 
 
 

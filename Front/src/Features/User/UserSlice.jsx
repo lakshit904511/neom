@@ -4,7 +4,7 @@ const initialUserState = {
   loading: false,
   error: null,
   authorized: false,
-  user_id:null,
+  user_id: null,
   fullName: null,
   email: null,
   filterCheck: null,
@@ -76,27 +76,7 @@ export default function userReducer(state = initialUserState, action) {
         totalCards: state.allCards,
       };
 
-    case "user/favouriteCard":
-      const isAlreadyFavorite = state.favouriteEvents.some(
-        (event) => event.id === action.payload.card.id
-      );
 
-      return {
-        ...state,
-        favouriteEvents: isAlreadyFavorite
-          ? state.favouriteEvents.filter(
-              (event) => event.id !== action.payload.card.id
-            )
-          : [...state.favouriteEvents, action.payload.card],
-      };
-
-    case "user/remove":
-      return {
-        ...state,
-        favouriteEvents: state.favouriteEvents.filter(
-          (event) => event.id !== action.payload.card.id
-        ),
-      };
     case "user/ReserveSeat":
       const alreadyScheduled = state.scheduledEvents.some(
         (event) => event.id === action.payload.card.id
@@ -136,6 +116,8 @@ export default function userReducer(state = initialUserState, action) {
   }
 }
 
+// function provide verification of user and data of user
+
 export function getAllUserData() {
   return async (dispatch, getState) => {
     dispatch({ type: "user/loading", payload: true });
@@ -157,6 +139,8 @@ export function getAllUserData() {
   };
 }
 
+// function working on filtering the cards
+
 export const getFilterEvent = (val) => (dispatch, getState) => {
   const state = getState();
 
@@ -177,36 +161,65 @@ export const getFilterEvent = (val) => (dispatch, getState) => {
   dispatch({ type: "user/upcomingFilter", payload });
 };
 
-export const handleFavouriteCard = (card) => async(dispatch, getState) => {
-  // const state=getState();
-  // const data={cardId:card.id,userId:state.user.user_id};
-  // console.log(data);
-  //  await fetch("http://localhost:5000/card/fav", {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(data),
-  // });
 
-  // await dispatch(getAllUserData());
-  
-  dispatch({ type: "user/favouriteCard", payload: { card } });
+// handle favorite card 
+
+export const handleFavouriteCard = (card) => async (dispatch, getState) => {
+  const state = getState();
+  const data = { cardId: card.id, userId: state.user.user_id };
+  console.log(data);
+  const res = await fetch("http://localhost:5000/card/fav", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  const val = await res.json();
+  if (val.success) {
+    await dispatch(getAllUserData());
+  }
 };
 
 
+// handle remove card
 
-
-export const handleRemoveCard = (card) => (dispatch, getState) => {
-  dispatch({ type: "user/remove", payload: { card } });
+export const handleRemoveCard = (card) => async(dispatch, getState) => {
+  const state = getState();
+  const data = { cardId: card.id, userId: state.user.user_id };
+  console.log(data);
+  const res = await fetch("http://localhost:5000/card/remove", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  const val = await res.json();
+  if (val.success) {
+    await dispatch(getAllUserData());
+  }
 };
 
 
-
-export const handleReserve = (card) => (dispatch, getState) => {
-  dispatch({ type: "user/ReserveSeat", payload: { card } });
+// handle reserve card
+export const handleReserve = (card_id,guestCount) => async(dispatch, getState) => {
+  const state = getState();
+  const data = {cardId: card_id, userId: state.user.user_id, seat:guestCount};
+  console.log(data);
+  const res = await fetch("http://localhost:5000/card/reserve", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  const val = await res.json();
+  if (val.success) {
+    await dispatch(getAllUserData());
+  }
+  // dispatch({ type: "user/ReserveSeat", payload: { card } });
 };
-
 
 
 
@@ -217,8 +230,6 @@ export const HandleProfile =
       payload: { updatedName, updatedEmail, updatedMobile },
     });
   };
-
-
 
 export const handleLike = (value) => (dispatch, getState) => {
   const state = getState();

@@ -4,7 +4,7 @@ import {
 import DashBoardCard3 from "../Components/DashboardCards/DashBoardCard3";
 import MyFavoritesCard from "../Components/MyFavorites/MyFavoritesCard";
 import Slider from "../Components/Slider/Slider";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import userData from "../assets/Dummy_Data/userData";
 import fullCardDetails from "../assets/Dummy_Data/fullCardDetails";
 import serverData from "../assets/Dummy_Data/serverData";
@@ -21,6 +21,10 @@ export default function MyFavrouites() {
   console.log(userDetails);
 
   const {authorized,fullName,favouriteEvents,serverTopEventLists}=userDetails;
+
+  useEffect(()=>{
+      console.log(favouriteEvents);
+  },[favouriteEvents])
 
   const [currentIndexCard3, setCurrentIndexCard3] = useState(0);
 

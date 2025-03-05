@@ -19,6 +19,8 @@ import LoaderPage from "./Pages/LoaderPage";
 import store from "../Store";
 import { getAllUserData } from "./Features/User/UserSlice";
 import { useEffect } from "react";
+import PaymentSuccessful from "./Pages/PaymentSuccesful";
+import PaymentFailed from "./Pages/PaymentFailed";
 
 
 export default function App() {
@@ -72,6 +74,8 @@ export default function App() {
             <Route path="vibe" element={<VibeMeter />} />
             <Route path="schedule" element={<ReschedulePage />} />
             <Route path="SignIn" element={<SignInPage />} />
+            <Route path="success" element={<PaymentSuccessful />} />
+            <Route path="fail" element={<PaymentFailed />} />
             {/* <Route path="loader" element={<LoaderPage />} /> */}
           </Routes>
         </div>

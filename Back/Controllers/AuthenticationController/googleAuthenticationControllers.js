@@ -73,7 +73,7 @@ module.exports.googleAuthControllerCallback = (req, res, next) => {
           httpOnly: true,
           secure: false,
           sameSite: "Strict",
-          maxAge: 5 * 5 * 1000,
+          maxAge: 35 * 35 * 1000,
         })
         .redirect(`${process.env.FRONTEND_URL}/`);
     }
