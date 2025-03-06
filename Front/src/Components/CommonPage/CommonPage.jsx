@@ -5,8 +5,6 @@ import { useLocation } from "react-router-dom";
 import ImageGrid from "./ImageGrid";
 import CommonAbout from "./CommonAbout";
 import ReserveCard from "./ReserveCard";
-import fullCardDetails from "../../assets/Dummy_Data/fullCardDetails";
-import serverData from "../../assets/Dummy_Data/serverData";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { useSelector } from "react-redux";
@@ -48,7 +46,7 @@ export default function CommonPage({
 
   return (
     <>
-    {check==="remove" || check==="favorite" ? <Header />:null}
+    {check==="remove" || check==="favorite" || check==="top" || check==="res" ? <Header />:null}
     <div className="mt-[20px]">
       <h1
         style={{ fontFamily: "IvyMode, sans-serif" }}
@@ -139,7 +137,7 @@ export default function CommonPage({
         </div>
       </div>
     </div>
-    {check==="remove" || check==="favorite" ? <Footer />:null}
+    {check==="remove" || check==="favorite" || check==="top" || check==="res"? <Footer />:null}
     </>
   );
 }

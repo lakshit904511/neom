@@ -19,11 +19,11 @@ const StripeController = async (req, res) => {
         currency: "USD",
         product_data: {
           name: product.name,
-          images: [product.image_main],  // Ensure this is a valid URL
+          images: [product.image_main],
         },
-        unit_amount: pay * 100, // Convert dollars to cents
+        unit_amount: pay, 
       },
-      quantity: guest, // Stripe expects "quantity" instead of "guestNumber"
+      quantity: guest, 
     }));
 
     console.log(products[0].id);

@@ -14,7 +14,6 @@ export default function RescheduleModal({ notificationRef, handleReschedule, han
 
   const userDetails=useSelector((store)=>store.user);
   const {authorized,fullName}=userDetails;
-
   useEffect(() => {
     const interval = setInterval(() => {
       if (loc.pathname === "/dashboard") {

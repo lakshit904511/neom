@@ -1,8 +1,7 @@
 import { formatDate, formatEventTime } from "../../util/DateFormatter";
 import store from "../../../Store";
 import { loadStripe } from "@stripe/stripe-js";
-import { handleReserve } from "../../Features/User/UserSlice";
-import { useNavigate } from "react-router-dom";
+import { handleReserve, stripePayment } from "../../Features/User/UserSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 import { useRef, useState } from "react";
@@ -15,17 +14,12 @@ export default function ReserveCard({ check, datadetailedEvent }) {
   const userSeats = useRef(null);
   const [seat, setSeat] = useState(datadetailedEvent.available_seats);
   const [amount, setAmount] = useState(datadetailedEvent.price);
-  const navigate = useNavigate();
-
-  const notify = () =>
-    toast.success("New event is scheduled", {
-      className: "text-[12px] w-[250px]!",
-    });
 
   const notify1 = () =>
     toast.success("Event is already scheduled", {
       className: "text-[12px] w-[250px]!",
-    });
+  });
+
 
   function handleUser() {
     const no_of_reserveSeat = userSeats.current.value;
@@ -41,12 +35,9 @@ export default function ReserveCard({ check, datadetailedEvent }) {
     );
   }
 
-  // Load Stripe once globally
-  const stripePromise = loadStripe(
-    "pk_test_51QzDEW2eBk2Ytfec9qDwRxqP8kahT49DURiIC66jGTmTqJjm8wjVuKyo5AJgkHAek55zPl2X0VkQHWAZBM5ZKNDP00qHUlKS20"
-  );
 
   async function handleReserveMySeat(card) {
+    
     try {
       console.log("Reserve button clicked");
 
@@ -59,44 +50,7 @@ export default function ReserveCard({ check, datadetailedEvent }) {
         notify1();
         store.dispatch(handleReserve(card, no_of_reserveSeat));
       } else {
-        const stripe = await stripePromise;
-
-        const body = {
-          products: [
-            {
-              id: card.id,
-              name: card.name,
-              image_main: card.image_main,
-            },
-          ],
-          pay: amount,
-          guest: no_of_reserveSeat,
-        };
-
-        const res = await fetch("http://localhost:5000/payment/check", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body),
-        });
-
-        if (!res.ok) {
-          throw new Error("Failed to create Stripe session");
-        }
-
-        const session = await res.json();
-
-        if (!session.id) {
-          throw new Error("Invalid session ID received");
-        }
-
-        const result = await stripe.redirectToCheckout({
-          sessionId: session.id,
-        });
-
-        if (result.error) {
-          console.log("Error during payment:", result.error);
-          return;
-        }
+        store.dispatch(stripePayment(card.id,card.name,card.image_main,amount,no_of_reserveSeat))
       }
     } catch (error) {
       console.error("Payment Error:", error);
@@ -167,7 +121,7 @@ export default function ReserveCard({ check, datadetailedEvent }) {
             <button
               onClick={() => handleReserveMySeat(datadetailedEvent)}
               style={{ fontFamily: "BrownLight, sans-serif" }}
-              className="w-full text-[#ffffff] rounded-[4px] text-[14px] mt-[10px] px-[24px] py-[8px] bg-[#222222] flex items-center justify-center text-center"
+              className="w-full text-[#ffffff] cursor-pointer rounded-[4px] text-[14px] mt-[10px] px-[24px] py-[8px] bg-[#222222] flex items-center justify-center text-center"
             >
               Reserve my seat
             </button>

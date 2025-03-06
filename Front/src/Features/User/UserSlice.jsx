@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { loadStripe } from "@stripe/stripe-js";
 
 const initialUserState = {
   loading: false,
@@ -218,7 +218,6 @@ export const handleReserve = (card_id,guestCount) => async(dispatch, getState) =
   if (val.success) {
     await dispatch(getAllUserData());
   }
-  // dispatch({ type: "user/ReserveSeat", payload: { card } });
 };
 
 
@@ -229,28 +228,25 @@ export const HandleProfile =
       type: "user/profile",
       payload: { updatedName, updatedEmail, updatedMobile },
     });
-  };
+};
 
 export const handleLike = (value) => (dispatch, getState) => {
   const state = getState();
   const checks = state.user.interestArray;
-  // console.log("before click", checks);
   const clickedValue = checks.findIndex((check) => check[0] === value);
   console.log(clickedValue);
   if (checks[clickedValue][1] === false) {
     checks[clickedValue][1] = true;
-    // console.log(checks[clickedValue][1]);
   } else {
     checks[clickedValue][1] = false;
-    // console.log(checks[clickedValue][1]);
   }
-  // console.log("after click", checks);
   dispatch({ type: "user/Like", payload: checks });
 };
 
 export const handleInputChange = (likeArray) => (dispatch, getState) => {
   dispatch({ type: "user/InputHandle", payload: likeArray });
 };
+
 
 export const UserSignIn = (data) => {
   return async () => {
@@ -307,3 +303,50 @@ export const userlogin = (data) => {
     }
   };
 };
+
+const stripePromise = loadStripe(
+  "pk_test_51QzDEW2eBk2Ytfec9qDwRxqP8kahT49DURiIC66jGTmTqJjm8wjVuKyo5AJgkHAek55zPl2X0VkQHWAZBM5ZKNDP00qHUlKS20"
+);
+
+export const stripePayment=(id,name,image,amount,seat)=>{
+  return async()=>{
+    const stripe = await stripePromise;
+
+        const body = {
+          products: [
+            {
+              id: id,
+              name: name,
+              image_main: image,
+            },
+          ],
+          pay: amount,
+          guest: seat,
+        };
+
+        const res = await fetch("http://localhost:5000/payment/check", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
+
+        if (!res.ok) {
+          throw new Error("Failed to create Stripe session");
+        }
+
+        const session = await res.json();
+
+        if (!session.id) {
+          throw new Error("Invalid session ID received");
+        }
+
+        const result = await stripe.redirectToCheckout({
+          sessionId: session.id,
+        });
+
+        if (result.error) {
+          console.log("Error during payment:", result.error);
+          return;
+        }
+  }
+}

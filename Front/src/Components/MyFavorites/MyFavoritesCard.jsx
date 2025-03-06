@@ -1,5 +1,5 @@
 import over from "../../assets/img/overwhelmed.svg";
-import { FaHeart  } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 export default function MyFavoritesCard({ favCard }) {
   return (
     <div className="relative  ">
@@ -7,8 +7,9 @@ export default function MyFavoritesCard({ favCard }) {
         className="w-[60vw] rounded-[4px] max-w-none h-[460px]"
         src={favCard.image}
       />
-       <div className="absolute rounded-[4px] inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80
-"></div>
+      <div
+        className="absolute rounded-[4px] inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80"
+      ></div>
       <img
         className="absolute bottom-[41px] w-[16px] right-[83px]"
         src={over}
