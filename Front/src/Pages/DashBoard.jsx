@@ -10,41 +10,28 @@ import DashBoardMain from "../Components/DashboardCards/DashBoardMain";
 import Map from "../Components/DashboardCards/Map";
 import userData from "../assets/Dummy_Data/userData";
 import fullCardDetails from "../assets/Dummy_Data/fullCardDetails";
-import serverData from "../assets/Dummy_Data/serverData";
+import Header from "../Components/Header/Header";
+import Footer from "../Components/Footer/Footer";
+import { useSelector } from "react-redux";
 
 export default function DashBoard() {
+
+  const userDetails=useSelector((store)=>store.user);
+  console.log(userDetails);
+
+  const {authorized,fullName,scheduledEvents,attendedEvents,serverTopEventLists}=userDetails;
+
+  console.log(scheduledEvents);
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentIndexCard2, setCurrentIndexCard2] = useState(0);
 
   const itemsPerView = 2;
   const itemsPerViewCard2 = 2;
 
-  // cards jo schedule honge starting mai hi data for card1 in dashboard
-  const filteroutCards = userData[0].scheduledEventCards.flatMap((eventId) =>
-    fullCardDetails.filter((onecardData) => onecardData.id === eventId)
-  );
-
-  // cards top events jo dikhenge
-  const topeventCards = serverData[0].topEventsDetails.flatMap((eventId) =>
-    fullCardDetails.filter((onecardData) => onecardData.id === eventId)
-  );
-
-  // cards jo attend honge starting mai hi data for card1 in dashboard
-  const attendedEventCards = userData[0].attendedEventCards.flatMap((eventId) =>
-    fullCardDetails.filter((onecardData) => onecardData.id === eventId)
-  );
-  async function fetchdata() {
-    try {
-      const data = await fetch("http://localhost:5000/details/carddetails");
-      const res = await data.json();
-      console.log(res);
-    } catch (error) {
-      console.log("error occur while fetching", error);
-    }
-  }
-  useEffect(() => {
-    fetchdata();
-  }, []);
+    useEffect(()=>{
+        console.log(serverTopEventLists);
+    },[serverTopEventLists])
 
   const goToPrevImage = () => {
     if (currentIndex > 0) {
@@ -53,7 +40,7 @@ export default function DashBoard() {
   };
 
   const goToNextImage = () => {
-    if (currentIndex < filteroutCards.length - itemsPerView) {
+    if (currentIndex < scheduledEvents.length - itemsPerView) {
       setCurrentIndex(currentIndex + 1);
     }
   };
@@ -71,13 +58,14 @@ export default function DashBoard() {
 
   return (
     <>
+      <Header />
       <section className="mt-[1.25rem] ">
         <h2
           style={{ fontFamily: "IvyMode, sans-serif" }}
-          className="w-[23.44rem] h-[3.25rem] text-left text-[1.5rem] leading-[2.75rem] tracking-[0.0725rem]
+          className="h-[3.25rem] text-left text-[1.5rem] leading-[2.75rem] tracking-[0.0725rem]
  text-[#222222]"
         >
-          Good morning Charlie!
+          Good morning {authorized===true?fullName:"Charlie"}
         </h2>
 
         <p
@@ -90,7 +78,7 @@ export default function DashBoard() {
 
         <div className="relative ">
           <DashBoardMain
-            data={filteroutCards}
+            data={scheduledEvents}
             itemsPerView={itemsPerView}
             currentIndex={currentIndex}
             renderItem={(list) => <DashBoardCard1 key={list.id} list={list} />}
@@ -99,7 +87,7 @@ export default function DashBoard() {
 
         <Slider
           value={1}
-          filteroutCards={filteroutCards}
+          scheduledEvents={scheduledEvents}
           goToPrevImage={goToPrevImage}
           goToNextImage={goToNextImage}
           currentIndex={currentIndex}
@@ -109,9 +97,9 @@ export default function DashBoard() {
         <div className="mt-[55px]">
           <h2
             style={{ fontFamily: "IvyMode, sans-serif" }}
-            className="w-[500px] text-left text-[26px] leading-[28px] tracking-[1.19px] text-[#222222]"
+            className=" text-left text-[26px] leading-[28px] tracking-[1.19px] text-[#222222]"
           >
-            Charlie, hope we understand you better
+            {authorized===true?fullName:"Charlie"}, hope we understand you better
           </h2>
 
           <div className="relative ">
@@ -139,12 +127,12 @@ export default function DashBoard() {
         <div className="mt-[60px]">
           <h1
             style={{ fontFamily: "IvyMode, sans-serif" }}
-            className="w-[550px] text-left text-[#222222] tracking-[1px] text-[26px]  "
+            className=" text-left text-[#222222] tracking-[1px] text-[26px]  "
           >
-            Today's recommendations for you, Charlie!
+            Today's recommendations for you, {authorized===true?fullName:"Charlie"}!
           </h1>
           <div className="mt-[30px] flex items-center gap-[10px]">
-            {topeventCards.map((card3) => (
+            {serverTopEventLists?.map((card3) => (
               <DashBoardCard3 key={card3.id} card3={card3} />
             ))}
           </div>
@@ -155,12 +143,12 @@ export default function DashBoard() {
         <div className="mt-[90px]">
           <h1
             style={{ fontFamily: "IvyMode, sans-serif" }}
-            className="w-[700px] text-left text-[#222222] tracking-[1px] text-[26px]"
+            className=" text-left text-[#222222] tracking-[1px] text-[26px]"
           >
-            Charlie, here is your master journey with us so far
+            {authorized===true?fullName:"Charlie"}, here is your master journey with us so far
           </h1>
           <div className="mt-[30px] flex items-center gap-[10px]">
-            {attendedEventCards.map((card4) => (
+            {attendedEvents.map((card4) => (
               <DashBoardCard4 key={card4.id} card4={card4} />
             ))}
           </div>
@@ -178,6 +166,7 @@ export default function DashBoard() {
           <Map />
         </div>
       </section>
+      <Footer />
     </>
   );
 }

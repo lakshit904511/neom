@@ -17,8 +17,8 @@ export default function Speedometer() {
         width={400}
         needleHeightRatio={0.8}
         needleBaseWidth={1.5}
-        segments={6}
-        segmentColors={["#55BF3B", "#9ACC0D", "#D8D90F", "#FFB03A", "#FF385C","#FFFFFF"]}
+        segments={5}
+        segmentColors={["#55BF3B", "#9ACC0D", "#D8D90F", "#FFB03A", "#FF385C",]}
         needleColor="#222222"
         ringWidth={20}
         forceRender={true}

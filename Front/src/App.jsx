@@ -1,13 +1,10 @@
 import "./App.css";
-import { useState } from "react";
 import MyModal from "./Components/Modals/MyModal";
 // import VibeMeter from "./Pages/VibeMeter";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MyFavrouites from "./Pages/MyFavrouites";
 import DashBoard from "./Pages/DashBoard";
-import Footer from "./Components/Footer/Footer";
 import ProfilePage from "./Pages/ProfilePage";
-import Header from "../src/Components/Header/Header";
 import UpComming from "./Pages/UpComming";
 import FeedBackPage from "./Pages/FeedBackPage";
 import SettingsPage from "./Pages/SettingsPage";
@@ -15,9 +12,33 @@ import DetailedPage from "./Pages/DetailedPage";
 import CommonPage from "./Components/CommonPage/CommonPage";
 import VibeMeter from "./Components/Modals/VibeMeter";
 import ReschedulePage from "./Pages/ReschedulePage";
+import LoginPage from "./Pages/LoginPage";
+import { useSelector } from "react-redux";
+import SignInPage from "./Pages/SignInPage";
+import LoaderPage from "./Pages/LoaderPage";
+import store from "../Store";
+import { getAllUserData } from "./Features/User/UserSlice";
+import { useEffect } from "react";
+import PaymentSuccessful from "./Pages/PaymentSuccesful";
+import PaymentFailed from "./Pages/PaymentFailed";
+
 
 export default function App() {
   
+  const userDetails=useSelector((store)=>store.user);
+  console.log(userDetails);
+
+  const {loading,authorized}=userDetails;
+
+  function loginHandlebyGoogle() {
+    window.location.href = "http://localhost:5000/auth/google";
+  }
+
+  useEffect(() => {
+    store.dispatch(getAllUserData());
+  }, []);
+
+
 
   return (
     <div
@@ -25,17 +46,21 @@ export default function App() {
       className="overflow-x-hidden"
     >
       <BrowserRouter>
-        <Header />
         <div className="app">
           <Routes>
             <Route
               index
-              element={<DashBoard  />}
+              element={
+                loading ? (
+                  <LoaderPage />
+                ) : authorized === false ? (
+                  <LoginPage loginHandlebyGoogle={loginHandlebyGoogle} />
+                ) : (
+                  <DashBoard />
+                )
+              }              
             />
-            <Route
-              path="dashboard"
-              element={<DashBoard  />}
-            >
+            <Route path="dashboard" element={<DashBoard />}>
               <Route path="modal" element={<MyModal />} />
             </Route>
             <Route path="favourites" element={<MyFavrouites />} />
@@ -48,9 +73,12 @@ export default function App() {
             <Route path="details2" element={<CommonPage />} />
             <Route path="vibe" element={<VibeMeter />} />
             <Route path="schedule" element={<ReschedulePage />} />
+            <Route path="SignIn" element={<SignInPage />} />
+            <Route path="success" element={<PaymentSuccessful />} />
+            <Route path="fail" element={<PaymentFailed />} />
+            {/* <Route path="loader" element={<LoaderPage />} /> */}
           </Routes>
         </div>
-        <Footer />
       </BrowserRouter>
     </div>
   );

@@ -7,6 +7,14 @@ import music from "../img/music.png";
 import play from "../img/plays.png";
 import room from "../img/rooms.png";
 
+
+const server={
+  id:0,
+  recommendataEvents:0,
+  topEvents:0,
+  upcommingEvents:0,
+  profileQuestion:0,
+}
 const serverData = [
   {
     id: 0,

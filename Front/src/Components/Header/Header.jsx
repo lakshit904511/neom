@@ -1,7 +1,7 @@
 import styles from "../Header/header.module.css";
 import logo from "../../assets/img/logo2.png";
 import { RiGlobalLine } from "react-icons/ri";
-import { MdNotifications  } from "react-icons/md";
+import { MdNotifications } from "react-icons/md";
 import { BsList } from "react-icons/bs";
 import { useEffect, useRef, useState } from "react";
 import ModalLanguage from "../Modals/ModalLanguage";
@@ -9,6 +9,7 @@ import ModalProfile from "../Modals/ModalProfile";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import RescheduleModal from "../Modals/RescheduleModal";
 import RescheduleNow from "../Modals/RescheduleNow";
+import { useSelector } from "react-redux";
 
 const navItems = [
   { name: "Dashboard", path: "/dashboard" },
@@ -20,31 +21,39 @@ export default function Header() {
   const [showLanguage, setShowLanguage] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const notificationRef = useRef(null);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [show, setShow] = useState([false, null]);
 
+  const userDetails = useSelector((store) => store.user);
+
+  const { authorized, fullName } = userDetails;
+
+  const profile =
+    fullName !== null
+      ? fullName
+          .split(" ")
+          .map((word) => word[0])
+          .join("")
+          .toUpperCase()
+      : "";
 
   const handleShow = () => {
     setShow([false, null]);
   };
 
-
   const handleCancel2 = () => {
     setShow([true, 2]);
   };
-
 
   const handleReschedule = () => {
     setShow([true, 1]);
   };
 
-
   const handleReschedule1 = (val) => {
     setShow([false, null]);
     console.log(val);
-    navigate("/schedule",{state:{text:val}});
+    navigate("/schedule", { state: { text: val } });
   };
-
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -99,7 +108,7 @@ export default function Header() {
         <div className={styles.item2}>
           <div className="relative">
             <li ref={notificationRef}>
-              <MdNotifications  className="relative w-[18px] text-gray-400" />
+              <MdNotifications className="relative w-[18px] text-gray-400" />
               <div className="absolute top-0 right-1 border-2 opacity-80 rounded-[100px] border-[#9c7c27]"></div>
             </li>
             <RescheduleModal
@@ -121,10 +130,16 @@ export default function Header() {
               }}
               className="profile-icon flex w-[55px] flex-row items-center justify-evenly bg-white px-1 py-2 rounded-4xl cursor-pointer"
             >
-              <BsList className="w-[15px]" />
-              <button className="px-2 bg-red-300 text-[12px] rounded-[100px]">
-                P
-              </button>
+              {authorized === true ? (
+                <>
+                  <BsList className="w-[15px] text-black font-extrabold" />
+                  <button className="px-[5px] py-[2px] bg-red-300 text-[13px] rounded-[100px]">
+                    {profile}
+                  </button>
+                </>
+              ) : (
+                <span className="text-[13px]">login</span>
+              )}
             </div>
             {showProfile && <ModalProfile />}
           </div>

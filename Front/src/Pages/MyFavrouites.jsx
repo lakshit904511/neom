@@ -4,23 +4,32 @@ import {
 import DashBoardCard3 from "../Components/DashboardCards/DashBoardCard3";
 import MyFavoritesCard from "../Components/MyFavorites/MyFavoritesCard";
 import Slider from "../Components/Slider/Slider";
-import { useState } from "react";
-import userData from "../assets/Dummy_Data/userData";
-import fullCardDetails from "../assets/Dummy_Data/fullCardDetails";
-import serverData from "../assets/Dummy_Data/serverData";
+import { useEffect, useState } from "react";
+import Header from "../Components/Header/Header";
+import Footer from "../Components/Footer/Footer";
+import { useSelector } from "react-redux";
+import { ToastContainer,toast } from "react-toastify";
+import "react-toastify/ReactToastify.css";
+
 
 export default function MyFavrouites() {
+
+  const userDetails=useSelector((store)=>store.user);
+  console.log(userDetails);
+
+  const {authorized,fullName,favouriteEvents,serverTopEventLists}=userDetails;
+
+  useEffect(()=>{
+      console.log(favouriteEvents);
+  },[favouriteEvents])
+
   const [currentIndexCard3, setCurrentIndexCard3] = useState(0);
 
   const itemsPerViewCard3 = 1.5;
 
-  const favouriteCards = userData[0].favoriteEventCards.flatMap((eventId) =>
-    fullCardDetails.filter((onecardData) => onecardData.id === eventId)
-  );
-
-  const topeventCards = serverData[0].topEventsDetails.flatMap(eventId =>
-    fullCardDetails.filter(onecardData => onecardData.id === eventId)
-  );
+  const notify2=()=>toast.warn("Event removed from favourites Events",{
+    className:"text-[12px] w-[250px]!"
+  });
 
   const goToPrevImageCard3 = () => {
     if (currentIndexCard3 > 0) {
@@ -36,25 +45,26 @@ export default function MyFavrouites() {
 
   return (
     <>
+      <Header />
       <section className="mt-[29px]">
         <h2
           style={{ fontFamily: "IvyMode, sans-serif" }}
-          className="w-[375px] h-[52px] text-left text-[25px] leading-[44px] tracking-[1.16px] text-[#222222]"
+          className="w-[475px] h-[52px] text-left text-[25px] leading-[44px] tracking-[1.16px] text-[#222222]"
         >
-          Good morning Charlie!
+          Good morning {authorized===true?fullName:"Charlie"}!
         </h2>
-
+        <ToastContainer />
         <p
           style={{ fontFamily: "BrownLight, sans-serif" }}
           className="text-left text-[18px] font-medium opacity-80 text-[#000000]"
         >
-          You have short listed 10 events to join later.
+          You have short listed {favouriteEvents.length} events to join later.
         </p>
 
         <div className="mt-[36px]">
           <div className="mt-[20px] grid grid-cols-5 gap-[15px]">
-            {favouriteCards.map((card3) => (
-              <DashBoardCard3 key={card3.id} card3={card3} fav={1} />
+            {favouriteEvents.map((card3) => (
+              <DashBoardCard3 key={card3.id} card3={card3} fav={1} notify1="null" notify2={notify2} notify3="null" />
             ))}
           </div>
         </div>
@@ -63,7 +73,7 @@ export default function MyFavrouites() {
           style={{ fontFamily: "IvyMode, sans-serif" }}
           className="mt-[45px] text-left text-[26px] leading-[44px] tracking-[1px] text-[#222222] opacity-100"
         >
-          Charlie, we have find some recommendation for you
+          {authorized===true?fullName:"Charlie"}, we have find some recommendation for you
         </h1>
 
         <div className="relative">
@@ -98,12 +108,13 @@ export default function MyFavrouites() {
 
         <div className="mt-[20px]">
           <div className="mt-[20px] flex items-center gap-[15px]">
-            {topeventCards.map((card3) => (
+            {serverTopEventLists.map((card3) => (
               <DashBoardCard3 key={card3.id} card3={card3} />
             ))}
           </div>
         </div>
       </section>
+      <Footer />
     </>
   );
 }

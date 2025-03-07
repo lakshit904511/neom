@@ -3,7 +3,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { dataDashBoardCard2 } from "../../assets/Dummy_Data/data";
 import { dataMyFavoritesCard } from "../../assets/Dummy_Data/data";
 
-export default function Slider({value,filteroutCards,goToPrevImage,goToNextImage,goToNextImageCard2,goToPrevImageCard2,currentIndex,currentIndexCard2,itemsPerView,itemsPerViewCard2,currentIndexCard3,itemsPerViewCard3,goToNextImageCard3,goToPrevImageCard3}) {
+export default function Slider({value,scheduledEvents,goToPrevImage,goToNextImage,goToNextImageCard2,goToPrevImageCard2,currentIndex,currentIndexCard2,itemsPerView,itemsPerViewCard2,currentIndexCard3,itemsPerViewCard3,goToNextImageCard3,goToPrevImageCard3}) {
 
   
 
@@ -21,12 +21,12 @@ export default function Slider({value,filteroutCards,goToPrevImage,goToNextImage
 
       <IoIosArrowRoundForward
         className={
-          currentIndex < (filteroutCards?.length || 0) - itemsPerView
+          currentIndex < (scheduledEvents?.length || 0) - itemsPerView
             ? "mx-2 my-2 rounded-[100px] border-1 border-[#222222] text-3xl text-[#222222]"
             : "mx-2 my-2 rounded-[100px] border-1 text-[#a3a1a1] border-[#a3a1a1] text-3xl"
         }
         onClick={goToNextImage}
-        disabled={currentIndex >= (filteroutCards?.length || 0) - itemsPerView}
+        disabled={currentIndex >= (scheduledEvents?.length || 0) - itemsPerView}
       />
     </div>
   );
