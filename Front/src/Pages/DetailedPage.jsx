@@ -3,10 +3,12 @@ import CommonPage from "../Components/CommonPage/CommonPage";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 import { useSelector } from "react-redux";
+import MyModal from "../Components/Modals/MyModal";
+import { useState } from "react";
 
 export default function DetailedPage() {
 
-
+  const [feebackModal,setFeedbackModal]=useState(false);
   const userDetails=useSelector((store)=>store.user);
   console.log(userDetails);
 
@@ -24,7 +26,9 @@ export default function DetailedPage() {
     detailedText=null;
   }
   
-
+  function handleReview(){
+    setFeedbackModal(true);
+  }
 
   return (
     <>
@@ -44,18 +48,19 @@ export default function DetailedPage() {
             better.
           </h1>
         </div>
-        <button
+        <button 
+          onClick={handleReview}
           style={{ fontFamily: "BrownLight, sans-serif" }}
-          className=" text-[#ffffff] text-[12px] rounded-[4px]  px-[30px] py-3 bg-[#222222] flex items-center justify-center text-center"
+          className=" text-[#ffffff] cursor-pointer text-[12px] rounded-[4px]  px-[30px] py-3 bg-[#222222] flex items-center justify-center text-center"
         >
           Add a review
         </button>
       </div>
-      
       <CommonPage detailedData={detailedData} detailedText={detailedText} />
       
     </section>
     <Footer />
+    {feebackModal && <MyModal detailedData={detailedData}/>}
     </>
   );
 }

@@ -26,11 +26,12 @@ export default function ProfilePage() {
   const dob = formatDobDate(birthDate);
 
   const [likeArray, setLikeArray] = useState(interestArray);
-
-  console.log("interested",interestArray);
+  console.log("interested array",interestArray);
 
   useEffect(() => {
+    console.log("useEffect Interested array",interestArray);
     setLikeArray(interestArray);
+    console.log("useEffect like array",likeArray);
   }, [interestArray]);
 
   const notify = () =>
@@ -44,10 +45,21 @@ export default function ProfilePage() {
     const updatedArray = likeArray.map((item) =>
       item[0] === value ? [item[0], !item[1]] : item
     );
+    console.log("update array while clicking image",updatedArray);
     setLikeArray(updatedArray);
+    console.log("like array while clicking image",likeArray);
     store.dispatch(handleLike(value));
+  
   }
 
+  function handleChange(e){
+    const data=e.target.value.split(",").map((item)=>item.trim());
+    setLikeArray((prev)=>prev.map((item)=>data.includes(item[0])?[item[0],true]:[item[0],false]));
+    console.log("like array while writing on input",likeArray);
+    store.dispatch(handleInputChange(likeArray));
+    console.log(data);
+  }
+  
   function handleSaveProfile(e) {
     e.preventDefault();
     const updatedName = userName.current.value;
@@ -59,15 +71,8 @@ export default function ProfilePage() {
   }
 
 
-  function handleChange(e){
-    const data=e.target.value.split(",").map((item)=>item.trim());
-    setLikeArray((prev)=>prev.map((item)=>data.includes(item[0])?[item[0],true]:[item[0],false]));
-    store.dispatch(handleInputChange(likeArray));
-    console.log(data);
-  }
 
-  console.log("likearray",likeArray);
-
+  console.log("outside likearray",likeArray);
 
   return (
     <>
