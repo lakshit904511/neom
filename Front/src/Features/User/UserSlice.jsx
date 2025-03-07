@@ -235,11 +235,14 @@ export const handleLike = (value) => (dispatch, getState) => {
   const checks = state.user.interestArray;
   const clickedValue = checks.findIndex((check) => check[0] === value);
   console.log(clickedValue);
+  console.log("intereested before array in userslice",checks);
+
   if (checks[clickedValue][1] === false) {
     checks[clickedValue][1] = true;
   } else {
     checks[clickedValue][1] = false;
   }
+  console.log("intereested after array in userslice",checks);
   dispatch({ type: "user/Like", payload: checks });
 };
 
@@ -348,5 +351,23 @@ export const stripePayment=(id,name,image,amount,seat)=>{
           console.log("Error during payment:", result.error);
           return;
         }
+  }
+}
+
+
+export const  feedbackData=(stars,feedback)=>async(dispatch,getState)=>{
+  const state = getState();
+  const data = {cardId: card_id, userId: state.user.user_id, rating:stars, user_feedback:feedback};
+  console.log(data);
+  const res = await fetch("http://localhost:5000/card/feedback", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  const val = await res.json();
+  if (val.success) {
+    await dispatch(getAllUserData());
   }
 }
