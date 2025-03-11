@@ -9,7 +9,7 @@ export default function ReschedulePrevious({ event, handleClick }) {
     <>
       <div className="relative flex mt-[30px] items-center justify-center w-[1129px] ">
         <img
-          onClick={()=>navigate("/details2",{ state: { text: "res",data:event } })}
+          onClick={()=>navigate(`/details2/eventId/${event.id}`,{ state: { text: "res",data:event } })}
           className=" rounded-[14px] h-[430px] object-center w-full"
           src={event.image_main}
         />

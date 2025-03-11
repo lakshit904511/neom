@@ -14,16 +14,6 @@ const initialUserState = {
   totalCards: [],
   serverTopEventLists: [],
   serverRecommandedEventList: [],
-  interestArray: [
-    ["Screaming children", false],
-    ["Chinese food", false],
-    ["Socializing", false],
-    ["Golf", false],
-    ["Cooking and dining", false],
-    ["Music", false],
-    ["Plays", false],
-    ["Rooms", false],
-  ],
   scheduledEvents: [],
   attendedEvents: [],
   favouriteEvents: [],
@@ -355,9 +345,9 @@ export const stripePayment=(id,name,image,amount,seat)=>{
 }
 
 
-export const  feedbackData=(stars,feedback)=>async(dispatch,getState)=>{
+export const  feedbackData=(card_id,stars,feedback)=>async(dispatch,getState)=>{
   const state = getState();
-  const data = {cardId: card_id, userId: state.user.user_id, rating:stars, user_feedback:feedback};
+  const data = {cardId: card_id, rating:stars, user_feedback:feedback, user_name:state.user.fullName};
   console.log(data);
   const res = await fetch("http://localhost:5000/card/feedback", {
     method: "POST",

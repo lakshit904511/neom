@@ -44,7 +44,7 @@ export default function UpcomingSchedule({ event }) {
         <TimeCircle />
 
         <button
-          onClick={()=>navigate("/details2",{ state: { text: "top",data:event } })}
+          onClick={()=>navigate(`/details2/eventId/${event.id}`,{ state: { text: "top",data:event } })}
           className="bottom-[50px] cursor-pointer absolute text-[14px] tracking-wider mx-auto  bg-[#ffffff] text-black px-6 py-3 rounded-[8px] flex justify-evenly items-center"
         >
           Yes I am in

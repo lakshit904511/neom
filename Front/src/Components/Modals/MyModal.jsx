@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import VibeMeter from "./VibeMeter";
 import { useRef, useState } from "react";
+import store from "../../../Store";
+import { feedbackData } from "../../Features/User/UserSlice";
 
 export default function MyModal({detailedData}) {
   const userfeedback=useRef(null);
@@ -24,8 +26,9 @@ export default function MyModal({detailedData}) {
   function handleModalSubmit() {
     console.log("handle submit call");
     const feedback=userfeedback.current.value;
-    console.log(totalRating/5,feedback);
-    console.log(detailedData);
+    // console.log(totalRating/5,feedback);
+    // console.log(detailedData.id);
+    store.dispatch(feedbackData(detailedData.id,totalRating/5,feedback));
     setVibe(true);
   }
  

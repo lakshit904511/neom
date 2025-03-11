@@ -41,7 +41,6 @@ const experienceEvent={
     experienceDesc:"This event has a rating of 5.0 that make this event overwhelmed.",
 }
 
-
 const user={
     userId:1,
     name: "Charlie",
@@ -95,36 +94,36 @@ const experienceEvent2 = {
 
 
 
-INSERT INTO cardDetails (
-  image_main, 
-  image_cloud, 
-  name, 
-  star_review,
-  review_event, 
+// INSERT INTO cardDetails (
+//   image_main, 
+//   image_cloud, 
+//   name, 
+//   star_review,
+//   review_event, 
 
-  no_of_review, 
-  event_date, 
-  city, 
-  country, 
-  description, 
-  experience_event, 
-  location_event, 
-  event_type, 
-  category
-) 
-VALUES (
-  '../img/art.jpg',   
-  '../img/Temprature.svg', 
-  'Creativity with sketche ',   
-  4,   
-  7, 
-  25,   
-  '2025-02-08 16:30:45',   
-  'Rajisthan City',   
-  'India',  
-  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elit.',  
-  7,   
-  7,   
-  7,   
-  'Book Exhibitions' 
-);
+//   no_of_review, 
+//   event_date, 
+//   city, 
+//   country, 
+//   description, 
+//   experience_event, 
+//   location_event, 
+//   event_type, 
+//   category
+// ) 
+// VALUES (
+//   '../img/art.jpg',   
+//   '../img/Temprature.svg', 
+//   'Creativity with sketche ',   
+//   4,   
+//   7, 
+//   25,   
+//   '2025-02-08 16:30:45',   
+//   'Rajisthan City',   
+//   'India',  
+//   'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elit.',  
+//   7,   
+//   7,   
+//   7,   
+//   'Book Exhibitions' 
+// );

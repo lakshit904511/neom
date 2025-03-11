@@ -11,55 +11,64 @@ import Footer from "../Components/Footer/Footer";
 import { useSelector } from "react-redux";
 import { formatDobDate } from "../util/DateFormatter";
 import store from "../../Store";
-import { handleInputChange, handleLike, HandleProfile } from "../Features/User/UserSlice";
+import {
+  HandleProfile,
+} from "../Features/User/UserSlice";
 import { useEffect, useRef, useState } from "react";
 
 export default function ProfilePage() {
-
-  
+  const navigate1 = useNavigate();
   const userName = useRef(null);
   const userEmail = useRef(null);
   const userMobile = useRef(null);
-  const userDetails = useSelector((store) => store.user);
-  const { authorized, fullName, birthDate, mobileNo, email, interestArray } =
-    userDetails;
-  const dob = formatDobDate(birthDate);
-
-  const [likeArray, setLikeArray] = useState(interestArray);
-  console.log("interested array",interestArray);
-
-  useEffect(() => {
-    console.log("useEffect Interested array",interestArray);
-    setLikeArray(interestArray);
-    console.log("useEffect like array",likeArray);
-  }, [interestArray]);
-
   const notify = () =>
     toast.success("User updated profile section", {
       className: "text-[12px] w-[250px]!",
     });
 
-  const navigate1 = useNavigate();
+  const userDetails = useSelector((store) => store.user);
+  const { authorized, fullName, birthDate, mobileNo, email } =
+    userDetails;
+  const dob = formatDobDate(birthDate);
+  const [likeArray, setLikeArray] = useState([
+    ["Screaming children", false],
+    ["Chinese food", false],
+    ["Socializing", false],
+    ["Golf", false],
+    ["Cooking and dining", false],
+    ["Music", false],
+    ["Plays", false],
+    ["Rooms", false],
+  ]);
+  useEffect(() => {
+    // setLikeArray(likeArray);
+    console.log("useEffect called",likeArray);
+  }, [likeArray]);
 
   function handleImage(value) {
     const updatedArray = likeArray.map((item) =>
       item[0] === value ? [item[0], !item[1]] : item
     );
-    console.log("update array while clicking image",updatedArray);
+    console.log("update array while clicking image", updatedArray);
     setLikeArray(updatedArray);
-    console.log("like array while clicking image",likeArray);
-    store.dispatch(handleLike(value));
-  
+    console.log("like array while clicking image", likeArray);
+    // store.dispatch(handleLike(value));
   }
 
-  function handleChange(e){
-    const data=e.target.value.split(",").map((item)=>item.trim());
-    setLikeArray((prev)=>prev.map((item)=>data.includes(item[0])?[item[0],true]:[item[0],false]));
-    console.log("like array while writing on input",likeArray);
-    store.dispatch(handleInputChange(likeArray));
+  function handleChange(e) {
+    console.log("like array before datA",likeArray);
+    const data = e.target.value.split(",").map((item) => item.trim());
     console.log(data);
+    const updateInputArray = likeArray.map((item) =>
+      data.includes(item[0]) ? [item[0], true] : [item[0], false]
+    );
+    console.log("updatearray",updateInputArray);
+    setLikeArray(updateInputArray);
+    console.log("like array while writing on input", likeArray);
+    // store.dispatch(handleInputChange(likeArray));
+    // console.log(data);
   }
-  
+
   function handleSaveProfile(e) {
     e.preventDefault();
     const updatedName = userName.current.value;
@@ -70,9 +79,7 @@ export default function ProfilePage() {
     notify();
   }
 
-
-
-  console.log("outside likearray",likeArray);
+  console.log("outside likearray", likeArray);
 
   return (
     <>

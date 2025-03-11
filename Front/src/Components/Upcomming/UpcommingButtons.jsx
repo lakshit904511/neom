@@ -3,6 +3,11 @@ import { getFilterEvent } from "../../Features/User/UserSlice";
 
 export default function UpcommingButtons() {
 
+  function handlebuttons(option){
+    console.log(option);
+
+    option.slice()
+  }
 
   const buttonGroups = [
     {
@@ -22,6 +27,7 @@ export default function UpcommingButtons() {
     >
       {options.map((option,index) => (
         <button
+        onClick={()=>handlebuttons({option})}
         key={index}
         className={`${
           index === 0
