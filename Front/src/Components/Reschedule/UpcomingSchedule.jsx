@@ -1,5 +1,5 @@
 import TimeCircle from "./TimeCircle";
-import { formatDate } from "../../util/DateFormatter";
+import { formatDate, formatEventTime } from "../../util/DateFormatter";
 import { useNavigate } from "react-router-dom";
 
 
@@ -38,7 +38,7 @@ export default function UpcomingSchedule({ event }) {
           style={{ fontFamily: "Brown, sans-serif" }}
           className="top-[180px] text-[17px] tracking-wide absolute  font-medium  text-center mx-auto text-[#ffffff]"
         >
-          {formatDate(event.start_date)}at 00:00
+          {formatDate(event.start_date)} at {formatEventTime(event.start_date,event.end_date)}
         </h1>
 
         <TimeCircle />

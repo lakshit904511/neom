@@ -29,7 +29,7 @@ export  function formatEventTime(startTime, endTime) {
   const start = new Date(startTime).toLocaleTimeString("en-US", options);
   const end = new Date(endTime).toLocaleTimeString("en-US", options);
 
-  return `${start} - ${end}`;
+  return `${start} : ${end}`;
 }
   
 export  function formatDate(dateString) {

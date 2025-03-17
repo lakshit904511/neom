@@ -1,5 +1,5 @@
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import { FaRegStar } from "react-icons/fa";
+import { LiaStarSolid  } from "react-icons/lia";
 import HomePage from "../../Pages/DashBoard";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -8,8 +8,8 @@ import { useRef, useState } from "react";
 import store from "../../../Store";
 import { feedbackData } from "../../Features/User/UserSlice";
 
-export default function MyModal({detailedData}) {
-  const userfeedback=useRef(null);
+export default function MyModal({ detailedData }) {
+  const userfeedback = useRef(null);
   const userDetails = useSelector((store) => store.user);
   const { authorized, fullName } = userDetails;
   const [vibe, setVibe] = useState(false);
@@ -25,22 +25,25 @@ export default function MyModal({detailedData}) {
   }
   function handleModalSubmit() {
     console.log("handle submit call");
-    const feedback=userfeedback.current.value;
+    const feedback = userfeedback.current.value;
     // console.log(totalRating/5,feedback);
     // console.log(detailedData.id);
-    store.dispatch(feedbackData(detailedData.id,totalRating/5,feedback));
+    store.dispatch(feedbackData(detailedData.id, totalRating / 5, feedback));
     setVibe(true);
   }
- 
-  const totalRating = Object.values(starcolor).reduce((sum, rating) => sum + rating, 0);
-  console.log(totalRating/5);
+
+  const totalRating = Object.values(starcolor).reduce(
+    (sum, rating) => sum + rating,
+    0
+  );
+  console.log(totalRating / 5);
 
   function closeVibeModal() {
     setVibe(false);
   }
 
   function handleStars(label, key) {
-    setStarColor((prev) => ({ ...prev, [label]: key+1 }));
+    setStarColor((prev) => ({ ...prev, [label]: key + 1 }));
   }
 
   return (
@@ -77,8 +80,12 @@ export default function MyModal({detailedData}) {
               </span>
               <div className="flex justify-start gap-[5px] items-center mt-[10px]">
                 {[...Array(5)].map((__, i) => (
-                  <FaRegStar
-                    className={i < (starcolor["Quality of Event"] ?? -1) ? "text-red-500" : null}
+                  <LiaStarSolid 
+                    className={
+                      i < (starcolor["Quality of Event"] ?? -1)
+                        ? "text-red-500"
+                        : "text-gray-500"
+                    }
                     size={20}
                     key={i}
                     onClick={() => handleStars("Quality of Event", i)}
@@ -95,8 +102,12 @@ export default function MyModal({detailedData}) {
               </span>
               <div className="flex justify-start gap-[5px] items-center mt-[10px]">
                 {[...Array(5)].map((__, i) => (
-                  <FaRegStar
-                  className={i < (starcolor["Facilities of Event"] ?? -1) ? "text-red-500" : null}
+                  <LiaStarSolid 
+                    className={
+                      i < (starcolor["Facilities of Event"] ?? -1)
+                        ? "text-red-500"
+                        : "text-gray-500"
+                    }
                     size={20}
                     key={i}
                     onClick={() => handleStars("Facilities of Event", i)}
@@ -114,8 +125,12 @@ export default function MyModal({detailedData}) {
               </span>
               <div className="flex justify-start gap-[5px] items-center mt-[10px]">
                 {[...Array(5)].map((__, i) => (
-                  <FaRegStar
-                  className={i < (starcolor["Staff Politeness"] ?? -1) ? "text-red-500" : null}
+                  <LiaStarSolid 
+                    className={
+                      i < (starcolor["Staff Politeness"] ?? -1)
+                        ? "text-red-500"
+                        : "text-gray-500"
+                    }
                     size={20}
                     key={i}
                     onClick={() => handleStars("Staff Politeness", i)}
@@ -133,8 +148,12 @@ export default function MyModal({detailedData}) {
               </span>
               <div className="flex justify-start gap-[5px] items-center mt-[10px]">
                 {[...Array(5)].map((__, i) => (
-                  <FaRegStar
-                  className={i < (starcolor["Operator of Event"] ?? -1) ? "text-red-500" : null}
+                  <LiaStarSolid 
+                    className={
+                      i < (starcolor["Operator of Event"] ?? -1)
+                        ? "text-red-500"
+                        : "text-gray-500"
+                    }
                     size={20}
                     key={i}
                     onClick={() => handleStars("Operator of Event", i)}
@@ -152,8 +171,12 @@ export default function MyModal({detailedData}) {
               </span>
               <div className="flex justify-start gap-[5px] items-center mt-[10px] ">
                 {[...Array(5)].map((__, i) => (
-                  <FaRegStar
-                  className={i < (starcolor["Services at Event"] ?? -1) ? "text-red-500" : null}
+                  <LiaStarSolid 
+                    className={
+                      i < (starcolor["Services at Event"] ?? -1)
+                        ? "text-red-500"
+                        : "text-gray-500"
+                    }
                     size={20}
                     key={i}
                     onClick={() => handleStars("Services at Event", i)}
@@ -166,7 +189,7 @@ export default function MyModal({detailedData}) {
             <textarea
               ref={userfeedback}
               placeholder="Share your feedback and suggestions about this event..."
-              className="outline-gray-700 placeholder:pt-[10px] pl-[10px]  text-left placeholder:text-[#000000] text-[14px] leading-6 tracking-[0.35px] opacity-50 w-full h-[150px] outline-none bg-white border border-gray-300 rounded-lg "
+              className="outline-gray-700 text-black  placeholder: pl-[10px] text-left placeholder:text-[#000000] text-[14px] leading-6 tracking-[0.35px] opacity-50 w-full h-[150px] outline-none bg-white border border-gray-600 pt-1  rounded-lg "
             />
           </div>
           <button

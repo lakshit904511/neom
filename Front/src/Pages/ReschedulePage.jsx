@@ -13,18 +13,27 @@ import UpcomingSchedule from "../Components/Reschedule/UpcomingSchedule";
 import { useState } from "react";
 
 export default function ReschedulePage() {
+  const state=useLocation();
+  const data=state.state.text;
+  console.log(data);
   const userDetails = useSelector((store) => store.user);
   const { authorized, fullName, totalCards, scheduledEvents } = userDetails;
   const [golfModal, setGolfModal] = useState(false);
   const [carddata,setCarddata]=useState(null);
-  
-  const rescheduleEvents = scheduledEvents.slice(1, 4);
+  const [cardtime,setCardTime]=useState(null);
+
+  const rescheduled=scheduledEvents.filter((event)=>event.id===data);
+  const rescheduledGolfEvent=[{eventItem:rescheduled,time:"11:00 AM - 12:30 PM"},{eventItem:rescheduled,time:"1:30 PM - 2:30 PM"},{eventItem:rescheduled,time:"3:00 PM - 4:30 PM"}]
+  console.log(rescheduledGolfEvent[0].event);
+
+
   const afterRescheduleEvent = totalCards.slice(17, 23);
 
 
-  function handleClick(event) {
+  function handleClick(event,time) {
     console.log(event);
     setCarddata(event);
+    setCardTime(time);
     setGolfModal(true);
   }
 
@@ -67,9 +76,9 @@ export default function ReschedulePage() {
           {check === 1 ? (
             <Swiper spaceBetween={40} loop={true}>
               <div className="relative flex gap-[20px]">
-                {rescheduleEvents.map((event) => (
+                {rescheduledGolfEvent.map((event) => (
                   <SwiperSlide>
-                    <ReschedulePrevious key={event.id} event={event} handleClick={handleClick}/>
+                    <ReschedulePrevious event={event} handleClick={handleClick}/>
                   </SwiperSlide>
                 ))}
               </div>
@@ -107,7 +116,7 @@ export default function ReschedulePage() {
         </div>
       </section>
       
-      {golfModal && <GolfMatch closeModal={closeModal} carddata={carddata}/>}
+      {golfModal && <GolfMatch closeModal={closeModal} carddata={carddata} cardtime={cardtime}/>}
       <Footer />
 
     </>

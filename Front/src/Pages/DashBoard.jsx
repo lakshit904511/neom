@@ -8,8 +8,6 @@ import DashBoardCard4 from "../Components/DashboardCards/DashBoardCard4";
 import DashBoardCard2 from "../Components/DashboardCards/DashBoardCard2";
 import DashBoardMain from "../Components/DashboardCards/DashBoardMain";
 import Map from "../Components/DashboardCards/Map";
-import userData from "../assets/Dummy_Data/userData";
-import fullCardDetails from "../assets/Dummy_Data/fullCardDetails";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 import { useSelector } from "react-redux";
@@ -21,7 +19,9 @@ export default function DashBoard() {
 
   const {authorized,fullName,scheduledEvents,attendedEvents,serverTopEventLists}=userDetails;
 
-  console.log(scheduledEvents);
+  const sortedScheduledEvent=scheduledEvents.sort((a,b)=>new Date(a.start_date) - new Date(b.start_date));
+
+  console.log(sortedScheduledEvent);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentIndexCard2, setCurrentIndexCard2] = useState(0);
@@ -40,7 +40,7 @@ export default function DashBoard() {
   };
 
   const goToNextImage = () => {
-    if (currentIndex < scheduledEvents.length - itemsPerView) {
+    if (currentIndex < sortedScheduledEvent.length - itemsPerView) {
       setCurrentIndex(currentIndex + 1);
     }
   };
@@ -78,7 +78,7 @@ export default function DashBoard() {
 
         <div className="relative ">
           <DashBoardMain
-            data={scheduledEvents}
+            data={sortedScheduledEvent}
             itemsPerView={itemsPerView}
             currentIndex={currentIndex}
             renderItem={(list) => <DashBoardCard1 key={list.id} list={list} />}
@@ -87,7 +87,7 @@ export default function DashBoard() {
 
         <Slider
           value={1}
-          scheduledEvents={scheduledEvents}
+          scheduledEvents={sortedScheduledEvent}
           goToPrevImage={goToPrevImage}
           goToNextImage={goToNextImage}
           currentIndex={currentIndex}

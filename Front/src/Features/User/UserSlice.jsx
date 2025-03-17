@@ -8,6 +8,8 @@ const initialUserState = {
   fullName: null,
   email: null,
   filterCheck: null,
+  categoryCheck:null,
+  categoryValue:null,
   mobileNo: null,
   birthDate: null,
   favIcon: null,
@@ -53,12 +55,6 @@ export default function userReducer(state = initialUserState, action) {
         error: action.payload,
       };
 
-    case "user/upcomingFilter":
-      return {
-        ...state,
-        totalCards: action.payload.cards,
-        filterCheck: action.payload.change,
-      };
 
     case "user/resetFilter":
       return {
@@ -94,7 +90,13 @@ export default function userReducer(state = initialUserState, action) {
         ...state,
         interestArray: action.payload,
       };
-
+    case "user/movementFilter":
+      return{
+        ...state,
+        totalCards: action.payload.cards,
+        categoryValue:action.payload.categoryValue,
+        categoryCheck:action.payload.categoryCheck,
+      }
     case "user/InputHandle":
       return {
         ...state,
@@ -131,25 +133,6 @@ export function getAllUserData() {
 
 // function working on filtering the cards
 
-export const getFilterEvent = (val) => (dispatch, getState) => {
-  const state = getState();
-
-  const allCards = state.user.allCards || [];
-  const filterCheck = state.user.filterCheck;
-
-  let payload;
-  let filterCards;
-  if (filterCheck === val) {
-    payload = { cards: allCards, change: null };
-  } else {
-    filterCards = allCards.filter((card) => card.category === val);
-    console.log("filterCards");
-    payload = { cards: filterCards, change: val };
-  }
-
-  console.log(payload);
-  dispatch({ type: "user/upcomingFilter", payload });
-};
 
 
 // handle favorite card 
@@ -361,3 +344,54 @@ export const  feedbackData=(card_id,stars,feedback)=>async(dispatch,getState)=>{
     await dispatch(getAllUserData());
   }
 }
+
+export const cancelEvent=(cardId)=>async(dispatch,getState)=>{
+   const state=getState();
+   const userId=state.user.user_id;
+   const data={user_id:userId,card_id:cardId};
+   const res=await fetch("http://localhost:5000/card/cancel",{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+   });
+   const val = await res.json();
+   if (val.success) {
+     await dispatch(getAllUserData());
+   }
+}
+
+export const eventFilter = (type,val) => (dispatch, getState) => {
+  const state = getState();
+
+  const allCards = state.user.allCards || [];
+  const categoryCheck = state.user.categoryCheck;
+  const categoryValue= state.user.categoryValue;
+
+  console.log(categoryCheck,categoryValue);
+
+  let payload;
+  let filterCards;
+
+  if (categoryCheck === type && (categoryValue===val || categoryValue==="")) {
+    payload = { cards: allCards, categoryCheck: null ,categoryValue:null };
+  } else {
+    if(type==="walking"){
+      filterCards = allCards.filter((card) => card.walking === val);
+    }
+    if(type==="drive"){
+      filterCards = allCards.filter((card) => card.drive === val);
+    }
+    if(type==="event"){
+      filterCards = allCards.filter((card) => card.category === val);
+    }
+    if(type==="date"){
+      filterCards = allCards.filter((card) => (card.start_date.slice(0,11)) === val);
+      console.log("datefilter",filterCards)
+    }
+    payload = { cards: filterCards, categoryCheck: type,categoryValue:val };
+  }
+
+  dispatch({ type: "user/movementFilter", payload });
+};
