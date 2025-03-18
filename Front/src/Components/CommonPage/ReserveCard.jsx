@@ -1,10 +1,9 @@
 import { formatDate, formatEventTime } from "../../util/DateFormatter";
 import store from "../../../Store";
-import { loadStripe } from "@stripe/stripe-js";
 import { handleReserve, stripePayment } from "../../Features/User/UserSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function ReserveCard({ check, datadetailedEvent }) {
@@ -28,11 +27,21 @@ export default function ReserveCard({ check, datadetailedEvent }) {
       setAmount(datadetailedEvent.price);
       return;
     }
+    if(no_of_reserveSeat<0){
+      setSeat(datadetailedEvent.available_seats);
+      setAmount(datadetailedEvent.price);
+      return;
+    }
     const updatedSeat = datadetailedEvent.available_seats - no_of_reserveSeat;
-    setSeat(updatedSeat);
-    setAmount(
-      no_of_reserveSeat * datadetailedEvent.price + datadetailedEvent.price
-    );
+    if(updatedSeat<=0){
+      setSeat(0);
+      setAmount(datadetailedEvent.price);
+    }else{
+      setSeat(updatedSeat);
+      setAmount(
+        no_of_reserveSeat * datadetailedEvent.price + datadetailedEvent.price
+      );
+    }
   }
 
 
@@ -100,11 +109,23 @@ export default function ReserveCard({ check, datadetailedEvent }) {
               datadetailedEvent.guest
             ) : (
               <input
+                min="0"
                 onChange={handleUser}
                 ref={userSeats}
                 className="outline-none border border-gray-400 pl-[4px] py-[2px] mr-1 mt-1"
                 type="number"
                 placeholder="Guest"
+                onKeyDown={(e) => {
+                  if (e.key === '-') {
+                    e.preventDefault();
+                  }
+                }}
+                onInput={(e) => {
+                  const maxSeats = datadetailedEvent.available_seats;
+                  if (e.target.value > maxSeats) {
+                    e.target.value = "";
+                  }
+                }}
               />
             )}{" "}
             Adults

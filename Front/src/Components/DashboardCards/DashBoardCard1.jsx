@@ -17,7 +17,7 @@ export default function DashBoardCard1({ list }) {
     <div className="w-[37.5rem] h-[15.5rem] mt-[1.875rem] border border-[#222222] rounded-[0.75rem] opacity-100 flex justify-center items-center">
       <div className="w-[13.1875rem] h-[15.375rem] relative ">
         <img
-          onClick={() => navigate("/details",{state:{text:null,val:list}})}
+          onClick={() => navigate(`/details2/eventId/${list.id}`,{state:{text:"sch",data:list}})}
           className="w-[13.1875rem] h-full rounded-l-[0.75rem] object-cover cursor-pointer"
           src={list.image_main}
           alt={list.event_type_title}
@@ -58,7 +58,7 @@ export default function DashBoardCard1({ list }) {
         >
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
           nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat…{" "}
-          <span className="text-[#FF385C]">read more</span>
+          <span  onClick={() => navigate(`/details2/eventId/${list.id}`,{state:{text:"sch",data:list}})} className="text-[#FF385C] cursor-pointer">read more</span>
         </p>
 
         <ul className="w-[18.125rem] h-[3.5rem] mt-[0.170rem] flex flex-col gap-[0.49375rem]">

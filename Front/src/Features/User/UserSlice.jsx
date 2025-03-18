@@ -8,13 +8,12 @@ const initialUserState = {
   fullName: null,
   email: null,
   filterCheck: null,
+  categoryCheck:null,
+  categoryValue:null,
   mobileNo: null,
   birthDate: null,
   favIcon: null,
-  totalCards: [],
-  serverTopEventLists: [],
-  serverRecommandedEventList: [],
-  interestArray: [
+  interestArray:[
     ["Screaming children", false],
     ["Chinese food", false],
     ["Socializing", false],
@@ -24,6 +23,9 @@ const initialUserState = {
     ["Plays", false],
     ["Rooms", false],
   ],
+  totalCards: [],
+  serverTopEventLists: [],
+  serverRecommandedEventList: [],
   scheduledEvents: [],
   attendedEvents: [],
   favouriteEvents: [],
@@ -63,13 +65,11 @@ export default function userReducer(state = initialUserState, action) {
         error: action.payload,
       };
 
-    case "user/upcomingFilter":
-      return {
+    case "user/interestArray":
+      return{
         ...state,
-        totalCards: action.payload.cards,
-        filterCheck: action.payload.change,
-      };
-
+        interestArray:action.payload,
+      }
     case "user/resetFilter":
       return {
         ...state,
@@ -104,7 +104,13 @@ export default function userReducer(state = initialUserState, action) {
         ...state,
         interestArray: action.payload,
       };
-
+    case "user/movementFilter":
+      return{
+        ...state,
+        totalCards: action.payload.cards,
+        categoryValue:action.payload.categoryValue,
+        categoryCheck:action.payload.categoryCheck,
+      }
     case "user/InputHandle":
       return {
         ...state,
@@ -141,25 +147,6 @@ export function getAllUserData() {
 
 // function working on filtering the cards
 
-export const getFilterEvent = (val) => (dispatch, getState) => {
-  const state = getState();
-
-  const allCards = state.user.allCards || [];
-  const filterCheck = state.user.filterCheck;
-
-  let payload;
-  let filterCards;
-  if (filterCheck === val) {
-    payload = { cards: allCards, change: null };
-  } else {
-    filterCards = allCards.filter((card) => card.category === val);
-    console.log("filterCards");
-    payload = { cards: filterCards, change: val };
-  }
-
-  console.log(payload);
-  dispatch({ type: "user/upcomingFilter", payload });
-};
 
 
 // handle favorite card 
@@ -355,9 +342,9 @@ export const stripePayment=(id,name,image,amount,seat)=>{
 }
 
 
-export const  feedbackData=(stars,feedback)=>async(dispatch,getState)=>{
+export const  feedbackData=(card_id,stars,feedback)=>async(dispatch,getState)=>{
   const state = getState();
-  const data = {cardId: card_id, userId: state.user.user_id, rating:stars, user_feedback:feedback};
+  const data = {cardId: card_id, rating:stars, user_feedback:feedback, user_name:state.user.fullName};
   console.log(data);
   const res = await fetch("http://localhost:5000/card/feedback", {
     method: "POST",
@@ -370,4 +357,67 @@ export const  feedbackData=(stars,feedback)=>async(dispatch,getState)=>{
   if (val.success) {
     await dispatch(getAllUserData());
   }
+}
+
+export const cancelEvent=(cardId)=>async(dispatch,getState)=>{
+   const state=getState();
+   const userId=state.user.user_id;
+   const data={user_id:userId,card_id:cardId};
+   const res=await fetch("http://localhost:5000/card/cancel",{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+   });
+   const val = await res.json();
+   if (val.success) {
+     await dispatch(getAllUserData());
+   }
+}
+
+export const eventFilter = (type,val) => (dispatch, getState) => {
+  const state = getState();
+
+  const allCards = state.user.allCards || [];
+  const categoryCheck = state.user.categoryCheck;
+  const categoryValue= state.user.categoryValue;
+
+  console.log(categoryCheck,categoryValue);
+  // console.log(allCards[0].start_date.slice(0,11));
+
+  let payload;
+  let filterCards;
+
+  if (categoryCheck === type && (categoryValue===val || val===null || val===" ")) {
+    payload = { cards: allCards, categoryCheck: null ,categoryValue:null };
+  } else {
+    if(type==="walking"){
+      filterCards = allCards.filter((card) => card.walking === val);
+    }
+    if(type==="drive"){
+      filterCards = allCards.filter((card) => card.drive === val);
+    }
+    if(type==="event"){
+      filterCards = allCards.filter((card) => card.category === val);
+    }
+    if(type==="date"){
+      console.log("type date runs");
+      filterCards = allCards.filter((card) => (card.start_date.slice(0,10)) === val);
+      console.log("datefilter",filterCards)
+    }
+    if(type==="city"){
+      filterCards = allCards.filter((card) => (card.city === val.split(",")[0]));
+    }
+    payload = { cards: filterCards, categoryCheck: type,categoryValue:val };
+    console.log(payload);
+  }
+  
+  dispatch({ type: "user/movementFilter", payload });
+};
+
+
+export const interestedFunction=(array)=>(dispatch,getState)=>{
+  console.log("userslice likearray",array)
+    dispatch({type: "user/interestArray",payload:array});
 }

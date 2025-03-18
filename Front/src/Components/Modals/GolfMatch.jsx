@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { formatDate, formatEventTime } from "../../util/DateFormatter";
 
-export default function GolfMatch({ closeModal, carddata }) {
+export default function GolfMatch({ closeModal, carddata ,cardtime}) {
   const userDetails = useSelector((store) => store.user);
   const { authorized, fullName } = userDetails;
 
@@ -32,7 +32,7 @@ export default function GolfMatch({ closeModal, carddata }) {
             className="text-[18px] mt-[5px]"
           >
             You have chosen a new "{carddata.name}" event on{" "}
-            {formatDate(carddata.start_date)}, at 12:00 AM. Have a great day
+            {formatDate(carddata.start_date)}, at {cardtime}. Have a great day
             ahead and enjoy your new round of {carddata.category}!
           </h1>
 
@@ -58,10 +58,7 @@ export default function GolfMatch({ closeModal, carddata }) {
                 Select a time slots
               </label>
               <input
-                defaultValue={formatEventTime(
-                  carddata.start_date,
-                  carddata.end_date
-                )}
+                defaultValue={cardtime}
                 type="text"
                 className=" outline-gray-300 w-[185px] h-[35px] border border-[#DDDDDD] rounded-[4px] placeholder:text-left text-[12px] pl-2  tracking-[0.31px] text-[#222222]"
               />

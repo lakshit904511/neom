@@ -11,55 +11,57 @@ import Footer from "../Components/Footer/Footer";
 import { useSelector } from "react-redux";
 import { formatDobDate } from "../util/DateFormatter";
 import store from "../../Store";
-import { handleInputChange, handleLike, HandleProfile } from "../Features/User/UserSlice";
+import { HandleProfile, interestedFunction } from "../Features/User/UserSlice";
 import { useEffect, useRef, useState } from "react";
 
 export default function ProfilePage() {
-
-  
+  const navigate1 = useNavigate();
   const userName = useRef(null);
   const userEmail = useRef(null);
   const userMobile = useRef(null);
+  const notify = () => toast.success("User updated profile section", {  className: "text-[12px] w-[250px]!",});
+
   const userDetails = useSelector((store) => store.user);
-  const { authorized, fullName, birthDate, mobileNo, email, interestArray } =
-    userDetails;
+  const { authorized, fullName, birthDate, mobileNo, email, interestArray } = userDetails;
   const dob = formatDobDate(birthDate);
-
   const [likeArray, setLikeArray] = useState(interestArray);
-  console.log("interested array",interestArray);
-
-  useEffect(() => {
-    console.log("useEffect Interested array",interestArray);
-    setLikeArray(interestArray);
-    console.log("useEffect like array",likeArray);
-  }, [interestArray]);
-
-  const notify = () =>
-    toast.success("User updated profile section", {
-      className: "text-[12px] w-[250px]!",
-    });
-
-  const navigate1 = useNavigate();
+  const [inputValue, setInputValue] = useState("");
 
   function handleImage(value) {
-    const updatedArray = likeArray.map((item) =>
-      item[0] === value ? [item[0], !item[1]] : item
-    );
-    console.log("update array while clicking image",updatedArray);
-    setLikeArray(updatedArray);
-    console.log("like array while clicking image",likeArray);
-    store.dispatch(handleLike(value));
-  
+    setLikeArray((prevLikeArray) => {
+      const updatedArray = prevLikeArray.map((item) =>
+        item[0] === value ? [item[0], !item[1]] : item
+      );
+      const selectedValue = updatedArray.filter((val) => val[1] === true);
+      setInputValue(selectedValue.map((select) => select[0]).join(", "));
+
+      return updatedArray;
+    });
+    store.dispatch(interestedFunction(likeArray));
+  }
+  useEffect(() => {
+    const selectedValue = interestArray.filter((val) => val[1] === true);
+    setInputValue(selectedValue.map((select) => select[0]).join(", "));
+  }, []);
+
+  function handleChange(e) {
+    const userData = e.target.value;
+    setInputValue(userData);
+
+    const data = userData
+      .split(",")
+      .map((item) => item.trim())
+      .filter((item) => item.length > 0);
+
+    setLikeArray((prevLikeArray) => {
+      const updateInputArray = prevLikeArray.map((item) =>
+        data.includes(item[0]) ? [item[0], true] : [item[0], false]
+      );
+      return updateInputArray;
+    });
+    store.dispatch(interestedFunction(likeArray));
   }
 
-  function handleChange(e){
-    const data=e.target.value.split(",").map((item)=>item.trim());
-    setLikeArray((prev)=>prev.map((item)=>data.includes(item[0])?[item[0],true]:[item[0],false]));
-    console.log("like array while writing on input",likeArray);
-    store.dispatch(handleInputChange(likeArray));
-    console.log(data);
-  }
-  
   function handleSaveProfile(e) {
     e.preventDefault();
     const updatedName = userName.current.value;
@@ -70,9 +72,6 @@ export default function ProfilePage() {
     notify();
   }
 
-
-
-  console.log("outside likearray",likeArray);
 
   return (
     <>
@@ -142,7 +141,7 @@ export default function ProfilePage() {
               <input
                 ref={userMobile}
                 style={{ fontFamily: "BrownLight, sans-serif" }}
-                type="number"
+                type="text"
                 defaultValue={mobileNo}
                 className=" outline-gray-300 w-[320px] h-[40px] border border-[#DDDDDD] rounded-[4px] placeholder: pl-2 text-[12px]"
               />
@@ -163,28 +162,32 @@ export default function ProfilePage() {
               />
               <br />
 
-              <div className="mt-[20px] grid grid-cols-5 w-[400px] gap-3 ">
+              <div className="mt-[20px] grid grid-cols-5 w-[400px] gap-3">
                 {serverData[0].formData.map((data1) => {
                   const isLiked = likeArray.find(
                     (item) => item[0] === data1.name
                   )?.[1];
 
                   return (
-                    <div key={data1.name} className="relative w-[73px]">
+                    <div
+                      key={data1.name}
+                      onClick={() => handleImage(data1.name)}
+                      className="relative w-[73px] cursor-pointer"
+                    >
                       <img
-                        onClick={() => handleImage(data1.name)}
                         className="relative w-[73px] h-[100px] object-cover rounded-[4px] cursor-pointer"
                         src={data1.image}
                         alt="Social"
                       />
-
                       {isLiked && (
-                        <BsHandThumbsUp
-                          size={30}
-                          className="absolute top-7 right-5 text-white text-lg"
-                        />
+                        <>
+                          <BsHandThumbsUp
+                            size={30}
+                            className="absolute z-90 top-7 right-5 text-white text-lg"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
+                        </>
                       )}
-
                       <p className="absolute bottom-2 left-3 text-center text-[10px] leading-[16px] tracking-[0.29px] text-[#FFFFFF] opacity-100 font-medium w-[60px]">
                         {data1.name}
                       </p>
@@ -202,13 +205,10 @@ export default function ProfilePage() {
               <br />
               <input
                 onChange={handleChange}
-                defaultValue={likeArray
-                  .filter((item) => item[1] !== false)
-                  .map((item) => item[0])
-                  .join(", ")}
+                value={inputValue}
                 placeholder="Add multiple interests comma ( , ) separated"
                 type="text"
-                className=" outline-gray-300 w-[320px] h-[40px] border border-[#DDDDDD] rounded-[4px] placeholder: pl-2 text-[12px]"
+                className="outline-gray-300 w-[320px] h-[40px] border border-[#DDDDDD] rounded-[4px] placeholder:pl-2 text-[12px]"
               />
               <br />
 

@@ -8,7 +8,6 @@ import ProfilePage from "./Pages/ProfilePage";
 import UpComming from "./Pages/UpComming";
 import FeedBackPage from "./Pages/FeedBackPage";
 import SettingsPage from "./Pages/SettingsPage";
-import DetailedPage from "./Pages/DetailedPage";
 import CommonPage from "./Components/CommonPage/CommonPage";
 import VibeMeter from "./Components/Modals/VibeMeter";
 import ReschedulePage from "./Pages/ReschedulePage";
@@ -21,7 +20,7 @@ import { getAllUserData } from "./Features/User/UserSlice";
 import { useEffect } from "react";
 import PaymentSuccessful from "./Pages/PaymentSuccesful";
 import PaymentFailed from "./Pages/PaymentFailed";
-
+import ScrollToTop from "./Components/Scroll/ScrolToTop";
 
 export default function App() {
   
@@ -47,6 +46,7 @@ export default function App() {
     >
       <BrowserRouter>
         <div className="app">
+          <ScrollToTop />
           <Routes>
             <Route
               index
@@ -69,8 +69,7 @@ export default function App() {
             <Route path="events" element={<UpComming />} />
             <Route path="feedback" element={<FeedBackPage />} />
             <Route path="settings" element={<SettingsPage />} />
-            <Route path="details" element={<DetailedPage />} />
-            <Route path="details2" element={<CommonPage />} />
+            <Route path="details2/eventId/:id" element={<CommonPage />} />
             <Route path="vibe" element={<VibeMeter />} />
             <Route path="schedule" element={<ReschedulePage />} />
             <Route path="SignIn" element={<SignInPage />} />

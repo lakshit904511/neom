@@ -1,8 +1,29 @@
+import { useSelector } from "react-redux";
 import store from "../../../Store";
-import { getFilterEvent } from "../../Features/User/UserSlice";
+import { eventFilter} from "../../Features/User/UserSlice";
 
 export default function UpcommingButtons() {
 
+  const {categoryValue,categoryCheck}=useSelector((store)=>store.user);
+  console.log(categoryCheck,categoryValue);
+
+  const check = `${categoryValue ?? ""} mins ${categoryCheck ?? ""}`;
+  console.log(check);
+  
+  var category,number;
+
+  function handlebuttons(option){
+    const len=option.option.length;
+     number=+option.option.slice(0,2);
+    if(len===15){
+        category=option.option.slice(-7);
+    }else{
+        category=option.option.slice(-5);
+    }
+    
+    store.dispatch(eventFilter(category,number));
+
+  }
 
   const buttonGroups = [
     {
@@ -11,17 +32,18 @@ export default function UpcommingButtons() {
     },
     {
       label: "Driving",
-      options: ["10 mins Drive", "20 mins Drive", "30 mins Drive"],
+      options: ["10 mins drive", "20 mins drive", "30 mins drive"],
     },
   ];
 
   const TimeButtonGroup = ({ options }) => (
     <div
       style={{ fontFamily: "BrownLight, sans-serif" }}
-      className="border border-[#222222] bg-[#F9F7F2]  rounded-[24px] opacity-80 flex"
+      className={`border cursor-pointer border-[#222222] bg-[#F9F7F2]  rounded-[24px] opacity-80 flex`}
     >
       {options.map((option,index) => (
         <button
+        onClick={()=>handlebuttons({option})}
         key={index}
         className={`${
           index === 0
@@ -29,7 +51,7 @@ export default function UpcommingButtons() {
             : index === options.length - 1
             ? "rounded-r-[24px]"
             : ""
-        } tracking-wider px-[10px] border-r border-[#222222] leading-[38px] text-left font-normal text-[11px] text-[#222222] opacity-80 hover:bg-black hover:text-white`}
+        } tracking-wider cursor-pointer  px-[10px] border-r border-[#222222] ${(option===check) ? "bg-black text-white transition-all duration-300":null} leading-[38px] text-left font-normal text-[11px] text-[#222222] opacity-80 `}
       >
         {option}
       </button>
@@ -48,7 +70,7 @@ export default function UpcommingButtons() {
       </h1>
       <div className="flex gap-[10px]">
         {buttonGroups.map((group, index) => (
-          <div key={index} className="flex gap-[15px]">
+          <div key={index} className="flex gap-[15px] ">
             <TimeButtonGroup options={group.options} />
           </div>
         ))}

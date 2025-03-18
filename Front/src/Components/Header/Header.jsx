@@ -10,6 +10,8 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import RescheduleModal from "../Modals/RescheduleModal";
 import RescheduleNow from "../Modals/RescheduleNow";
 import { useSelector } from "react-redux";
+import store from "../../../Store";
+import { cancelEvent } from "../../Features/User/UserSlice";
 
 const navItems = [
   { name: "Dashboard", path: "/dashboard" },
@@ -54,6 +56,13 @@ export default function Header() {
     console.log(val);
     navigate("/schedule", { state: { text: val } });
   };
+
+  function handleCancelEvent(eventid,val){
+    setShow([false, null]);
+    // api call to cancel event
+    store.dispatch(cancelEvent(eventid));
+    navigate("/schedule", { state: { text: val } });
+  }
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -120,6 +129,7 @@ export default function Header() {
               show={show}
               handleShow={handleShow}
               handleReschedule1={handleReschedule1}
+              handleCancelEvent={handleCancelEvent}
             />
           </div>
           <div className="relative">

@@ -10,9 +10,12 @@ import Footer from "../Components/Footer/Footer";
 import { useSelector } from "react-redux";
 import { ToastContainer,toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 
 export default function MyFavrouites() {
+   
+  const Navigate=useNavigate();
 
   const userDetails=useSelector((store)=>store.user);
   console.log(userDetails);
@@ -61,13 +64,13 @@ export default function MyFavrouites() {
           You have short listed {favouriteEvents.length} events to join later.
         </p>
 
-        <div className="mt-[36px]">
+        {favouriteEvents.length>0?<div className="mt-[36px]">
           <div className="mt-[20px] grid grid-cols-5 gap-[15px]">
             {favouriteEvents.map((card3) => (
               <DashBoardCard3 key={card3.id} card3={card3} fav={1} notify1="null" notify2={notify2} notify3="null" />
             ))}
           </div>
-        </div>
+        </div>:<p className="flex items-center justify-center mt-[30px]">No favourite Events, add events to favourite by clicking heart icon in <span className="text-[#FF385C] ml-2 cursor-pointer " onClick={()=>Navigate("/events")}>UpComming Events</span> </p>}
 
         <h1
           style={{ fontFamily: "IvyMode, sans-serif" }}

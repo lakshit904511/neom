@@ -1,19 +1,19 @@
 
 import { IoIosStar } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
-import { formatDate, formatEventShortDate } from "../../util/DateFormatter";
+import { data, useNavigate } from "react-router-dom";
+import { formatDate } from "../../util/DateFormatter";
 
 export default function DashBoardCard4({ card4 }) {
 
 
   const navigate=useNavigate();
 
-
+   console.log(card4);
   return (
     <div className="w-[300px] h-[350px] flex flex-col items-start">
       <div className="flex items-center justify-center">
         <img
-          onClick={()=>navigate("/details",{state: { text: null,val:card4 }})}
+          onClick={()=>(navigate(`/details2/eventId/${card4.id}`,{state: { text: null,data:card4 }}))}
           className="w-[220px] h-[280px] object-cover rounded-[8px] cursor-pointer"
           src={card4.image_main}
         />

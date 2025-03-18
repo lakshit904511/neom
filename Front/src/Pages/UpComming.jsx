@@ -6,7 +6,7 @@ import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 import { useSelector } from "react-redux";
 import store from "../../Store";
-import { getFilterEvent } from "../Features/User/UserSlice";
+import { eventFilter } from "../Features/User/UserSlice";
 import { useState } from "react";
 import { ToastContainer,toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
@@ -30,13 +30,15 @@ export default function UpComming() {
   const userDetails = useSelector((store) => store.user);
   console.log(userDetails);
 
-  const { authorized, fullName, totalCards,filterCheck } = userDetails;
+  const { authorized, fullName, totalCards,categoryValue } = userDetails;
 
   function handleFilter(value) {
-    store.dispatch(getFilterEvent(value));
+    store.dispatch(eventFilter("event",value));
   }
 
+  console.log(totalCards);
   const totalCardsNumber=totalCards.length;
+
   function handleLoad(){
      const itemPerClick=3;
      if(showcard!==totalCardsNumber)
@@ -85,11 +87,11 @@ export default function UpComming() {
                 <div
                   style={{ fontFamily: "BrownLight, sans-serif" }}
                   className={`group border cursor-pointer flex justify-center items-center border-[#222222] bg-[#F9F7F2] rounded-[24px] opacity-80
-                ${filterCheck===filt1?"bg-black text-white transition-all duration-300":null}`}
+                ${categoryValue===filt1?"bg-black text-white transition-all duration-300":null}`}
                 >
                   <button
                     onClick={() => handleFilter(filt1)}
-                    className={`px-[10px] py-[2px] tracking-normal cursor-pointer leading-[28px] text-center font-normal text-[12px] text-[#222222]  ${filterCheck===filt1?"text-white opacity-80":null}`}
+                    className={`px-[10px] py-[2px] tracking-normal cursor-pointer leading-[28px] text-center font-normal text-[12px] text-[#222222]  ${categoryValue===filt1?"text-white opacity-80":null}`}
                   >
                     {filt1}
                   </button>
@@ -101,22 +103,23 @@ export default function UpComming() {
       </div>
       <ToastContainer />
       <div className="mt-[26px] flex flex-col justify-center">
-        {
+        { totalCards.length>0?
           <div className="mt-[20px] grid grid-cols-5 gap-[15px]">
             {totalCards.slice(0,showcard).map((card3) => (
               <DashBoardCard3 key={card3.id} card3={card3} up={1} notify1={notify1} notify3={notify3}/>
             ))}
-          </div>
+          </div>:
+          <p className="flex justify-center items-center h-[26vh] text-2xl">No result Found</p>
         }
       
         
-          <button
+        { totalCardsNumber>10? <button
             onClick={handleLoad}
             style={{ fontFamily: "BrownLight, sans-serif" }}
             className="mx-auto text-[#ffffff] cursor-pointer rounded-[4px] text-[14px]  mt-[40px] px-[24px] py-[8px] bg-[#222222] flex items-center justify-center text-center"
           >
-           {showcard===24?"No more cards back to Default":"Load More"}
-          </button>
+           {showcard===24?"No more Events back to Default":"Load More"}
+          </button>:null}
      
       </div>
       <Footer />

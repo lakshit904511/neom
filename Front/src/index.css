@@ -17,3 +17,11 @@
     src: url("../public/Fonts/BrownMedium-Regular.ttf") format("truetype");
 }
 
+@layer utilities {
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        filter: invert(22%) sepia(96%) saturate(7464%) hue-rotate(336deg) brightness(92%) contrast(101%);
+        /* Adjust icon color */
+      cursor: pointer;
+    }
+  }
+  
