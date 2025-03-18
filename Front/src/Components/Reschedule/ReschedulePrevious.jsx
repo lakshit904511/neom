@@ -4,7 +4,7 @@ import { formatDate } from "../../util/DateFormatter";
 
 export default function ReschedulePrevious({ event, handleClick }) {
   const navigate=useNavigate();
-  console.log(event.eventItem[0].name);
+  console.log(event);
   return (
     <>
       <div className="relative flex mt-[30px] items-center justify-center w-[1129px] ">

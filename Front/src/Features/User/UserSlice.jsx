@@ -13,6 +13,16 @@ const initialUserState = {
   mobileNo: null,
   birthDate: null,
   favIcon: null,
+  interestArray:[
+    ["Screaming children", false],
+    ["Chinese food", false],
+    ["Socializing", false],
+    ["Golf", false],
+    ["Cooking and dining", false],
+    ["Music", false],
+    ["Plays", false],
+    ["Rooms", false],
+  ],
   totalCards: [],
   serverTopEventLists: [],
   serverRecommandedEventList: [],
@@ -55,7 +65,11 @@ export default function userReducer(state = initialUserState, action) {
         error: action.payload,
       };
 
-
+    case "user/interestArray":
+      return{
+        ...state,
+        interestArray:action.payload,
+      }
     case "user/resetFilter":
       return {
         ...state,
@@ -370,11 +384,12 @@ export const eventFilter = (type,val) => (dispatch, getState) => {
   const categoryValue= state.user.categoryValue;
 
   console.log(categoryCheck,categoryValue);
+  // console.log(allCards[0].start_date.slice(0,11));
 
   let payload;
   let filterCards;
 
-  if (categoryCheck === type && (categoryValue===val || categoryValue==="")) {
+  if (categoryCheck === type && (categoryValue===val || val===null || val===" ")) {
     payload = { cards: allCards, categoryCheck: null ,categoryValue:null };
   } else {
     if(type==="walking"){
@@ -387,11 +402,22 @@ export const eventFilter = (type,val) => (dispatch, getState) => {
       filterCards = allCards.filter((card) => card.category === val);
     }
     if(type==="date"){
-      filterCards = allCards.filter((card) => (card.start_date.slice(0,11)) === val);
+      console.log("type date runs");
+      filterCards = allCards.filter((card) => (card.start_date.slice(0,10)) === val);
       console.log("datefilter",filterCards)
     }
+    if(type==="city"){
+      filterCards = allCards.filter((card) => (card.city === val.split(",")[0]));
+    }
     payload = { cards: filterCards, categoryCheck: type,categoryValue:val };
+    console.log(payload);
   }
-
+  
   dispatch({ type: "user/movementFilter", payload });
 };
+
+
+export const interestedFunction=(array)=>(dispatch,getState)=>{
+  console.log("userslice likearray",array)
+    dispatch({type: "user/interestArray",payload:array});
+}

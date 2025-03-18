@@ -58,7 +58,7 @@ export default function DashBoardCard1({ list }) {
         >
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
           nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat…{" "}
-          <span className="text-[#FF385C]">read more</span>
+          <span  onClick={() => navigate(`/details2/eventId/${list.id}`,{state:{text:"sch",data:list}})} className="text-[#FF385C] cursor-pointer">read more</span>
         </p>
 
         <ul className="w-[18.125rem] h-[3.5rem] mt-[0.170rem] flex flex-col gap-[0.49375rem]">

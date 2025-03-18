@@ -12,8 +12,8 @@ export default function Slider({value,scheduledEvents,goToPrevImage,goToNextImag
       <IoIosArrowRoundBack
         className={
           currentIndex === 0
-            ? "mx-2 my-2 rounded-[100px] border-1 text-[#a3a1a1] border-[#a3a1a1] text-3xl"
-            : "mx-2 my-2 rounded-[100px] border-1 border-[#222222] text-3xl text-[#222222]"
+            ? "mx-2 my-2  rounded-[100px] border-1 text-[#a3a1a1] border-[#a3a1a1] text-3xl"
+            : "mx-2 my-2 cursor-pointer rounded-[100px] border-1 border-[#222222] text-3xl text-[#222222]"
         }
         onClick={goToPrevImage}
         disabled={currentIndex === 0}
@@ -22,8 +22,8 @@ export default function Slider({value,scheduledEvents,goToPrevImage,goToNextImag
       <IoIosArrowRoundForward
         className={
           currentIndex < (scheduledEvents?.length || 0) - itemsPerView
-            ? "mx-2 my-2 rounded-[100px] border-1 border-[#222222] text-3xl text-[#222222]"
-            : "mx-2 my-2 rounded-[100px] border-1 text-[#a3a1a1] border-[#a3a1a1] text-3xl"
+            ? "mx-2 my-2 cursor-pointer rounded-[100px] border-1 border-[#222222] text-3xl text-[#222222]"
+            : "mx-2 my-2  rounded-[100px] border-1 text-[#a3a1a1] border-[#a3a1a1] text-3xl"
         }
         onClick={goToNextImage}
         disabled={currentIndex >= (scheduledEvents?.length || 0) - itemsPerView}
@@ -35,8 +35,8 @@ export default function Slider({value,scheduledEvents,goToPrevImage,goToNextImag
           <IoIosArrowRoundBack
             className={
               currentIndexCard2 === 0
-                ? "mx-2 my-2 rounded-[100px] border-1 text-[#a3a1a1] border-[#a3a1a1] text-3xl"
-                : "mx-2 my-2 rounded-[100px] border-1 border-[#222222] text-3xl text-[#222222]"
+                ? "mx-2 my-2  rounded-[100px] border-1 text-[#a3a1a1] border-[#a3a1a1] text-3xl"
+                : "mx-2 my-2 cursor-pointer rounded-[100px] border-1 border-[#222222] text-3xl text-[#222222]"
             }
             onClick={goToPrevImageCard2}
             disabled={currentIndexCard2 === 0}
@@ -45,7 +45,7 @@ export default function Slider({value,scheduledEvents,goToPrevImage,goToNextImag
           <IoIosArrowRoundForward
             className={
               currentIndexCard2 < dataDashBoardCard2.length - itemsPerViewCard2
-                ? "mx-2 my-2 rounded-[100px] border-1 border-[#222222] text-3xl text-[#222222]"
+                ? "mx-2 my-2 cursor-pointer rounded-[100px] border-1 border-[#222222] text-3xl text-[#222222]"
                 : "mx-2 my-2 rounded-[100px] border-1 text-[#a3a1a1] border-[#a3a1a1] text-3xl"
             }
             onClick={goToNextImageCard2}
@@ -60,8 +60,8 @@ export default function Slider({value,scheduledEvents,goToPrevImage,goToNextImag
           <IoIosArrowRoundBack
             className={
               currentIndexCard3 === 0
-                ? "mx-2 my-2 rounded-[100px] border-1 text-[#a3a1a1] border-[#a3a1a1] text-3xl"
-                : "mx-2 my-2 rounded-[100px] border-1 border-[#222222] text-3xl text-[#222222]"
+                ? "mx-2 my-2  rounded-[100px] border-1 text-[#a3a1a1] border-[#a3a1a1] text-3xl"
+                : "mx-2 my-2 cursor-pointer rounded-[100px] border-1 border-[#222222] text-3xl text-[#222222]"
             }
             onClick={goToPrevImageCard3}
             disabled={currentIndexCard3 === 0}
@@ -70,7 +70,7 @@ export default function Slider({value,scheduledEvents,goToPrevImage,goToNextImag
           <IoIosArrowRoundForward
             className={
               currentIndexCard3 < dataMyFavoritesCard.length - itemsPerViewCard3
-                ? "mx-2 my-2 rounded-[100px] border-1 border-[#222222] text-3xl text-[#222222]"
+                ? "mx-2 my-2 cursor-pointer rounded-[100px] border-1 border-[#222222] text-3xl text-[#222222]"
                 : "mx-2 my-2 rounded-[100px] border-1 text-[#a3a1a1] border-[#a3a1a1] text-3xl"
             }
             onClick={goToNextImageCard3}

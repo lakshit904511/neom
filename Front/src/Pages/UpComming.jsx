@@ -103,12 +103,13 @@ export default function UpComming() {
       </div>
       <ToastContainer />
       <div className="mt-[26px] flex flex-col justify-center">
-        {
+        { totalCards.length>0?
           <div className="mt-[20px] grid grid-cols-5 gap-[15px]">
             {totalCards.slice(0,showcard).map((card3) => (
               <DashBoardCard3 key={card3.id} card3={card3} up={1} notify1={notify1} notify3={notify3}/>
             ))}
-          </div>
+          </div>:
+          <p className="flex justify-center items-center h-[26vh] text-2xl">No result Found</p>
         }
       
         
@@ -117,7 +118,7 @@ export default function UpComming() {
             style={{ fontFamily: "BrownLight, sans-serif" }}
             className="mx-auto text-[#ffffff] cursor-pointer rounded-[4px] text-[14px]  mt-[40px] px-[24px] py-[8px] bg-[#222222] flex items-center justify-center text-center"
           >
-           {showcard===24?"No more cards back to Default":"Load More"}
+           {showcard===24?"No more Events back to Default":"Load More"}
           </button>:null}
      
       </div>

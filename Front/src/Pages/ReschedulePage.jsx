@@ -13,16 +13,18 @@ import UpcomingSchedule from "../Components/Reschedule/UpcomingSchedule";
 import { useState } from "react";
 
 export default function ReschedulePage() {
-  const state=useLocation();
-  const data=state.state.text;
-  console.log(data);
-  const userDetails = useSelector((store) => store.user);
-  const { authorized, fullName, totalCards, scheduledEvents } = userDetails;
   const [golfModal, setGolfModal] = useState(false);
   const [carddata,setCarddata]=useState(null);
   const [cardtime,setCardTime]=useState(null);
+  const state=useLocation();
+  const data=state.state.text;
+  console.log(data);
 
+  const userDetails=useSelector((store)=>store.user);
+  const { authorized, fullName, totalCards, scheduledEvents } = userDetails;
+  console.log(scheduledEvents);
   const rescheduled=scheduledEvents.filter((event)=>event.id===data);
+  console.log(rescheduled);
   const rescheduledGolfEvent=[{eventItem:rescheduled,time:"11:00 AM - 12:30 PM"},{eventItem:rescheduled,time:"1:30 PM - 2:30 PM"},{eventItem:rescheduled,time:"3:00 PM - 4:30 PM"}]
   console.log(rescheduledGolfEvent[0].event);
 
@@ -68,7 +70,7 @@ export default function ReschedulePage() {
             >
               {check === 1
                 ? "We have a few similar event for you against your today's rescheduled event of Round of Golf. And one of them is just starting in an hour and 5 minutes drive away."
-                : `You have just ${carddata===null?"cancelled":"Rescheduled"} your ${carddata===null?"Round of Golf":carddata.name} event. We have found a few similar event for you against your today's cancelled event one of them is just starting in an hour and 5 minutes drive away`}
+                : `We have just ${carddata===null?"cancelled":"Rescheduled"} your ${carddata===null?"Round of Golf":carddata.name} event. We have found a few similar event for you against your today's cancelled event one of them is just starting in an hour and 5 minutes drive away`}
             </h1>
           </div>
         </div>
