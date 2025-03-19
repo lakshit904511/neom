@@ -217,21 +217,21 @@ export const HandleProfile =
     });
 };
 
-export const handleLike = (value) => (dispatch, getState) => {
-  const state = getState();
-  const checks = state.user.interestArray;
-  const clickedValue = checks.findIndex((check) => check[0] === value);
-  console.log(clickedValue);
-  console.log("intereested before array in userslice",checks);
+// export const handleLike = (value) => (dispatch, getState) => {
+//   const state = getState();
+//   const checks = state.user.interestArray;
+//   const clickedValue = checks.findIndex((check) => check[0] === value);
+//   console.log(clickedValue);
+//   console.log("intereested before array in userslice",checks);
 
-  if (checks[clickedValue][1] === false) {
-    checks[clickedValue][1] = true;
-  } else {
-    checks[clickedValue][1] = false;
-  }
-  console.log("intereested after array in userslice",checks);
-  dispatch({ type: "user/Like", payload: checks });
-};
+//   if (checks[clickedValue][1] === false) {
+//     checks[clickedValue][1] = true;
+//   } else {
+//     checks[clickedValue][1] = false;
+//   }
+//   console.log("intereested after array in userslice",checks);
+//   dispatch({ type: "user/Like", payload: checks });
+// };
 
 export const handleInputChange = (likeArray) => (dispatch, getState) => {
   dispatch({ type: "user/InputHandle", payload: likeArray });

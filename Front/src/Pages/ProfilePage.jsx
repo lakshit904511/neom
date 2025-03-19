@@ -24,6 +24,7 @@ export default function ProfilePage() {
   const userDetails = useSelector((store) => store.user);
   const { authorized, fullName, birthDate, mobileNo, email, interestArray } = userDetails;
   const dob = formatDobDate(birthDate);
+  console.log(dob);
   const [likeArray, setLikeArray] = useState(interestArray);
   const [inputValue, setInputValue] = useState("");
 
@@ -156,7 +157,7 @@ export default function ProfilePage() {
               <br />
               <input
                 disabled
-                defaultValue={dob}
+                value={dob}
                 type="text"
                 className=" outline-gray-300 w-[320px] h-[40px] border border-[#DDDDDD] rounded-[4px] placeholder: pl-2 text-[12px]"
               />

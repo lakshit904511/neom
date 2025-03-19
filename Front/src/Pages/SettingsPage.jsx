@@ -1,9 +1,15 @@
+import { useSelector } from "react-redux";
 import Footer from "../Components/Footer/Footer";
 import Header from "../Components/Header/Header";
 import SettingCard from "../Components/SettingComponent/SettingCard";
 import serverData from "../assets/Dummy_Data/serverData";
 
 export default function SettingsPage() {
+  
+  const userDetails = useSelector((store) => store.user);
+  console.log(userDetails);
+
+  const { authorized, fullName} = userDetails;
   return (
     <>
       <Header />
@@ -13,7 +19,7 @@ export default function SettingsPage() {
             style={{ fontFamily: "IvyMode, sans-serif" }}
             className="text-left text-[24px] leading-[24px] tracking-normal text-[#222222] opacity-100"
           >
-            Good morning Charlie!
+            Good morning {authorized === true ? fullName : "Charlie"}!
           </h1>
           <p
             style={{ fontFamily: "BrownLight, sans-serif" }}

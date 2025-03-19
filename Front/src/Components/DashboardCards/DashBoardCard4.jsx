@@ -13,7 +13,7 @@ export default function DashBoardCard4({ card4 }) {
     <div className="w-[300px] h-[350px] flex flex-col items-start">
       <div className="flex items-center justify-center">
         <img
-          onClick={()=>(navigate(`/details2/eventId/${card4.id}`,{state: { text: null,data:card4 }}))}
+          onClick={()=>(navigate(`/details2/eventId/${card4.id}`,{state: { data:card4 }}))}
           className="w-[220px] h-[280px] object-cover rounded-[8px] cursor-pointer"
           src={card4.image_main}
         />

@@ -118,7 +118,7 @@ export default function UpComming() {
             style={{ fontFamily: "BrownLight, sans-serif" }}
             className="mx-auto text-[#ffffff] cursor-pointer rounded-[4px] text-[14px]  mt-[40px] px-[24px] py-[8px] bg-[#222222] flex items-center justify-center text-center"
           >
-           {showcard===24?"No more Events back to Default":"Load More"}
+           {showcard===24?"No more Events":"Load More"}
           </button>:null}
      
       </div>

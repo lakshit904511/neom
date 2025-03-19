@@ -17,15 +17,16 @@ export default function DashBoardCard1({ list }) {
     <div className="w-[37.5rem] h-[15.5rem] mt-[1.875rem] border border-[#222222] rounded-[0.75rem] opacity-100 flex justify-center items-center">
       <div className="w-[13.1875rem] h-[15.375rem] relative ">
         <img
-          onClick={() => navigate(`/details2/eventId/${list.id}`,{state:{text:"sch",data:list}})}
+          onClick={() => navigate(`/details2/eventId/${list.id}`,{state:{data:list}})}
           className="w-[13.1875rem] h-full rounded-l-[0.75rem] object-cover cursor-pointer"
           src={list.image_main}
           alt={list.event_type_title}
         />
         <img
-          className="absolute bottom-[0.375rem] right-[0.375rem] h-[2.1875rem]"
+          className="absolute bottom-[0.575rem] opacity-80 right-[0.375rem] h-[2.275rem] z-[70]"
           src={list.image_cloud}
         />
+        <p  style={{ fontFamily: "BrownLight, sans-serif" }}  className="absolute bottom-[.725rem] z-[100] right-[.35rem] text-white font-[900] text-[12px]">{list.temp}°C</p>
       </div>
       <div className="w-[19.5rem] h-full rounded-r-[0.75rem] pt-[0.625rem] flex flex-col items-start pl-[0.7875rem] ">
         <h1
