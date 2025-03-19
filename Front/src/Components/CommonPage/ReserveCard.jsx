@@ -3,10 +3,10 @@ import store from "../../../Store";
 import { handleReserve, stripePayment } from "../../Features/User/UserSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
-export default function ReserveCard({ check, datadetailedEvent }) {
+export default function ReserveCard({  datadetailedEvent }) {
   const userDetails = useSelector((store) => store.user);
   console.log(userDetails);
   const { scheduledEvents } = userDetails;
@@ -69,7 +69,7 @@ export default function ReserveCard({ check, datadetailedEvent }) {
   return (
     <div
       className={`${
-        check === "favorite" || check === "remove" || check === "top"
+        datadetailedEvent.status===null
           ? "h-[260px]"
           : "h-[200px]"
       } w-[275px] mt-[10px] p-5 flex flex-col  bg-white bg-[0%_0%] bg-no-repeat bg-padding-box shadow-[0px_3px_16px_rgba(0,0,0,0.14)] border border-[#DDDDDD] rounded-[12px] opacity-100`}
@@ -131,7 +131,7 @@ export default function ReserveCard({ check, datadetailedEvent }) {
             Adults
           </p>
         </div>
-        {check === "favorite" || check === "remove" || check === "top" ? (
+        {datadetailedEvent.status===null ? (
           <div className="flex flex-col">
             <p
               style={{ fontFamily: "Brown, sans-serif" }}

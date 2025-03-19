@@ -25,12 +25,12 @@ const verifyUserController =async (req, res) => {
       const userID = loggedUser.rows[0].user_id;
       console.log("inside userid", userID);
   
-      const fullData=await getAllCardDetails();
+      const fullData=await getAllCardDetails(userID);
       const favouriteEvents = await getFavoriteEvents(userID);
       const attendedEvents = await getAttendedEvents(userID);
       const scheduledEvents = await getScheduledEvents(userID);
       const serverRecommandData = await getServerRecommendedEvents();
-      const topData = await getServerTopEvents();
+      const topData = await getServerTopEvents(userID);
       const profile=await getProfileQuestions();
   
       return res.json({

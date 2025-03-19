@@ -24,7 +24,7 @@ export default function ImageGrid({val,status}) {
         <button
           onClick={()=>setShowall(true)}
           style={{ fontFamily: "Brown, sans-serif" }}
-          className="absolute cursor-pointer bottom-3 right-3 font-medium text-[#222222] rounded-[4px] text-[12px] px-[18px] py-[10px] bg-[#ffffff] flex items-center justify-center text-center"
+          className="absolute cursor-pointer bottom-3 right-3 font-medium text-white rounded-[4px] text-[12px] px-[18px] py-[10px] border border-white  flex items-center justify-center text-center hover:bg-[#ffffff] hover:text-black"
         >
           Show all
         </button>
@@ -32,7 +32,8 @@ export default function ImageGrid({val,status}) {
           style={{ fontFamily: "Brown, sans-serif" }}
           className="absolute top-[-20px] right-0  text-left text-[10px] tracking-[0.31px] text-[#222222]"
         >
-         {status}
+          {/* SHOW ON THE BASIS OF COMPLETED , SCHEDULED, NULL */}
+         {status===null?null:status}
         </span>
       </div>
     </div>

@@ -1,6 +1,5 @@
-
 import { GoHeartFill } from "react-icons/go";
-import { data, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import store from "../../../Store";
 import {  handleFavouriteCard, handleRemoveCard } from "../../Features/User/UserSlice";
 import { useSelector } from "react-redux";
@@ -55,7 +54,8 @@ export default function Image({ value, card3,notify1 ,notify2,notify3}) {
           {card3.top_event_id}
         </div>
         <img
-          onClick={()=>(navigate(`/details2/eventId/${card3.id}`,{state:{text:"top",data:card3}}))}
+        // YHA SE REMOVE KRNA CHECK
+          onClick={()=>(navigate(`/details2/eventId/${card3.id}`,{state:{data:card3}}))}
           className="w-[220px] h-[280px] object-cover cursor-pointer rounded-[8px]"
           src={card3.image_main}
         />
@@ -69,7 +69,8 @@ export default function Image({ value, card3,notify1 ,notify2,notify3}) {
       <div className="flex items-center justify-center relative">
         <GoHeartFill onClick={()=>handleFavorite(card3)} className={`absolute cursor-pointer size-6 top-3 right-3 ${isFavorite?"text-red-600":"text-black"}`}  />
         <img
-         onClick={()=>(navigate(`/details2/eventId/${card3.id}`,{ state: { text: "favorite",data:card3 } }))}
+          // YHA SE REMOVE KRNA CHECK
+         onClick={()=>(navigate(`/details2/eventId/${card3.id}`,{ state: { data:card3 } }))}
           className="w-[220px] h-[280px] object-cover rounded-[8px] cursor-pointer"
           src={card3.image_main}
         />
@@ -88,7 +89,8 @@ export default function Image({ value, card3,notify1 ,notify2,notify3}) {
           Remove
         </button>
         <img
-          onClick={()=>(navigate(`/details2/eventId/${card3.id}`,{ state: { text: "remove",data:card3 } }))}
+          // YHA SE REMOVE KRNA CHECK
+          onClick={()=>(navigate(`/details2/eventId/${card3.id}`,{ state: { data:card3 } }))}
           className="w-[220px] h-[280px] object-cover cursor-pointer rounded-[8px]"
           src={card3.image_main}
         />

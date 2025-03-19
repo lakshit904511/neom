@@ -20,6 +20,7 @@ export default function CommonPage() {
   }
 
   var mainCommonPageData = null;
+  // COMMENT OUT CHECK
   var check = null;
   const value = useLocation();
 
@@ -28,13 +29,16 @@ export default function CommonPage() {
 
   const {authorized,fullName, totalCards } = userDetails;
 
-  if (value.state.text !== null) {
-    check = value.state.text;
-  }
-  if (value.state.text === null) {
-    console.log("attended page");
-    check = null;
-  }
+  // // YE SHI KRNA HAI
+  // if (value.state.text !== null) {
+  //   mainCommonPageData = value.state.data;
+  //   check = value.state.text;
+  // }
+  // if (value.state.text === null) {
+  //   console.log("attended page");
+  //   mainCommonPageData = value.state.data;
+  //   check = null;
+  // }
   mainCommonPageData = value.state.data;
 
   console.log(mainCommonPageData);
@@ -48,8 +52,7 @@ export default function CommonPage() {
     <>
       <section>
         <Header />
-
-        {check === null ? (
+        {mainCommonPageData.status==="Completed"? (
           <div className="flex mt-[20px] items-center justify-between pl-[28px] pr-[15px] py-[20px] w-full border border-[#222222] rounded-[12px]">
             <div className="flex w-[775px] flex-col justify-between">
               <h1
@@ -114,6 +117,7 @@ export default function CommonPage() {
             </span>
           </div>
 
+             {/* YHA PR V KAAM KRNA HAI IMAGE GRID MAI */}
           <ImageGrid
             val={mainCommonPageData.image_main}
             status={mainCommonPageData.status}
@@ -121,8 +125,8 @@ export default function CommonPage() {
 
           <div className="px-[80px] flex justify-between mt-[25px] ">
             <CommonAbout datadetailedEvent={mainCommonPageData} />
-
-            <ReserveCard check={check} datadetailedEvent={mainCommonPageData} />
+             {/* REMOVE CHECK AND STATUS K BASIS PR RESERVE VALA SHOW HOGA SCHEDULE AND COMPLETED --> NO RESERVE SEAT, NULL --> RESERVE MY */}
+            <ReserveCard datadetailedEvent={mainCommonPageData} />
           </div>
 
           <div className="flex px-[80px] flex-col w-[650px]">
