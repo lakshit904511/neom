@@ -6,6 +6,7 @@ const initialUserState = {
   authorized: false,
   user_id: null,
   fullName: null,
+  ProfilePic:null,
   email: null,
   filterCheck: null,
   categoryCheck:null,
@@ -43,6 +44,7 @@ export default function userReducer(state = initialUserState, action) {
           : null,
         fullName: action.payload.user ? action.payload.user.name : null,
         mobileNo: action.payload.user ? action.payload.user.mobile_no : null,
+        ProfilePic:action.payload.user ? action.payload.user.profile_pic : null,
         email: action.payload.user ? action.payload.user.email_id : null,
         user_id: action.payload.user ? action.payload.user.user_id : null,
         allCards: action.payload.cardData,
@@ -238,15 +240,14 @@ export const handleInputChange = (likeArray) => (dispatch, getState) => {
 };
 
 
-export const UserSignIn = (data) => {
+export const UserSignIn = (formDataToSend) => {
+
+  console.log(formDataToSend);
   return async () => {
     try {
       const res = await fetch("http://localhost:5000/user/signIn", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
+        body: formDataToSend,
         credentials: "include",
       });
 

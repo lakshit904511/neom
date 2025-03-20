@@ -45,11 +45,14 @@ export default function Image({ value, card3,notify1 ,notify2,notify3}) {
         />
 
         <div
+          onClick={() =>
+            navigate(`/details2/eventId/${card3.id}`, { state: { data: card3 } })
+          }
           style={{
             WebkitTextStroke: "1px white",
             WebkitTextFillColor: "rgba(156, 163, 175, 0.5)",
           }}
-          className="absolute right-1 text-[6rem]  mb-[-18px] font-extrabold bottom-0 text-gray-400 opacity-90  "
+          className="absolute right-1 text-[6rem] cursor-pointer  mb-[-18px] font-extrabold bottom-0 text-gray-400 opacity-90  "
         >
           {card3.top_event_id}
         </div>

@@ -21,7 +21,7 @@ export default function ReschedulePage() {
   console.log(data);
 
   const userDetails=useSelector((store)=>store.user);
-  const { authorized, fullName, totalCards, scheduledEvents } = userDetails;
+  const { authorized, fullName, totalCards, scheduledEvents,attendedEvents } = userDetails;
   console.log(scheduledEvents);
   const rescheduled=scheduledEvents.filter((event)=>event.id===data);
   console.log(rescheduled);
@@ -29,8 +29,8 @@ export default function ReschedulePage() {
   console.log(rescheduledGolfEvent[0].event);
 
 
-  const afterRescheduleEvent = totalCards.slice(17, 23);
-
+  const afterRescheduleEvent = totalCards.filter((event)=>event.status===null).slice(0,6);
+  
 
   function handleClick(event,time) {
     console.log(event);

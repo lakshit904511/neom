@@ -19,14 +19,50 @@ export default function ProfilePage() {
   const userName = useRef(null);
   const userEmail = useRef(null);
   const userMobile = useRef(null);
-  const notify = () => toast.success("User updated profile section", {  className: "text-[12px] w-[250px]!",});
+  // const fileInputRef = useRef(null);
+  const [toggle, setToggle] = useState(true);
+
+  const notify = () =>
+    toast.success("User updated profile section", {
+      className: "text-[12px] w-[250px]!",
+    });
 
   const userDetails = useSelector((store) => store.user);
-  const { authorized, fullName, birthDate, mobileNo, email, interestArray } = userDetails;
+  const {
+    ProfilePic,
+    authorized,
+    fullName,
+    birthDate,
+    mobileNo,
+    email,
+    interestArray,
+  } = userDetails;
+
+  // const [pic, setPic] = useState(ProfilePic);
+
   const dob = formatDobDate(birthDate);
   console.log(dob);
   const [likeArray, setLikeArray] = useState(interestArray);
   const [inputValue, setInputValue] = useState("");
+
+  function handleEditProfile(e) {
+    e.preventDefault();
+    setToggle(false);
+  }
+
+  // const handleImageEdit = () => {
+  //   console.log("edit button clicked");
+  //   fileInputRef.current.click();
+  // };
+
+  // Function to handle file selection
+  const handleFileChange = (event) => {
+    console.log("file called");
+    const file = event.target.files[0];
+    if (file) {
+      console.log("Selected file:", URL.createObjectURL(file));
+    }
+  };
 
   function handleImage(value) {
     setLikeArray((prevLikeArray) => {
@@ -73,7 +109,6 @@ export default function ProfilePage() {
     notify();
   }
 
-
   return (
     <>
       <Header />
@@ -89,15 +124,25 @@ export default function ProfilePage() {
           <div className="absolute top-[100px] left-[55px] w-[110px] rounded-[8px] overflow-hidden">
             <img
               className="w-[110px] h-[110px] object-cover"
-              src={social}
+              src={ProfilePic}
               alt="Social"
             />
 
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
 
-            <button className="absolute inset-0 flex items-center justify-center opacity-100 transition-opacity">
-              <FiEdit3 className="text-[#ffffff] w-[30px] h-[40px] opacity-80" />
-            </button>
+            <label className="absolute inset-0 flex items-center justify-center opacity-100 transition-opacity cursor-pointer">
+              {toggle == false ? (
+                <>
+                  <FiEdit3 className="text-[#ffffff] cursor-pointer w-[30px] h-[40px] opacity-80" />
+                  <input
+                    type="file"
+                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                    onChange={handleFileChange}
+                    accept="image/*"
+                  />
+                </>
+              ) : null}
+            </label>
           </div>
           <ToastContainer />
           <div className="absolute top-[90px] left-[190px]">
@@ -110,6 +155,7 @@ export default function ProfilePage() {
               </label>
               <br />
               <input
+                disabled={toggle}
                 defaultValue={fullName}
                 ref={userName}
                 type="text"
@@ -125,6 +171,7 @@ export default function ProfilePage() {
               </label>
               <br />
               <input
+                disabled={toggle}
                 ref={userEmail}
                 defaultValue={email}
                 type="text"
@@ -140,6 +187,7 @@ export default function ProfilePage() {
               </label>
               <br />
               <input
+                disabled={toggle}
                 ref={userMobile}
                 style={{ fontFamily: "BrownLight, sans-serif" }}
                 type="text"
@@ -172,7 +220,9 @@ export default function ProfilePage() {
                   return (
                     <div
                       key={data1.name}
-                      onClick={() => handleImage(data1.name)}
+                      onClick={
+                        toggle === false ? () => handleImage(data1.name) : null
+                      }
                       className="relative w-[73px] cursor-pointer"
                     >
                       <img
@@ -205,6 +255,7 @@ export default function ProfilePage() {
               </label>
               <br />
               <input
+                disabled={toggle}
                 onChange={handleChange}
                 value={inputValue}
                 placeholder="Add multiple interests comma ( , ) separated"
@@ -214,22 +265,34 @@ export default function ProfilePage() {
               <br />
 
               <div className="flex gap-5 mt-[10px]">
-                <button
-                  onClick={handleSaveProfile}
-                  style={{ fontFamily: "BrownLight, sans-serif" }}
-                  className="bg-[#FF385C] rounded-[4px] cursor-pointer opacity-100 px-8 py-2 text-left text-[12px] leading-[21px] tracking-[0.04px] text-[#FFFFFF] "
-                >
-                  Save
-                </button>
-                <button
-                  onClick={() => {
-                    navigate1("/dashboard");
-                  }}
-                  style={{ fontFamily: "BrownLight, sans-serif" }}
-                  className="bg-[#ffffff] border cursor-pointer rounded-[4px] opacity-100 px-8 py-2 text-left text-[12px] leading-[21px] tracking-[0.04px] text-[##222222] "
-                >
-                  Cancel
-                </button>
+                {toggle !== false ? (
+                  <button
+                    onClick={handleEditProfile}
+                    style={{ fontFamily: "BrownLight, sans-serif" }}
+                    className="bg-[#FF385C] rounded-[4px] cursor-pointer opacity-100 px-8 py-2 text-left text-[12px] leading-[21px] tracking-[0.04px] text-[#FFFFFF] "
+                  >
+                    Edit
+                  </button>
+                ) : (
+                  <>
+                    <button
+                      onClick={handleSaveProfile}
+                      style={{ fontFamily: "BrownLight, sans-serif" }}
+                      className="bg-[#FF385C] rounded-[4px] cursor-pointer opacity-100 px-8 py-2 text-left text-[12px] leading-[21px] tracking-[0.04px] text-[#FFFFFF] "
+                    >
+                      Save
+                    </button>
+                    <button
+                      onClick={() => {
+                        navigate1("/dashboard");
+                      }}
+                      style={{ fontFamily: "BrownLight, sans-serif" }}
+                      className="bg-[#ffffff] border cursor-pointer rounded-[4px] opacity-100 px-8 py-2 text-left text-[12px] leading-[21px] tracking-[0.04px] text-[##222222] "
+                    >
+                      Cancel
+                    </button>
+                  </>
+                )}
               </div>
             </form>
           </div>

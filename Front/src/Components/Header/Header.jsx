@@ -28,7 +28,7 @@ export default function Header() {
 
   const userDetails = useSelector((store) => store.user);
 
-  const { authorized, fullName } = userDetails;
+  const {ProfilePic, authorized, fullName } = userDetails;
 
   const profile =
     fullName !== null
@@ -143,9 +143,8 @@ export default function Header() {
               {authorized === true ? (
                 <>
                   <BsList className="w-[15px] text-black font-extrabold" />
-                  <button className="px-[5px] py-[2px] bg-red-300 text-[13px] rounded-[100px]">
-                    {profile}
-                  </button>
+                  <img src={ProfilePic} className=" w-[25px]  rounded-[100px]" />
+                 
                 </>
               ) : (
                 <span className="text-[13px]">login</span>
