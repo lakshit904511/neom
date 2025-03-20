@@ -32,7 +32,7 @@ const loginController = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       sameSite: "Strict",
-      maxAge: 4 * 4 * 1000,
+      maxAge: 3 * 3 * 1000,
     });
 
     res.status(201).json({
