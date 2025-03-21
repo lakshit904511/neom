@@ -6,15 +6,15 @@ const initialUserState = {
   authorized: false,
   user_id: null,
   fullName: null,
-  ProfilePic:null,
+  ProfilePic: null,
   email: null,
   filterCheck: null,
-  categoryCheck:null,
-  categoryValue:null,
+  categoryCheck: null,
+  categoryValue: null,
   mobileNo: null,
   birthDate: null,
   favIcon: null,
-  interestArray:[
+  interestArray: [
     ["Screaming children", false],
     ["Chinese food", false],
     ["Socializing", false],
@@ -31,6 +31,7 @@ const initialUserState = {
   attendedEvents: [],
   favouriteEvents: [],
   serverProfile: [],
+  interests:""
 };
 
 export default function userReducer(state = initialUserState, action) {
@@ -44,7 +45,9 @@ export default function userReducer(state = initialUserState, action) {
           : null,
         fullName: action.payload.user ? action.payload.user.name : null,
         mobileNo: action.payload.user ? action.payload.user.mobile_no : null,
-        ProfilePic:action.payload.user ? action.payload.user.profile_pic : null,
+        ProfilePic: action.payload.user
+          ? action.payload.user.profile_pic
+          : null,
         email: action.payload.user ? action.payload.user.email_id : null,
         user_id: action.payload.user ? action.payload.user.user_id : null,
         allCards: action.payload.cardData,
@@ -52,9 +55,16 @@ export default function userReducer(state = initialUserState, action) {
         scheduledEvents: action.payload.scheduledData,
         attendedEvents: action.payload.attendedData,
         favouriteEvents: action.payload.favouriteData,
+        interests: action.payload.user.interests,
         serverRecommandedEventList: action.payload.serverRecommandEventData,
         serverTopEventLists: action.payload.serverTopEventsData,
         serverProfile: action.payload.serverProfileQuestion,
+        // interestArray: state.interestArray.map((arr) => [
+        //   arr[0],
+        //   action.payload.user.interests
+        //     ? state.interests.split(",").includes(arr[0])
+        //     : false,
+        // ]),
       };
     case "user/loading":
       return {
@@ -68,16 +78,15 @@ export default function userReducer(state = initialUserState, action) {
       };
 
     case "user/interestArray":
-      return{
+      return {
         ...state,
-        interestArray:action.payload,
-      }
+        interestArray: action.payload,
+      };
     case "user/resetFilter":
       return {
         ...state,
         totalCards: state.allCards,
       };
-
 
     case "user/ReserveSeat":
       const alreadyScheduled = state.scheduledEvents.some(
@@ -99,6 +108,7 @@ export default function userReducer(state = initialUserState, action) {
         email: action.payload.updatedEmail,
         mobileNo: action.payload.updatedMobile,
         fullName: action.payload.updatedName,
+        ProfilePic: action.payload.updatedPic,
       };
 
     case "user/Like":
@@ -107,12 +117,12 @@ export default function userReducer(state = initialUserState, action) {
         interestArray: action.payload,
       };
     case "user/movementFilter":
-      return{
+      return {
         ...state,
         totalCards: action.payload.cards,
-        categoryValue:action.payload.categoryValue,
-        categoryCheck:action.payload.categoryCheck,
-      }
+        categoryValue: action.payload.categoryValue,
+        categoryCheck: action.payload.categoryCheck,
+      };
     case "user/InputHandle":
       return {
         ...state,
@@ -149,9 +159,7 @@ export function getAllUserData() {
 
 // function working on filtering the cards
 
-
-
-// handle favorite card 
+// handle favorite card
 
 export const handleFavouriteCard = (card) => async (dispatch, getState) => {
   const state = getState();
@@ -170,10 +178,9 @@ export const handleFavouriteCard = (card) => async (dispatch, getState) => {
   }
 };
 
-
 // handle remove card
 
-export const handleRemoveCard = (card) => async(dispatch, getState) => {
+export const handleRemoveCard = (card) => async (dispatch, getState) => {
   const state = getState();
   const data = { cardId: card.id, userId: state.user.user_id };
   console.log(data);
@@ -190,33 +197,43 @@ export const handleRemoveCard = (card) => async(dispatch, getState) => {
   }
 };
 
-
 // handle reserve card
-export const handleReserve = (card_id,guestCount) => async(dispatch, getState) => {
-  const state = getState();
-  const data = {cardId: card_id, userId: state.user.user_id, seat:guestCount};
-  console.log(data);
-  const res = await fetch("http://localhost:5000/card/reserve", {
+export const handleReserve =
+  (card_id, guestCount) => async (dispatch, getState) => {
+    const state = getState();
+    const data = {
+      cardId: card_id,
+      userId: state.user.user_id,
+      seat: guestCount,
+    };
+    console.log(data);
+    const res = await fetch("http://localhost:5000/card/reserve", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const val = await res.json();
+    if (val.success) {
+      await dispatch(getAllUserData());
+    }
+  };
+
+export const HandleProfile = (formData) => async (dispatch, getState) => {
+  console.log("FormData before sending in userslice:");
+  for (let pair of formData.entries()) {
+    console.log(pair[0], pair[1]);
+  }
+
+  const res = await fetch("http://localhost:5000/card/updateProfile", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
+    body: formData,
   });
   const val = await res.json();
   if (val.success) {
     await dispatch(getAllUserData());
   }
-};
-
-
-
-export const HandleProfile =
-  (updatedName, updatedEmail, updatedMobile) => (dispatch, getState) => {
-    dispatch({
-      type: "user/profile",
-      payload: { updatedName, updatedEmail, updatedMobile },
-    });
 };
 
 // export const handleLike = (value) => (dispatch, getState) => {
@@ -239,9 +256,7 @@ export const handleInputChange = (likeArray) => (dispatch, getState) => {
   dispatch({ type: "user/InputHandle", payload: likeArray });
 };
 
-
 export const UserSignIn = (formDataToSend) => {
-
   console.log(formDataToSend);
   return async () => {
     try {
@@ -299,55 +314,77 @@ const stripePromise = loadStripe(
   "pk_test_51QzDEW2eBk2Ytfec9qDwRxqP8kahT49DURiIC66jGTmTqJjm8wjVuKyo5AJgkHAek55zPl2X0VkQHWAZBM5ZKNDP00qHUlKS20"
 );
 
-export const stripePayment=(id,name,image,amount,seat)=>{
-  return async()=>{
+export const stripePayment = (id, name, image, amount, seat) => {
+  return async () => {
     const stripe = await stripePromise;
 
-        const body = {
-          products: [
-            {
-              id: id,
-              name: name,
-              image_main: image,
-            },
-          ],
-          pay: amount,
-          guest: seat,
-        };
+    const body = {
+      products: [
+        {
+          id: id,
+          name: name,
+          image_main: image,
+        },
+      ],
+      pay: amount,
+      guest: seat,
+    };
 
-        const res = await fetch("http://localhost:5000/payment/check", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body),
-        });
+    const res = await fetch("http://localhost:5000/payment/check", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
 
-        if (!res.ok) {
-          throw new Error("Failed to create Stripe session");
-        }
+    if (!res.ok) {
+      throw new Error("Failed to create Stripe session");
+    }
 
-        const session = await res.json();
+    const session = await res.json();
 
-        if (!session.id) {
-          throw new Error("Invalid session ID received");
-        }
+    if (!session.id) {
+      throw new Error("Invalid session ID received");
+    }
 
-        const result = await stripe.redirectToCheckout({
-          sessionId: session.id,
-        });
+    const result = await stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
 
-        if (result.error) {
-          console.log("Error during payment:", result.error);
-          return;
-        }
-  }
-}
+    if (result.error) {
+      console.log("Error during payment:", result.error);
+      return;
+    }
+  };
+};
 
+export const feedbackData =
+  (card_id, stars, feedback) => async (dispatch, getState) => {
+    const state = getState();
+    const data = {
+      cardId: card_id,
+      rating: stars,
+      user_feedback: feedback,
+      user_name: state.user.fullName,
+    };
+    console.log(data);
+    const res = await fetch("http://localhost:5000/card/feedback", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const val = await res.json();
+    if (val.success) {
+      await dispatch(getAllUserData());
+    }
+  };
 
-export const  feedbackData=(card_id,stars,feedback)=>async(dispatch,getState)=>{
+export const cancelEvent = (cardId) => async (dispatch, getState) => {
   const state = getState();
-  const data = {cardId: card_id, rating:stars, user_feedback:feedback, user_name:state.user.fullName};
-  console.log(data);
-  const res = await fetch("http://localhost:5000/card/feedback", {
+  const userId = state.user.user_id;
+  const data = { user_id: userId, card_id: cardId };
+  const res = await fetch("http://localhost:5000/card/cancel", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -358,67 +395,54 @@ export const  feedbackData=(card_id,stars,feedback)=>async(dispatch,getState)=>{
   if (val.success) {
     await dispatch(getAllUserData());
   }
-}
+};
 
-export const cancelEvent=(cardId)=>async(dispatch,getState)=>{
-   const state=getState();
-   const userId=state.user.user_id;
-   const data={user_id:userId,card_id:cardId};
-   const res=await fetch("http://localhost:5000/card/cancel",{
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-   });
-   const val = await res.json();
-   if (val.success) {
-     await dispatch(getAllUserData());
-   }
-}
-
-export const eventFilter = (type,val) => (dispatch, getState) => {
+export const eventFilter = (type, val) => (dispatch, getState) => {
   const state = getState();
 
   const allCards = state.user.allCards || [];
   const categoryCheck = state.user.categoryCheck;
-  const categoryValue= state.user.categoryValue;
+  const categoryValue = state.user.categoryValue;
 
-  console.log(categoryCheck,categoryValue);
+  console.log(categoryCheck, categoryValue);
   // console.log(allCards[0].start_date.slice(0,11));
 
   let payload;
   let filterCards;
 
-  if (categoryCheck === type && (categoryValue===val || val===null || val===" ")) {
-    payload = { cards: allCards, categoryCheck: null ,categoryValue:null };
+  if (
+    categoryCheck === type &&
+    (categoryValue === val || val === null || val === " ")
+  ) {
+    payload = { cards: allCards, categoryCheck: null, categoryValue: null };
   } else {
-    if(type==="walking"){
+    if (type === "walking") {
       filterCards = allCards.filter((card) => card.walking === val);
     }
-    if(type==="drive"){
+    if (type === "drive") {
       filterCards = allCards.filter((card) => card.drive === val);
     }
-    if(type==="event"){
+    if (type === "event") {
       filterCards = allCards.filter((card) => card.category === val);
     }
-    if(type==="date"){
+    if (type === "date") {
       console.log("type date runs");
-      filterCards = allCards.filter((card) => (card.start_date.slice(0,10)) === val);
-      console.log("datefilter",filterCards)
+      filterCards = allCards.filter(
+        (card) => card.start_date.slice(0, 10) === val
+      );
+      console.log("datefilter", filterCards);
     }
-    if(type==="city"){
-      filterCards = allCards.filter((card) => (card.city === val.split(",")[0]));
+    if (type === "city") {
+      filterCards = allCards.filter((card) => card.city === val.split(",")[0]);
     }
-    payload = { cards: filterCards, categoryCheck: type,categoryValue:val };
+    payload = { cards: filterCards, categoryCheck: type, categoryValue: val };
     console.log(payload);
   }
-  
+
   dispatch({ type: "user/movementFilter", payload });
 };
 
-
-export const interestedFunction=(array)=>(dispatch,getState)=>{
-  console.log("userslice likearray",array)
-    dispatch({type: "user/interestArray",payload:array});
-}
+export const interestedFunction = (array) => (dispatch, getState) => {
+  console.log("userslice likearray", array);
+  dispatch({ type: "user/interestArray", payload: array });
+};

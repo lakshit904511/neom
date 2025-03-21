@@ -9,8 +9,8 @@ require("dotenv").config();
 const signInController = async (req, res) => {
   try {
     console.log("signinController--->", req.body);
-    
-    console.log("user file",req.file);
+
+    console.log("user file", req.file);
     const { FullName, password, date_of_birth, Email, Contact } = req.body;
 
     const query1 = `SELECT * FROM users WHERE email_id = $1;`;
@@ -43,7 +43,6 @@ const signInController = async (req, res) => {
         stream.end(req.file.buffer);
       });
     }
-
 
     console.log(profilePic);
 
