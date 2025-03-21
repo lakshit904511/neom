@@ -35,54 +35,106 @@ export default function ProfilePage() {
     birthDate,
     mobileNo,
     email,
+    user_id,
     interestArray,
+    interests,
   } = userDetails;
 
-  // const [pic, setPic] = useState(ProfilePic);
-
+  const [pic, setPic] = useState(ProfilePic);
+  const [formPic, setFormPic] = useState(null);
   const dob = formatDobDate(birthDate);
   console.log(dob);
-  const [likeArray, setLikeArray] = useState(interestArray);
-  const [inputValue, setInputValue] = useState("");
 
   function handleEditProfile(e) {
     e.preventDefault();
     setToggle(false);
   }
 
-  // const handleImageEdit = () => {
-  //   console.log("edit button clicked");
-  //   fileInputRef.current.click();
-  // };
+  useEffect(() => {
+    setPic(ProfilePic);
+  }, [ProfilePic]);
 
-  // Function to handle file selection
+
+
+
   const handleFileChange = (event) => {
     console.log("file called");
     const file = event.target.files[0];
     if (file) {
       console.log("Selected file:", URL.createObjectURL(file));
+      setPic(URL.createObjectURL(file));
+      setFormPic(file);
     }
   };
 
-  function handleImage(value) {
-    setLikeArray((prevLikeArray) => {
-      const updatedArray = prevLikeArray.map((item) =>
-        item[0] === value ? [item[0], !item[1]] : item
-      );
-      const selectedValue = updatedArray.filter((val) => val[1] === true);
-      setInputValue(selectedValue.map((select) => select[0]).join(", "));
+  const x = interests?.split(",") || [];
+  console.log("interests", x);
+  let initlikearray = [];
+  for (let i = 0; i < interestArray.length; i++) {
+    const val = x.includes(interestArray[i][0]);
+    initlikearray.push([interestArray[i][0], val]);
+  }
+  console.log("init array",initlikearray);
+  const [likeArray, setLikeArray] = useState(initlikearray);
+  const [inputValue, setInputValue] = useState("");
+  // const [int, setInt] = useState(initlikearray);
 
-      return updatedArray;
-    });
-    store.dispatch(interestedFunction(likeArray));
+  console.log("likearray in profile page", likeArray);
+  console.log("interested array in profile page", interestArray);
+
+  function handleCancelProfile(){
+    setToggle(true);
+    const selectedInterests = interests?.split(",") || [];
+    const updatedLikeArray = interestArray.map((arr) => [
+      arr[0],
+      selectedInterests.includes(arr[0]),
+    ]);
+
+    setLikeArray(updatedLikeArray);
+    // setInt(updatedLikeArray);
+    const selectedValue = updatedLikeArray
+      .filter((val) => val[1])
+      .map((val) => val[0])
+      .join(", ");
+    setInputValue(selectedValue);
+  }
+  
+  function handleImage(value) {
+    const prevLikeArray = [...likeArray];
+    const updatedArray = prevLikeArray.map((item) =>
+      item[0] === value ? [item[0], !item[1]] : item
+    );
+    const selectedValue = updatedArray.filter((val) => val[1] === true);
+    setInputValue(selectedValue.map((select) => select[0]).join(", "));
+
+    setLikeArray(updatedArray);
+    store.dispatch(interestedFunction(updatedArray));
   }
   useEffect(() => {
-    const selectedValue = interestArray.filter((val) => val[1] === true);
-    setInputValue(selectedValue.map((select) => select[0]).join(", "));
-  }, []);
+    const selectedInterests = interests?.split(",") || [];
+    const updatedLikeArray = interestArray.map((arr) => [
+      arr[0],
+      selectedInterests.includes(arr[0]),
+    ]);
+
+    setLikeArray(updatedLikeArray);
+    // setInt(updatedLikeArray);
+    const selectedValue = updatedLikeArray
+      .filter((val) => val[1])
+      .map((val) => val[0])
+      .join(", ");
+    setInputValue(selectedValue);
+  }, [interests]);
+
+  // useEffect(() => {
+  //   const selectedValue = likeArray.filter((val) => val[1] === true);
+  //   setInputValue(selectedValue.map((select) => select[0]).join(", "));
+  // }, [interestArray]);
 
   function handleChange(e) {
     const userData = e.target.value;
+
+    console.log(e.target.value);
     setInputValue(userData);
 
     const data = userData
@@ -90,24 +142,48 @@ export default function ProfilePage() {
       .map((item) => item.trim())
       .filter((item) => item.length > 0);
 
-    setLikeArray((prevLikeArray) => {
-      const updateInputArray = prevLikeArray.map((item) =>
-        data.includes(item[0]) ? [item[0], true] : [item[0], false]
-      );
-      return updateInputArray;
-    });
-    store.dispatch(interestedFunction(likeArray));
+    const prevLikeArray = [...likeArray];
+    const updateInputArray = prevLikeArray.map((item) =>
+      data.includes(item[0]) ? [item[0], true] : [item[0], false]
+    );
+    setLikeArray(updateInputArray);
+
+    store.dispatch(interestedFunction(updateInputArray));
   }
 
   function handleSaveProfile(e) {
     e.preventDefault();
-    const updatedName = userName.current.value;
-    const updatedEmail = userEmail.current.value;
-    const updatedMobile = userMobile.current.value;
-    console.log(updatedName, updatedMobile, updatedEmail);
-    store.dispatch(HandleProfile(updatedName, updatedEmail, updatedMobile));
+    console.log("save button clicked");
+  
+    // Extract selected interests from likeArray instead of interestArray
+    const text = likeArray
+      .filter(([interest, value]) => value)
+      .map(([interest]) => interest)
+      .join(",");
+  
+    console.log("save text", text);
+  
+    const formData = new FormData();
+    formData.append("userId", user_id);
+    formData.append("email", userEmail.current.value);
+    formData.append("mobileNo", userMobile.current.value);
+    formData.append("name", userName.current.value);
+    formData.append("intersets", text); // Corrected field name if needed
+  
+    if (formPic) {
+      formData.append("profilePic", formPic);
+    }
+  
+    console.log("FormData before sending:");
+    for (let pair of formData.entries()) {
+      console.log(pair[0], pair[1]);
+    }
+  
+    store.dispatch(HandleProfile(formData));
+    setToggle(true);
     notify();
   }
+  
 
   return (
     <>
@@ -124,7 +200,7 @@ export default function ProfilePage() {
           <div className="absolute top-[100px] left-[55px] w-[110px] rounded-[8px] overflow-hidden">
             <img
               className="w-[110px] h-[110px] object-cover"
-              src={ProfilePic}
+              src={pic}
               alt="Social"
             />
 
@@ -283,9 +359,7 @@ export default function ProfilePage() {
                       Save
                     </button>
                     <button
-                      onClick={() => {
-                        navigate1("/dashboard");
-                      }}
+                      onClick={handleCancelProfile}
                       style={{ fontFamily: "BrownLight, sans-serif" }}
                       className="bg-[#ffffff] border cursor-pointer rounded-[4px] opacity-100 px-8 py-2 text-left text-[12px] leading-[21px] tracking-[0.04px] text-[##222222] "
                     >
