@@ -4,13 +4,30 @@ import over from "../assets/img/overwhelmed.svg";
 import Speedometer from "../Components/Speedometer/Speedometer";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import MyModal from "../Components/Modals/MyModal";
 
 export default function FeedBackPage() {
+
+  const [feebackModal,setFeedbackModal]=useState(false);
+   
+  const userDetails = useSelector((store) => store.user);
+
+  const {authorized,fullName } = userDetails;
+   
+  function handleReview(){
+    setFeedbackModal(true);
+  }
+  function closeModal(){
+    setFeedbackModal(false);
+  }
+
   return (
     <>
       <Header />
       <div className="w-[1370px] h-[320px]  justify-between flex flex-row-reverse gap-[60px] bg-[linear-gradient(116deg,#fee8a6_0%,#f1d9ff_86%)] items-center px-[110px] ml-[-110px] bg-white shadow-md shadow-black/5 opacity-100 backdrop-blur-[30px] p-4 rounded-lg">
-        <div className=" mt-[60px]">
+        <div className=" mt-[110px]">
           <Speedometer />
         </div>
         <div className="flex mt-[45px] h-[250px] flex-col gap-[8px]">
@@ -43,18 +60,19 @@ export default function FeedBackPage() {
             style={{ fontFamily: "IvyMode, sans-serif" }}
             className="text-left mr-[17px] text-[26px] leading-[35px] font-medium tracking-[1.19px] text-[#161616] opacity-100"
           >
-            Hi Charlie,<br></br> here are the glimpse of your feedback shared
+            Hi {authorized === true ? fullName : "Charlie"},<br></br> here are the glimpse of your feedback shared
             with us.
           </h1>
 
           <div className="mt-[45px] flex flex-col gap-[20px]">
             {dataFeedBack.map((feed) => (
-              <FeedBackCard key={feed.id} feed={feed} />
+              <FeedBackCard key={feed.id} feed={feed} handleReview={handleReview}/>
             ))}
           </div>
         </div>
       </div>
       <Footer />
+       {feebackModal && <MyModal closeModal={closeModal} />}
     </>
   );
 }

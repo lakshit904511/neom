@@ -1,7 +1,12 @@
 import { IoMdStar } from "react-icons/io";
 import FeedBackIcons from "./FeedBackIcons";
+import { useSelector } from "react-redux";
 
-export default function FeedBackCard({ feed }) {
+export default function FeedBackCard({ feed, handleReview }) {
+  const userDetails = useSelector((store) => store.user);
+
+  const { authorized, fullName, attendedEvents } = userDetails;
+
   return (
     <div className=" flex w-[680px] pb-[25px] border-b border-[#c0bdb3] ">
       <div className="relative w-[220px] h-[240px]">
@@ -23,12 +28,12 @@ export default function FeedBackCard({ feed }) {
         <p className="absolute text-left text-[12px] underline font-normal leading-[20px] tracking-[0.4px] text-white opacity-100 left-[15px] bottom-[20px]">
           {feed.image_review}
         </p>
-        <p className="w-[50px] h-[20px] absolute flex gap-1 items-center text-[12px]  font-normal leading-[20px] tracking-[0.4px] text-yellow-200   opacity-100 right-[15px] bottom-[20px]">
+        {/* <p className="w-[50px] h-[20px] absolute flex gap-1 items-center text-[12px]  font-normal leading-[20px] tracking-[0.4px] text-yellow-200   opacity-100 right-[15px] bottom-[20px]">
           <IoMdStar className="w-[15px]" />
           <span className="text-[12px]  font-normal leading-[20px] tracking-[0.4px] !text-white">
             4.9
           </span>
-        </p>
+        </p> */}
       </div>
 
       <div className="w-[460px] pl-[30px] flex flex-col">
@@ -60,8 +65,9 @@ export default function FeedBackCard({ feed }) {
           <FeedBackIcons />
         ) : (
           <button
+            onClick={handleReview}
             style={{ fontFamily: "BrownLight, sans-serif" }}
-            className=" text-[#ffffff] rounded-[4px] text-[14px] w-[147px] mt-[30px] px-[28px] py-[10px] bg-[#222222] flex items-center justify-center text-center"
+            className=" text-[#ffffff] cursor-pointer rounded-[4px] text-[14px] w-[147px] mt-[30px] px-[28px] py-[10px] bg-[#222222] flex items-center justify-center text-center"
           >
             Add a Review
           </button>

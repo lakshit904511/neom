@@ -27,14 +27,15 @@ passport.use(
         const pic=profile.photos[0].value;
 
         let profilePic="";
-        // Check if the user exists
+        
+        // Check the user exists
         const query1 = `SELECT * FROM users WHERE email_id = $1;`;
         let user = await pool.query(query1, [email_id]);
 
         
 
         if (user.rows.length === 0) {
-          // console.log("User not found, creating new entry...");
+          // console.log("User not found,new entry...");
 
           if(pic!==null){
             const result = await cloudinary.uploader.upload(pic, {
@@ -88,7 +89,7 @@ module.exports.googleAuthControllerCallback = (req, res, next) => {
           httpOnly: true,
           secure: false,
           sameSite: "Strict",
-          maxAge: 35 * 35 * 1000,
+          maxAge: 55 * 55 * 1000,
         })
         .redirect(`${process.env.FRONTEND_URL}/`);
     }

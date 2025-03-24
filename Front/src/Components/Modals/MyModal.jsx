@@ -1,35 +1,35 @@
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import { LiaStarSolid  } from "react-icons/lia";
+import { LiaStarSolid } from "react-icons/lia";
 import HomePage from "../../Pages/DashBoard";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import VibeMeter from "./VibeMeter";
 import { useRef, useState } from "react";
-import store from "../../../Store";
 import { feedbackData } from "../../Features/User/UserSlice";
 
-export default function MyModal({ detailedData }) {
+export default function MyModal({ detailedData, closeModal }) {
   const userfeedback = useRef(null);
   const userDetails = useSelector((store) => store.user);
   const { authorized, fullName } = userDetails;
   const [vibe, setVibe] = useState(false);
   const [starcolor, setStarColor] = useState({});
-
+  const [msg,setMsg]=useState(true);
   const navigate = useNavigate();
 
-  function closeModal() {
-    navigate("/dashboard");
-  }
   function handleVibeSubmit() {
     navigate("/dashboard");
   }
   function handleModalSubmit() {
     console.log("handle submit call");
     const feedback = userfeedback.current.value;
-    // console.log(totalRating/5,feedback);
     // console.log(detailedData.id);
-    store.dispatch(feedbackData(detailedData.id, totalRating / 5, feedback));
-    setVibe(true);
+    if(feedback!==null && totalRating!==null ){
+      // store.dispatch(feedbackData(detailedData.id, totalRating / 5, feedback));
+      console.log(totalRating/5,feedback,msg);
+
+      // setMsg(false);
+      setVibe(true);
+    }
   }
 
   const totalRating = Object.values(starcolor).reduce(
@@ -80,7 +80,7 @@ export default function MyModal({ detailedData }) {
               </span>
               <div className="flex justify-start gap-[5px] items-center mt-[10px]">
                 {[...Array(5)].map((__, i) => (
-                  <LiaStarSolid 
+                  <LiaStarSolid
                     className={
                       i < (starcolor["Quality of Event"] ?? -1)
                         ? "text-red-500"
@@ -102,7 +102,7 @@ export default function MyModal({ detailedData }) {
               </span>
               <div className="flex justify-start gap-[5px] items-center mt-[10px]">
                 {[...Array(5)].map((__, i) => (
-                  <LiaStarSolid 
+                  <LiaStarSolid
                     className={
                       i < (starcolor["Facilities of Event"] ?? -1)
                         ? "text-red-500"
@@ -125,7 +125,7 @@ export default function MyModal({ detailedData }) {
               </span>
               <div className="flex justify-start gap-[5px] items-center mt-[10px]">
                 {[...Array(5)].map((__, i) => (
-                  <LiaStarSolid 
+                  <LiaStarSolid
                     className={
                       i < (starcolor["Staff Politeness"] ?? -1)
                         ? "text-red-500"
@@ -148,7 +148,7 @@ export default function MyModal({ detailedData }) {
               </span>
               <div className="flex justify-start gap-[5px] items-center mt-[10px]">
                 {[...Array(5)].map((__, i) => (
-                  <LiaStarSolid 
+                  <LiaStarSolid
                     className={
                       i < (starcolor["Operator of Event"] ?? -1)
                         ? "text-red-500"
@@ -171,7 +171,7 @@ export default function MyModal({ detailedData }) {
               </span>
               <div className="flex justify-start gap-[5px] items-center mt-[10px] ">
                 {[...Array(5)].map((__, i) => (
-                  <LiaStarSolid 
+                  <LiaStarSolid
                     className={
                       i < (starcolor["Services at Event"] ?? -1)
                         ? "text-red-500"
@@ -189,7 +189,7 @@ export default function MyModal({ detailedData }) {
             <textarea
               ref={userfeedback}
               placeholder="Share your feedback and suggestions about this event..."
-              className="outline-gray-700 text-black  placeholder: pl-[10px] text-left placeholder:text-[#000000] text-[14px] leading-6 tracking-[0.35px] opacity-50 w-full h-[150px] outline-none bg-white border border-gray-600 pt-1  rounded-lg "
+              className="outline-gray-700 text-black  placeholder: pl-[10px] text-left placeholder:text-[#000000] text-[14px] leading-6 tracking-[0.35px]  w-full h-[150px] outline-none bg-white border border-gray-600 pt-1  rounded-lg "
             />
           </div>
           <button
@@ -200,12 +200,14 @@ export default function MyModal({ detailedData }) {
           </button>
         </div>
       </div>
-      {vibe && (
-        <VibeMeter
-          handleVibeSubmit={handleVibeSubmit}
-          closeVibeModal={closeVibeModal}
-        />
-      )}
+   
+        {vibe && (
+          <VibeMeter
+            handleVibeSubmit={handleVibeSubmit}
+            closeVibeModal={closeVibeModal}
+          />
+        )}
+     
     </>
   );
 }

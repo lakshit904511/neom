@@ -3,11 +3,15 @@ import { MdOutlineStar } from "react-icons/md";
 const stars = [1, 2, 3, 4, 5];
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import { useNavigate } from "react-router-dom";
 
 export default function CommonPageCard() {
+
+  const navigate=useNavigate();
+
   return (
     <>
-      <div className="flex gap-[20px]  mt-[30px]">
+      <div className="flex gap-[20px] cursor-grab  mt-[30px]">
         <Swiper spaceBetween={30} slidesPerView={4} loop={true} >
             {dataDetailedCard.map((user) => (
             <SwiperSlide>
@@ -49,8 +53,9 @@ export default function CommonPageCard() {
                 </div>
 
                 <span
+                  onClick={()=>navigate("/feedback")}
                   style={{ fontFamily: "BrownLight, sans-serif" }}
-                  className="underline text-[14px] mt-[10px] opacity-80 text-black"
+                  className=" text-[#f10c36] cursor-pointer text-[12px] mt-[10px] opacity-80 underline"
                 >
                   Read more
                 </span>

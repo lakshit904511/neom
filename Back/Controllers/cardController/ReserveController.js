@@ -7,12 +7,10 @@ const ReserveController = async (req, res) => {
 
     console.log("Reserve Controller:", cardId, userId, seat);
 
-    // Convert inputs to integers to avoid type errors
     const userIdInt = parseInt(userId, 10);
     const cardIdInt = parseInt(cardId, 10);
     const seatInt = parseInt(seat, 10);
 
-    // Check if inputs are valid numbers
     if (isNaN(userIdInt) || isNaN(cardIdInt) || isNaN(seatInt)) {
       return res.status(400).json({ success: false, message: "Invalid input data" });
     }

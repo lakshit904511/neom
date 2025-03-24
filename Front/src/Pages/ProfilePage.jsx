@@ -98,7 +98,7 @@ export default function ProfilePage() {
       .map((val) => val[0])
       .join(", ");
     setInputValue(selectedValue);
-
+    setPic(ProfilePic);
     userName.current.value = name;
     userEmail.current.value = mail;
     userMobile.current.value = num;
@@ -244,7 +244,7 @@ export default function ProfilePage() {
                 defaultValue={name}
                 ref={userName}
                 type="text"
-                className=" outline-gray-300 w-[320px] h-[40px] border border-[#DDDDDD] rounded-[4px] placeholder: pl-2 text-[12px]"
+                className=" outline-gray-300 cursor-text w-[320px] h-[40px] border border-[#DDDDDD] rounded-[4px] placeholder: pl-2 text-[12px]"
               />
               <br />
 
@@ -256,11 +256,11 @@ export default function ProfilePage() {
               </label>
               <br />
               <input
-                disabled={toggle}
+                disabled={true}
                 ref={userEmail}
                 defaultValue={mail}
                 type="text"
-                className=" outline-gray-300 w-[320px] h-[40px] border border-[#DDDDDD] rounded-[4px] placeholder: pl-2 text-[12px]"
+                className="outline-gray-300 cursor-text bg-gray-200 w-[320px] h-[40px] border border-[#DDDDDD] rounded-[4px] placeholder: pl-2 text-[12px]"
               />
               <br />
 
@@ -277,13 +277,13 @@ export default function ProfilePage() {
                 style={{ fontFamily: "BrownLight, sans-serif" }}
                 type="text"
                 defaultValue={num}
-                className=" outline-gray-300 w-[320px] h-[40px] border border-[#DDDDDD] rounded-[4px] placeholder: pl-2 text-[12px]"
+                className=" outline-gray-300 cursor-text w-[320px] h-[40px] border border-[#DDDDDD] rounded-[4px] placeholder: pl-2 text-[12px]"
               />
               <br />
 
               <label
                 style={{ fontFamily: "Brown, sans-serif" }}
-                className="w-[194px] text-center text-[10px] leading-[24px] tracking-wide text-[#222222] opacity-100"
+                className="w-[194px]  text-center text-[10px] leading-[24px] tracking-wide text-[#222222] opacity-100"
               >
                 When can we wish a happy birthday?
               </label>
@@ -292,7 +292,7 @@ export default function ProfilePage() {
                 disabled
                 value={dob}
                 type="text"
-                className=" outline-gray-300 w-[320px] h-[40px] border border-[#DDDDDD] rounded-[4px] placeholder: pl-2 text-[12px]"
+                className=" outline-gray-300 cursor-text bg-gray-200 w-[320px] h-[40px] border border-[#DDDDDD] rounded-[4px] placeholder: pl-2 text-[12px]"
               />
               <br />
 

@@ -18,10 +18,14 @@ export default function CommonPage() {
   function handleReview() {
     setFeedbackModal(true);
   }
-
+  
+  function closeModal(){
+    setFeedbackModal(false);
+  }
   var mainCommonPageData = null;
+
   // COMMENT OUT CHECK
-  var check = null;
+
   const value = useLocation();
 
   const userDetails = useSelector((store) => store.user);
@@ -39,14 +43,12 @@ export default function CommonPage() {
   //   mainCommonPageData = value.state.data;
   //   check = null;
   // }
+
   mainCommonPageData = value.state.data;
 
-  console.log(mainCommonPageData);
 
   const stars = mainCommonPageData.star_review;
-  console.log(stars);
 
-  console.log(mainCommonPageData);
 
   return (
     <>
@@ -184,7 +186,7 @@ export default function CommonPage() {
       
         <Footer />
        
-        {feebackModal && <MyModal detailedData={mainCommonPageData} />}
+        {feebackModal && <MyModal detailedData={mainCommonPageData} closeModal={closeModal}/>}
       </section>
     </>
   );

@@ -19,7 +19,7 @@ export default function RescheduleModal({ notificationRef, handleReschedule, han
       if (loc.pathname === "/dashboard") {
         setShowModal(true);
       }
-    }, 7000);
+    }, 10000);
 
     return () => clearInterval(interval);
   }, []);

@@ -8,7 +8,7 @@ const ProfileUpdateController = async (req, res) => {
 
   console.log("Profile update request:", req.body, req.file);
 
-  let profilePic = null; // Default to null, so we don’t overwrite existing data
+  let profilePic = null; 
 
   if (req.file) {
     console.log("Uploading Profile Pic to Cloudinary...");
@@ -43,7 +43,7 @@ const ProfileUpdateController = async (req, res) => {
   }
 
   const existingProfilePic = userResult.rows[0].profile_pic;
-  profilePic = profilePic || existingProfilePic; // Use the existing profile pic if no new one is uploaded
+  profilePic = profilePic || existingProfilePic; 
 
   const updateQuery = `UPDATE users SET 
     email_id = COALESCE($2, email_id),

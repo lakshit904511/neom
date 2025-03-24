@@ -1,6 +1,5 @@
 import { BiCategory } from "react-icons/bi";
 import { CiLocationOn } from "react-icons/ci";
-import joy from "../../assets/img/joy.svg";
 import getEmojiImage from "../../util/emojiFinder";
 
 export default function CommonAbout({datadetailedEvent}) {

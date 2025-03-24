@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
 import { dataDashBoardCard2 } from "../assets/Dummy_Data/data";
 import Slider from "../Components/Slider/Slider";
 import DashBoardCard1 from "../Components/DashboardCards/DashBoardCard1";
@@ -11,15 +10,24 @@ import Map from "../Components/DashboardCards/Map";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 import { useSelector } from "react-redux";
+import MyModal from "../Components/Modals/MyModal";
 
 export default function DashBoard() {
-
-  const userDetails=useSelector((store)=>store.user);
+  const userDetails = useSelector((store) => store.user);
   console.log(userDetails);
 
-  const {authorized,fullName,scheduledEvents,attendedEvents,serverTopEventLists}=userDetails;
+  const [feebackModal, setFeedbackModal] = useState(false);
+  const {
+    authorized,
+    fullName,
+    scheduledEvents,
+    attendedEvents,
+    serverTopEventLists,
+  } = userDetails;
 
-  const sortedScheduledEvent=scheduledEvents.sort((a,b)=>new Date(a.start_date) - new Date(b.start_date));
+  const sortedScheduledEvent = scheduledEvents.sort(
+    (a, b) => new Date(a.start_date) - new Date(b.start_date)
+  );
 
   console.log(sortedScheduledEvent);
 
@@ -29,9 +37,18 @@ export default function DashBoard() {
   const itemsPerView = 2;
   const itemsPerViewCard2 = 2;
 
-    useEffect(()=>{
-        console.log(serverTopEventLists);
-    },[serverTopEventLists])
+
+  function handleReviewModal(){
+    setFeedbackModal(true);
+  }
+
+  function closeModal(){
+    setFeedbackModal(false);
+  }
+
+  useEffect(() => {
+    console.log(serverTopEventLists);
+  }, [serverTopEventLists]);
 
   const goToPrevImage = () => {
     if (currentIndex > 0) {
@@ -65,7 +82,7 @@ export default function DashBoard() {
           className="h-[3.25rem] text-left text-[1.5rem] leading-[2.75rem] tracking-[0.0725rem]
  text-[#222222]"
         >
-          Good morning {authorized===true?fullName:"Charlie"}
+          Good morning {authorized === true ? fullName : "Charlie"}
         </h2>
 
         <p
@@ -99,7 +116,8 @@ export default function DashBoard() {
             style={{ fontFamily: "IvyMode, sans-serif" }}
             className=" text-left text-[26px] leading-[28px] tracking-[1.19px] text-[#222222]"
           >
-            {authorized===true?fullName:"Charlie"}, hope we understand you better
+            {authorized === true ? fullName : "Charlie"}, hope we understand you
+            better
           </h2>
 
           <div className="relative ">
@@ -108,10 +126,13 @@ export default function DashBoard() {
               itemsPerView={itemsPerViewCard2}
               currentIndex={currentIndexCard2}
               renderItem={(card2) => (
-                <DashBoardCard2 key={card2.id} card2={card2} />
+                <DashBoardCard2
+                  key={card2.id}
+                  card2={card2}
+                  handleReviewModal={handleReviewModal}
+                />
               )}
             />
-            <Outlet />
           </div>
 
           <Slider
@@ -129,7 +150,8 @@ export default function DashBoard() {
             style={{ fontFamily: "IvyMode, sans-serif" }}
             className=" text-left text-[#222222] tracking-[1px] text-[26px]  "
           >
-            Today's recommendations for you, {authorized===true?fullName:"Charlie"}!
+            Today's recommendations for you,{" "}
+            {authorized === true ? fullName : "Charlie"}!
           </h1>
           <div className="mt-[30px] flex items-center gap-[10px]">
             {serverTopEventLists?.map((card3) => (
@@ -145,7 +167,8 @@ export default function DashBoard() {
             style={{ fontFamily: "IvyMode, sans-serif" }}
             className=" text-left text-[#222222] tracking-[1px] text-[26px]"
           >
-            {authorized===true?fullName:"Charlie"}, here is your master journey with us so far
+            {authorized === true ? fullName : "Charlie"}, here is your master
+            journey with us so far
           </h1>
           <div className="mt-[30px] flex items-center gap-[10px]">
             {attendedEvents.map((card4) => (
@@ -167,6 +190,7 @@ export default function DashBoard() {
         </div>
       </section>
       <Footer />
+      {feebackModal && <MyModal closeModal={closeModal} />}
     </>
   );
 }

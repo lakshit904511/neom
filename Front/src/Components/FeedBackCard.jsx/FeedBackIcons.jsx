@@ -18,6 +18,8 @@ const Images = [
 export default function FeedBackIcons() {
   const [selectedIcon, setSelectedIcon] = useState(null);
 
+
+
   const handleIconClick = (iconName) => {
     if (selectedIcon === iconName) {
       setSelectedIcon(null);
@@ -32,7 +34,7 @@ export default function FeedBackIcons() {
         <img
           key={index}
           onClick={() => handleIconClick(image.name)}
-          className={`w-[30px] h-[30px] ${
+          className={`w-[30px] h-[30px] cursor-pointer  ${
             selectedIcon === image.name ? "" : "filter grayscale"
           }`}
           src={image.src} 

@@ -60,9 +60,7 @@ export default function App() {
                 )
               }              
             />
-            <Route path="dashboard" element={<DashBoard />}>
-              <Route path="modal" element={<MyModal />} />
-            </Route>
+            <Route path="dashboard" element={<DashBoard />} />
             <Route path="favourites" element={<MyFavrouites />} />
             <Route path="modal" element={<MyModal />} />
             <Route path="edit-profile" element={<ProfilePage />} />
@@ -75,7 +73,6 @@ export default function App() {
             <Route path="SignIn" element={<SignInPage />} />
             <Route path="success" element={<PaymentSuccessful />} />
             <Route path="fail" element={<PaymentFailed />} />
-            {/* <Route path="loader" element={<LoaderPage />} /> */}
           </Routes>
         </div>
       </BrowserRouter>

@@ -1,6 +1,5 @@
-import { NavLink, Outlet } from "react-router-dom";
 
-export default function DashBoardCard2({ card2 }) {
+export default function DashBoardCard2({ card2 ,handleReviewModal}) {
   return (
     <>
       <div className="flex flex-col items-start w-[520px] h-[490px]">
@@ -35,13 +34,13 @@ export default function DashBoardCard2({ card2 }) {
           {card2.description}
         </p>
         <div className="mt-[22px] flex gap-[24px]">
-          <NavLink
-            to={card2.textBtn === "Yes, I would Share" ? "modal" : "#"}
+          <button
+            onClick={card2.textBtn === "Yes, I would Share" ? handleReviewModal : null}
 
             className="bg-[#222222] cursor-pointer rounded-[6px] text-white px-9 py-2 text-[10px] font-[Poppins]"
           >
             {card2.textBtn}
-          </NavLink>
+          </button>
           <button className="text-center underline text-[12px] font-normal leading-[16px] tracking-[0px] text-[#5b5b5b] opacity-100 font-[Poppins]">
             {card2.textBtn2}
           </button>
