@@ -6,30 +6,44 @@ import anger from "../../assets/img/anger.svg";
 import appre from "../../assets/img/appreciation.svg";
 import bore from "../../assets/img/boredom.svg";
 import disapp from "../../assets/img/disappointed.svg";
+import joy from "../../assets/img/joy.svg";
+
 import { useState } from "react";
 
 const reactions = [
-  { value: 10, src: over, alt: "Segment 1" },
-  { value: 30, src: appre, alt: "Segment 2" },
-  { value: 50, src: bore, alt: "Segment 3" },
-  { value: 70, src: disapp, alt: "Segment 4" },
-  { value: 90, src: anger, alt: "Segment 5" },
+  { min: -1, max: -5, src: over, alt: "Segment 1" },
+  { min: -6, max: -10, src: joy, alt: "Segment 2" },
+  { min: -11, max: -15, src: appre, alt: "Segment 3" },
+  { min: -16, max: -20, src: bore, alt: "Segment 4" },
+  { min: -21, max: -25, src: disapp, alt: "Segment 5" },
+  { min: -26, max: -30, src: anger, alt: "Segment 6" },
 ];
 
 export default function VibeMeter({ closeVibeModal, handleVibeSubmit }) {
   const userDetails = useSelector((store) => store.user);
   const { authorized, fullName } = userDetails;
 
-  const [rec, setRec] = useState(0);
+  const [rec, setRec] = useState(-0);
+  const [clickedImage,setClickcedImage]=useState(null);
+  
+  const getRandomReactionValue = (min,max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+  
+  const handleReaction = (reaction) => {
+    const randomValue = getRandomReactionValue(reaction.min,reaction.max);
+    console.log("randomvalue",randomValue);
+    setRec(randomValue);
+    setClickcedImage(reaction.alt);
+    console.log("clickedimage",clickedImage);
+    console.log("rec",rec);
+  };
 
-  function handleReaction(val) {
-    console.log("SVG clicked, setting value:", val);
-    setRec(+val);
-  }
+
 
   return (
     <div className="fixed inset-0 flex items-center justify-center  ">
-      <div className="w-[550px] h-[580px] bg-white p-[25px] rounded-lg shadow-lg relative">
+      <div className="w-[550px] h-[590px] bg-white p-[25px] rounded-lg shadow-lg relative">
         <IoIosCloseCircleOutline
           onClick={closeVibeModal}
           className="absolute cursor-pointer top-[10px] right-[10px]"
@@ -48,30 +62,30 @@ export default function VibeMeter({ closeVibeModal, handleVibeSubmit }) {
           the vibes you got from this event. It helps us to improve us and serve
           you best for the next time.
         </p>
-        <div className="mt-[30px] flex  flex-col items-center justify-center mr-[60px]">
-          <FeedbackSpeedometer rec={rec} />
-          <div className="flex z-[100] justify-evenly cursor-pointer items-center gap-5 ml-[30px] mt-[10px]">
+        <div className="flex  flex-col items-center justify-center">
+          <FeedbackSpeedometer down={150} rec={rec} />
+          <div className="flex z-[100] justify-evenly cursor-pointer items-center gap-5">
+            <p className="text-[12px]">Click Emojis</p>
             {reactions.map((reaction, index) => (
               <img
                 key={index}
-                onClick={() => handleReaction(reaction.value)}
-                className="cursor-pointer"
-                src={reaction.src}
+                onClick={() => handleReaction(reaction)}
+                className={`cursor-pointer ${reaction.alt===clickedImage?"w-[40px] h-[40px]":"w-[30px] h-[30px]"}`}
+                src={reaction.src} 
                 alt={reaction.alt}
-                style={{ width: "30px", height: "30px" }}
               />
             ))}
           </div>
         </div>
-        <div className="mt-[20px]">
+        <div className="mt-[18px]">
           <textarea
             placeholder="Share your experience with us..."
-            className="outline-gray-700 text-black  placeholder: pl-[10px] text-left placeholder:text-[#000000] text-[14px] leading-6 tracking-[0.35px] opacity-50 w-full h-[150px] outline-none bg-white border border-gray-600 pt-1  rounded-lg "
+            className="outline-gray-700 text-black  placeholder: pl-[10px] text-left placeholder:text-[#000000] text-[14px] leading-6 tracking-[0.35px] opacity-90 w-full h-[150px] outline-none bg-white border border-gray-600 pt-1  rounded-lg "
           />
         </div>
         <button
           onClick={handleVibeSubmit}
-          className="mt-4 text-[12px] cursor-pointer px-8 py-2 bg-[#222222] text-white rounded-[6px]"
+          className="mt-[12px] text-[12px] cursor-pointer px-8 py-2 bg-[#222222] text-white rounded-[6px]"
         >
           Submit
         </button>

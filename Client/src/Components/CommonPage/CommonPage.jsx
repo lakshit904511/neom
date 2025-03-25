@@ -54,7 +54,7 @@ export default function CommonPage() {
     <>
       <section>
         <Header />
-        {mainCommonPageData.status==="Completed"? (
+        {mainCommonPageData.status==="Completed" && mainCommonPageData.reviewstatus===false? (
           <div className="flex mt-[20px] items-center justify-between pl-[28px] pr-[15px] py-[20px] w-full border border-[#222222] rounded-[12px]">
             <div className="flex w-[775px] flex-col justify-between">
               <h1
@@ -136,7 +136,7 @@ export default function CommonPage() {
               style={{ fontFamily: "IvyMode, sans-serif" }}
               className="mt-[20px] text-left font-normal text-[20px]  tracking-[1.19px] text-[#222222] opacity-100"
             >
-              Operator title
+              Operator River Stone
             </h1>
             <div className="flex items-start mt-[10px]  justify-start">
               {(Array.isArray(stars)

@@ -5,31 +5,36 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import VibeMeter from "./VibeMeter";
 import { useRef, useState } from "react";
-import { feedbackData } from "../../Features/User/UserSlice";
+import { feedbackData, getAllUserData } from "../../Features/User/UserSlice";
+import store from "../../../Store";
 
-export default function MyModal({ detailedData, closeModal }) {
+export default function MyModal({ detailedData, closeModal, cardid = null }) {
+  var card_id;
   const userfeedback = useRef(null);
   const userDetails = useSelector((store) => store.user);
   const { authorized, fullName } = userDetails;
   const [vibe, setVibe] = useState(false);
   const [starcolor, setStarColor] = useState({});
-  const [msg,setMsg]=useState(true);
+  // const [msg,setMsg]=useState(true);
   const navigate = useNavigate();
 
   function handleVibeSubmit() {
+    store.dispatch(getAllUserData());
     navigate("/dashboard");
   }
   function handleModalSubmit() {
     console.log("handle submit call");
     const feedback = userfeedback.current.value;
-    // console.log(detailedData.id);
-    if(feedback!==null && totalRating!==null ){
-      // store.dispatch(feedbackData(detailedData.id, totalRating / 5, feedback));
-      console.log(totalRating/5,feedback,msg);
-
-      // setMsg(false);
-      setVibe(true);
+    if (cardid === null) {
+      card_id = detailedData.id;
+      console.log(card_id);
+    } else {
+      card_id = cardid;
+      console.log(card_id);
     }
+
+    store.dispatch(feedbackData(card_id, totalRating / 5, feedback));
+    setVibe(true);
   }
 
   const totalRating = Object.values(starcolor).reduce(
@@ -200,14 +205,13 @@ export default function MyModal({ detailedData, closeModal }) {
           </button>
         </div>
       </div>
-   
-        {vibe && (
-          <VibeMeter
-            handleVibeSubmit={handleVibeSubmit}
-            closeVibeModal={closeVibeModal}
-          />
-        )}
-     
+
+      {vibe && (
+        <VibeMeter
+          handleVibeSubmit={handleVibeSubmit}
+          closeVibeModal={closeVibeModal}
+        />
+      )}
     </>
   );
 }

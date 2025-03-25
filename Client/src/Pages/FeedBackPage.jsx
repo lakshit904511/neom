@@ -1,5 +1,4 @@
 import FeedBackCard from "../Components/FeedBackCard.jsx/FeedBackCard";
-import { dataFeedBack } from "../assets/Dummy_Data/data";
 import over from "../assets/img/overwhelmed.svg";
 import Speedometer from "../Components/Speedometer/Speedometer";
 import Header from "../Components/Header/Header";
@@ -11,12 +10,16 @@ import MyModal from "../Components/Modals/MyModal";
 export default function FeedBackPage() {
 
   const [feebackModal,setFeedbackModal]=useState(false);
+  const [cardid,setCardId]=useState(null);
    
   const userDetails = useSelector((store) => store.user);
 
-  const {authorized,fullName } = userDetails;
+  const {authorized,fullName,attendedEvents} = userDetails;
    
-  function handleReview(){
+
+
+  function handleReview(id){
+    setCardId(id);
     setFeedbackModal(true);
   }
   function closeModal(){
@@ -65,14 +68,14 @@ export default function FeedBackPage() {
           </h1>
 
           <div className="mt-[45px] flex flex-col gap-[20px]">
-            {dataFeedBack.map((feed) => (
+            {attendedEvents.map((feed) => (
               <FeedBackCard key={feed.id} feed={feed} handleReview={handleReview}/>
             ))}
           </div>
         </div>
       </div>
       <Footer />
-       {feebackModal && <MyModal closeModal={closeModal} />}
+       {feebackModal && <MyModal closeModal={closeModal} cardid={cardid} />}
     </>
   );
 }

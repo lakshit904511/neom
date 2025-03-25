@@ -23,7 +23,7 @@ const getAllCardDetails = async (userID) => {
     LEFT JOIN user_attended_events uatev 
     ON c.id = uatev.card_id AND uatev.user_id = $1;
     `;
-  return await pool.query(query,[userID]);
+  return await pool.query(query, [userID]);
 };
 
 const getFavoriteEvents = async (userID) => {
@@ -51,20 +51,27 @@ const getFavoriteEvents = async (userID) => {
 
 const getAttendedEvents = async (userID) => {
   const query = `
-       SELECT 
+     SELECT 
     c.*, 
     usev.status,  
     usev.guest, 
+    usev.reviewstatus,
     r.*, 
     l.*, 
     e.*, 
-    ex.*
+    ex.*, 
+    CASE 
+        WHEN usev.reviewstatus = TRUE 
+        THEN to_jsonb(f)  -- Convert the feedback row into JSON format
+        ELSE NULL 
+    END AS feedback_data  
     FROM user_attended_events usev
     JOIN carddetails c ON usev.card_id = c.id
     LEFT JOIN reviewevents r ON c.id = r.review_event_id
     LEFT JOIN locationevents l ON c.id = l.location_event_id
     LEFT JOIN eventtypes e ON c.id = e.event_type_id
     LEFT JOIN experienceevents ex ON c.id = ex.experience_id
+    LEFT JOIN feedback f ON usev.card_id = f.card_id AND usev.user_id = f.user_id
     WHERE usev.user_id = $1;
     `;
   return await pool.query(query, [userID]);
@@ -138,12 +145,35 @@ const getServerTopEvents = async (userID) => {
     ORDER BY r.id ASC;  -- Sorting by top_event_id (r.id)
 
     `;
-  return await pool.query(query,[userID]);
+  return await pool.query(query, [userID]);
 };
 
 const getProfileQuestions = async () => {
   const query = `SELECT * FROM profile_questions;`;
   return await pool.query(query);
+};
+
+const getFeedBackPageData = async (userID) => {
+  const feedbackquery = `SELECT 
+    c.*, 
+    usev.status,  
+    usev.guest, 
+    usev.reviewstatus,
+    r.*, 
+    l.*, 
+    e.*, 
+    ex.*, 
+    f.*  
+    FROM feedback f
+    JOIN carddetails c ON f.card_id = c.id
+    LEFT JOIN user_attended_events usev ON f.card_id = usev.card_id AND f.user_id = usev.user_id
+    LEFT JOIN reviewevents r ON c.id = r.review_event_id
+    LEFT JOIN locationevents l ON c.id = l.location_event_id
+    LEFT JOIN eventtypes e ON c.id = e.event_type_id
+    LEFT JOIN experienceevents ex ON c.id = ex.experience_id
+    WHERE f.user_id = $1;`;
+
+  return await pool.query(feedbackquery, [userID]);
 };
 
 module.exports = {
@@ -154,4 +184,5 @@ module.exports = {
   getServerRecommendedEvents,
   getServerTopEvents,
   getProfileQuestions,
+  getFeedBackPageData,
 };

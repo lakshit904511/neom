@@ -2,7 +2,7 @@ require("dotenv").config();
 const pool = require("../../Config/database");
 const jwt = require("jsonwebtoken");
 
-const { getAllCardDetails, getFavoriteEvents, getAttendedEvents, getScheduledEvents, getServerRecommendedEvents, getServerTopEvents, getProfileQuestions } = require("../../IntialData/userDataQuery");
+const { getAllCardDetails, getFavoriteEvents, getAttendedEvents, getScheduledEvents, getServerRecommendedEvents, getServerTopEvents, getProfileQuestions, getFeedBackPageData } = require("../../IntialData/userDataQuery");
 
 console.log("in user verify controller file");
 
@@ -32,6 +32,7 @@ const verifyUserController =async (req, res) => {
       const serverRecommandData = await getServerRecommendedEvents();
       const topData = await getServerTopEvents(userID);
       const profile=await getProfileQuestions();
+      const feedbackEvents=await getFeedBackPageData(userID);
   
       return res.json({
         authenticated: true,
@@ -40,6 +41,7 @@ const verifyUserController =async (req, res) => {
         attendedData: attendedEvents.rows,
         scheduledData: scheduledEvents.rows,
         favouriteData: favouriteEvents.rows,
+        feedbackEvents: feedbackEvents.rows,
         serverRecommandEventData: serverRecommandData.rows,
         serverTopEventsData:topData.rows,
         serverProfileQuestion:profile.rows

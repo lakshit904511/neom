@@ -31,6 +31,7 @@ const initialUserState = {
   attendedEvents: [],
   favouriteEvents: [],
   serverProfile: [],
+  feedbackEvents:[],
   interests:""
 };
 
@@ -59,12 +60,7 @@ export default function userReducer(state = initialUserState, action) {
         serverRecommandedEventList: action.payload.serverRecommandEventData,
         serverTopEventLists: action.payload.serverTopEventsData,
         serverProfile: action.payload.serverProfileQuestion,
-        // interestArray: state.interestArray.map((arr) => [
-        //   arr[0],
-        //   action.payload.user.interests
-        //     ? state.interests.split(",").includes(arr[0])
-        //     : false,
-        // ]),
+        feedbackEvents: action.payload.feedbackEvents,
       };
     case "user/loading":
       return {
@@ -365,6 +361,7 @@ export const feedbackData =
       rating: stars,
       user_feedback: feedback,
       user_name: state.user.fullName,
+      userId:state.user.user_id,
     };
     console.log(data);
     const res = await fetch("http://localhost:5000/card/feedback", {

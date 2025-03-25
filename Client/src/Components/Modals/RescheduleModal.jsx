@@ -3,7 +3,7 @@ import { MdNotificationsActive  } from "react-icons/md";
 import { useLocation } from "react-router-dom";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { useSelector } from "react-redux";
-
+import "../../index.css";
 
 export default function RescheduleModal({ notificationRef, handleReschedule, handleCancel2 }) {
   const [showModal, setShowModal] = useState(false);
