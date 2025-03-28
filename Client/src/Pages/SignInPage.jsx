@@ -9,39 +9,34 @@ export default function SignInPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // State for form fields
   const [formData, setFormData] = useState({
     FullName: "",
     password: "",
     date_of_birth: "",
     Email: "",
     Contact: "",
-    profilePicUrl: null, // For file input
+    profilePicUrl: null,
   });
 
   const [preview, setPreview] = useState(null);
 
-  // Handle text input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle file input change
   const handleFileChange = (e) => {
     const file = e.target.files[0];
 
     if (file) {
-      setFormData((prev) => ({ ...prev, profilePicUrl: file })); // Store file in state
-      setPreview(URL.createObjectURL(file)); // Preview image
+      setFormData((prev) => ({ ...prev, profilePicUrl: file })); 
+      setPreview(URL.createObjectURL(file));
     }
   };
 
-  // Handle sign-in form submission
   function handleSignIn(e) {
     e.preventDefault();
 
-    // Prepare FormData object
     const formDataToSend = new FormData();
     formDataToSend.append("FullName", formData.FullName);
     formDataToSend.append("password", formData.password);
@@ -49,13 +44,12 @@ export default function SignInPage() {
     formDataToSend.append("Email", formData.Email);
     formDataToSend.append("Contact", formData.Contact);
 
-    // Append file if selected
     if (formData.profilePicUrl) {
       formDataToSend.append("profilePic", formData.profilePicUrl);
     }
 
-    // Dispatch action to Redux store
     dispatch(UserSignIn(formDataToSend));
+
   }
 
   return (
